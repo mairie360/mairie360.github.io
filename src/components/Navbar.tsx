@@ -1,11 +1,11 @@
 type NavbarProps = {
-  name: string;
+  title: string;
 };
 
-export default function Navbar({ name }: NavbarProps) {
+export default function Navbar({ title }: NavbarProps) {
   return (
     <div className="navbar bg-base-100 shadow-sm">
-      <a className="btn btn-ghost text-xl">{name}</a>
+      <a className="btn btn-ghost text-xl">{title}</a>
     </div>
   );
 }
