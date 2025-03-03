@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mairie360",
-  description: "Mairie360 is an all-in-one digital solution designed to simplify and modernize the management of French town halls",
+  description: "Mairie360 is an all-in-one digital solution designed to simplify and modernize the management of French town halls.",
 };
 
 export default function RootLayout({
