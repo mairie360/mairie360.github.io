@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type NavbarProps = {
   title: string;
 };
@@ -13,24 +15,24 @@ export default function Navbar({ title }: NavbarProps) {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-            <li><a href="/">Home</a></li>
-            <li><a href="/calendars">Calendars</a></li>
-            <li><a href="/emails">Emails</a></li>
-            <li><a href="/files">Files</a></li>
-            <li><a href="/messages">Messages</a></li>
-            <li><a href="/projects">Projects</a></li>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/calendars">Calendars</Link></li>
+            <li><Link href="/emails">Emails</Link></li>
+            <li><Link href="/files">Files</Link></li>
+            <li><Link href="/messages">Messages</Link></li>
+            <li><Link href="/projects">Projects</Link></li>
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">{title}</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li><a href="/">Home</a></li>
-          <li><a href="/calendars">Calendars</a></li>
-          <li><a href="/emails">Emails</a></li>
-          <li><a href="/files">Files</a></li>
-          <li><a href="/messages">Messages</a></li>
-          <li><a href="/projects">Projects</a></li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/calendars">Calendars</Link></li>
+          <li><Link href="/emails">Emails</Link></li>
+          <li><Link href="/files">Files</Link></li>
+          <li><Link href="/messages">Messages</Link></li>
+          <li><Link href="/projects">Projects</Link></li>
         </ul>
       </div>
       <div className="navbar-end">
