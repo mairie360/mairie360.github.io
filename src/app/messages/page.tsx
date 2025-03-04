@@ -16,7 +16,7 @@ export default function Page() {
       <main className="flex-1 p-6 flex flex-col">
         <header className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Alice</h1>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">New Message</button>
+          <button className="btn btn-primary">New Message</button>
         </header>
         
         {/* Messages List */}

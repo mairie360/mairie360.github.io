@@ -3,7 +3,7 @@ export default function Page() {
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <aside className="w-64 bg-white p-4 shadow-md">
-        <h2 className="text-xl font-bold">Folders</h2>
+        <h2 className="text-xl font-bold">Files</h2>
         <ul className="mt-4">
           <li className="py-2 px-3 bg-blue-100 rounded-md cursor-pointer">Documents</li>
           <li className="py-2 px-3 mt-2 cursor-pointer hover:bg-gray-200 rounded-md">Images</li>
@@ -16,7 +16,7 @@ export default function Page() {
       <main className="flex-1 p-6">
         <header className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Documents</h1>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Upload File</button>
+          <button className="btn btn-primary">Upload File</button>
         </header>
 
         {/* File List */}

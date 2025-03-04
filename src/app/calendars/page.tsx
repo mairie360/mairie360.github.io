@@ -1,13 +1,13 @@
 export default function Page() {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-base-200">
       {/* Sidebar */}
-      <aside className="w-64 bg-white p-4 shadow-md">
+      <aside className="w-64 bg-base-100 p-4 shadow-md">
         <h2 className="text-xl font-bold">Calendars</h2>
         <ul className="mt-4">
-          <li className="py-2 px-3 bg-blue-100 rounded-md cursor-pointer">Work</li>
-          <li className="py-2 px-3 mt-2 cursor-pointer hover:bg-gray-200 rounded-md">Personal</li>
-          <li className="py-2 px-3 mt-2 cursor-pointer hover:bg-gray-200 rounded-md">Meetings</li>
+          <li className="py-2 px-3 bg-primary text-primary-content rounded-md cursor-pointer">Work</li>
+          <li className="py-2 px-3 mt-2 cursor-pointer hover:bg-base-300 rounded-md">Personal</li>
+          <li className="py-2 px-3 mt-2 cursor-pointer hover:bg-base-300 rounded-md">Meetings</li>
         </ul>
       </aside>
 
@@ -15,7 +15,7 @@ export default function Page() {
       <main className="flex-1 p-6">
         <header className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">March 2025</h1>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Add Event</button>
+          <button className="btn btn-primary">Add Event</button>
         </header>
 
         {/* Calendar Grid */}
@@ -24,7 +24,7 @@ export default function Page() {
             <div key={day} className="text-center font-semibold">{day}</div>
           ))}
           {Array.from({ length: 31 }, (_, i) => (
-            <div key={i} className="border p-4 text-center bg-white rounded-md">
+            <div key={i} className="border p-4 text-center bg-base-100 rounded-md">
               {i + 1}
             </div>
           ))}
