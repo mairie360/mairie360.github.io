@@ -25,16 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-title" content="Mairie360" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex-row gap-6 px-6 py-6`}
       >
         <Navbar title="Mairie360" />
-        {children}
+        <main className="py-4 flex-row gap-4">{children}</main>
       </body>
-    </html>
+    </html> 
   );
 }
