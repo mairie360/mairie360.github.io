@@ -16,7 +16,7 @@ export default function Page() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-lg shadow">
             <h3 className="text-xl font-bold">Gestion documentaire</h3>
-            <p className="mt-2 text-gray-600">Versionnez vos fichiers sans perte d'information.</p>
+            <p className="mt-2 text-gray-600">Versionnez vos fichiers sans perte d&apos;information.</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
             <h3 className="text-xl font-bold">Collaboration optimisée</h3>
