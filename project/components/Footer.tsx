@@ -1,6 +1,6 @@
 'use client';
 
-import { Facebook, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -48,30 +48,24 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Suivez-nous</h3>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.facebook.com/people/Mairie360/61581860548366/"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2CA39D] transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/mairie360/"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2CA39D] transition-colors"
-                aria-label="Twitter"
+                aria-label="Instagram"
               >
-                <Twitter className="h-5 w-5" />
+                <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2CA39D] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
+                href="mailto:mairie360@gmail.com"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2CA39D] transition-colors"
                 aria-label="Email"
+                title="Envoyer un e‑mail à la Mairie"
               >
                 <Mail className="h-5 w-5" />
               </a>
