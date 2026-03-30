@@ -178,7 +178,7 @@ Ce projet a été réalisé dans le cadre d'un **projet de fin d'année** pour d
 
 Pour toute question sur ce projet étudiant :
 
-- **Email** : contact@mairie360.fr
+- **Email** : mairie360@gmail.com
 - **Téléphone** : 01 23 45 67 89
 - **Adresse** : 123 Avenue de la République, 75001 Paris
 

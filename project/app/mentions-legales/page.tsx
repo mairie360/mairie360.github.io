@@ -17,7 +17,7 @@ export default function MentionsLegales() {
             <h2 className="text-2xl font-bold text-[#005AA3] mb-4">Directeur de la publication</h2>
             <p>
               Responsable du site : Équipe de projet MAIRIE360<br />
-              Contact : contact@mairie360.fr
+              Contact : mairie360@gmail.com
             </p>
           </section>
 
@@ -55,7 +55,7 @@ export default function MentionsLegales() {
           <section>
             <h2 className="text-2xl font-bold text-[#005AA3] mb-4">Contact</h2>
             <p>
-              Pour toute question concernant ce site, veuillez nous contacter à : contact@mairie360.fr
+              Pour toute question concernant ce site, veuillez nous contacter à : mairie360@gmail.com
             </p>
           </section>
         </div>

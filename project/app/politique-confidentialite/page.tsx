@@ -96,7 +96,7 @@ export default function PolitiqueConfidentialite() {
             <h2 className="text-2xl font-bold text-[#005AA3] mb-4">Contact</h2>
             <p>
               Si vous avez des questions concernant cette politique de confidentialité,
-              veuillez nous contacter à : contact@mairie360.fr
+              veuillez nous contacter à : mairie360@gmail.com
             </p>
           </section>
         </div>

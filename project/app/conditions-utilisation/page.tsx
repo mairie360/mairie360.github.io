@@ -95,7 +95,7 @@ export default function ConditionsUtilisation() {
             <h2 className="text-2xl font-bold text-[#005AA3] mb-4">Contact</h2>
             <p>
               Pour toute question concernant ces conditions d'utilisation,
-              veuillez nous contacter à : contact@mairie360.fr
+              veuillez nous contacter à : mairie360@gmail.com
             </p>
           </section>
         </div>

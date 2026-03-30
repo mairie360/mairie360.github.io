@@ -76,12 +76,11 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-[#3F3F3F] mb-1">Email</h4>
-                  <p className="text-[#3F3F3F]/70">contact@mairie360.fr</p>
-                  <p className="text-[#3F3F3F]/70">demo@mairie360.fr</p>
+                  <p className="text-[#3F3F3F]/70">mairie360@gmail.com</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              {/* <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#005AA3] to-[#2CA39D] rounded-lg flex items-center justify-center flex-shrink-0">
                   <Phone className="h-6 w-6 text-white" />
                 </div>
@@ -90,7 +89,7 @@ export default function ContactSection() {
                   <p className="text-[#3F3F3F]/70">01 23 45 67 89</p>
                   <p className="text-[#3F3F3F]/70 text-sm">Lun-Ven : 9h-18h</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#005AA3] to-[#2CA39D] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -98,8 +97,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-[#3F3F3F] mb-1">Adresse</h4>
-                  <p className="text-[#3F3F3F]/70">123 Avenue de la République</p>
-                  <p className="text-[#3F3F3F]/70">75001 Paris, France</p>
+                  <p className="text-[#3F3F3F]/70">184 Chemin de la Pente Sassy</p>
+                  <p className="text-[#3F3F3F]/70">97440 Saint-André, La Réunion</p>
                 </div>
               </div>
             </div>
