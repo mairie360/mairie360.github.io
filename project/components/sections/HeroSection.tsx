@@ -36,13 +36,6 @@ export default function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => scrollToSection('contact')}
-                className="px-8 py-4 bg-[#005AA3] text-white rounded-lg font-semibold hover:bg-[#004080] transition-all hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                Demander une démo
-                <ArrowRight className="h-5 w-5" />
-              </button>
-              <button
                 onClick={() => scrollToSection('composants')}
                 className="px-8 py-4 border-2 border-[#005AA3] text-[#005AA3] rounded-lg font-semibold hover:bg-[#005AA3] hover:text-white transition-all flex items-center justify-center gap-2"
               >

@@ -128,7 +128,7 @@ npm run typecheck
 7. **Mise en œuvre** : Process de déploiement en 3 étapes
 8. **Comparaison** : Positionnement vs concurrents
 9. **Pour qui** : Cibles de la solution
-10. **Contact** : Formulaire de demande de démo
+10. **Contact** : Section de coordonnées (formulaire désactivé)
 
 ---
 
@@ -137,7 +137,6 @@ npm run typecheck
 - ✅ Design moderne et responsive (mobile, tablette, desktop)
 - ✅ Navigation fluide avec ancres
 - ✅ Animations CSS subtiles
-- ✅ Formulaire de contact fonctionnel (côté client)
 - ✅ Accessibilité optimisée
 - ✅ Performance optimale avec Next.js
 - ✅ TypeScript pour la robustesse du code

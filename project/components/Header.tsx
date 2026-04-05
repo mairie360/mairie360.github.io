@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import Logo from './Logo';
 
 const navItems = [
   { label: 'Problématiques', href: '#problematiques' },
@@ -11,7 +12,6 @@ const navItems = [
   { label: 'Fonctionnalités', href: '#fonctionnalites' },
   { label: 'Bénéfices', href: '#benefices' },
   { label: 'Comparaison', href: '#comparaison' },
-  { label: 'Contact', href: '#contact' },
 ];
 
 export default function Header() {
@@ -47,8 +47,6 @@ export default function Header() {
       return;
     }
 
-    // If the target element is not present on the current page, navigate to the homepage with the hash
-    // and attempt to scroll after navigation (small delay to allow the page to render).
     router.push(`/${href}`);
     setIsMobileMenuOpen(false);
 
@@ -81,10 +79,7 @@ export default function Header() {
               }}
               className="flex items-center gap-2"
             >
-              <div className="flex items-center">
-                <span className="text-2xl md:text-3xl font-bold text-[#3F3F3F]">MAIRIE</span>
-                <span className="text-2xl md:text-3xl font-bold text-[#005AA3]">360</span>
-              </div>
+              <Logo className="h-8 md:h-10" />
             </a>
           </div>
 
@@ -102,12 +97,6 @@ export default function Header() {
                 {item.label}
               </a>
             ))}
-            <button
-              onClick={() => scrollToSection('#contact')}
-              className="ml-4 px-6 py-2.5 bg-[#005AA3] text-white rounded-lg font-semibold hover:bg-[#004080] transition-all hover:shadow-lg hover:-translate-y-0.5 whitespace-nowrap text-sm"
-            >
-              Demander une démo
-            </button>
           </nav>
 
           <button
@@ -135,12 +124,6 @@ export default function Header() {
                   {item.label}
                 </a>
               ))}
-              <button
-                onClick={() => scrollToSection('#contact')}
-                className="mt-2 px-6 py-2.5 bg-[#005AA3] text-white rounded-lg font-semibold hover:bg-[#004080] transition-all text-center"
-              >
-                Demander une démo
-              </button>
             </nav>
           </div>
         )}

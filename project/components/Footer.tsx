@@ -1,6 +1,6 @@
 'use client';
 
-import { Facebook, Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
+import { Facebook, Mail, Instagram } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -12,8 +12,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center mb-4">
-              <span className="text-2xl font-bold text-white">MAIRIE</span>
-              <span className="text-2xl font-bold text-[#2CA39D]">360</span>
+              {/* Utilise logo2.png depuis /public/logo/logo2.png */}
+              <img src="/logo/logo2.png" alt="MAIRIE360" className="h-8" />
             </div>
             <p className="text-white/80 text-sm">
               La solution qui fait le tour complet des mairies.
