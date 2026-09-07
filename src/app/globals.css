@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
-@plugin "daisyui";
-
-@source "../../src/";
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
