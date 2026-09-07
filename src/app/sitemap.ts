@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: "https://mairie360.github.io/" }];
+  return [{ url: "https://mairie360.fr/" }];
 }

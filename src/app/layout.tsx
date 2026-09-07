@@ -10,7 +10,7 @@ const manrope = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mairie360.github.io"),
+  metadataBase: new URL("https://mairie360.fr"),
   title: "Mairie360 — Vos équipes, mieux connectées",
   description:
     "Projets, calendrier, messagerie et formations : découvrez Mairie360, la plateforme en développement pour les équipes des collectivités.",
