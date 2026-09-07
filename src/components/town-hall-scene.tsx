@@ -4,14 +4,13 @@ import Image from "next/image";
 import { type CSSProperties, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import styles from "./town-hall-scene.module.css";
 import { TownHallWind } from "./town-hall-wind";
+import { WalkingCitizen, walkingCharactersAsset } from "./walking-citizen";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
 const animationAssets = [
   "/images/mairie-parvis.webp",
-  "/images/mairie-marche-alpha.webp",
   "/images/mairie-conversation-alpha.webp",
-  "/images/mairie-sortie-femme.webp",
-  "/images/mairie-sortie-homme.webp",
+  walkingCharactersAsset,
 ];
 
 function subscribeToMotion(callback: () => void) {
@@ -28,12 +27,8 @@ function getServerReducedMotion() {
   return true;
 }
 
-function Citizen({ conversation = false, exiting = false, male = false }: { conversation?: boolean; exiting?: boolean; male?: boolean }) {
-  return (
-    <span
-      className={`${styles.sprite} ${conversation ? styles.conversation : exiting ? styles.departureSprite : ""} ${exiting && male ? styles.departureMan : ""}`}
-    />
-  );
+function Conversation() {
+  return <span className={styles.conversation} />;
 }
 
 function createJourney(first: boolean, exiting: boolean) {
@@ -47,7 +42,7 @@ function createJourney(first: boolean, exiting: boolean) {
   };
 }
 
-function Visitor({ exiting = false }: { exiting?: boolean }) {
+function Visitor({ exiting = false, paused }: { exiting?: boolean; paused: boolean }) {
   const [journey, setJourney] = useState<ReturnType<typeof createJourney> | null>(null);
   const [visit, setVisit] = useState(0);
 
@@ -73,7 +68,14 @@ function Visitor({ exiting = false }: { exiting?: boolean }) {
         setVisit((previous) => previous + 1);
       }}
     >
-      <div className={styles.direction}><Citizen exiting={exiting} male={journey.male} /></div>
+      <div className={styles.direction}>
+        <WalkingCitizen
+          variant={!exiting ? "arriving" : journey.male ? "man" : "woman"}
+          paused={paused}
+          stride={journey.stride}
+          delay={journey.delay}
+        />
+      </div>
     </div>
   );
 }
@@ -131,12 +133,13 @@ export function TownHallScene() {
   }, []);
 
   const animated = ready && !reducedMotion;
+  const animationPaused = paused || !visible || !tabVisible;
 
   return (
     <figure
       ref={figure}
       className="hero-figure"
-      data-animation-paused={paused || !visible || !tabVisible}
+      data-animation-paused={animationPaused}
     >
       <div className={styles.scene}>
         <Image
@@ -158,15 +161,15 @@ export function TownHallScene() {
                 alt=""
                 loading="eager"
               />
-              <TownHallWind src={animationAssets[0]} paused={paused || !visible || !tabVisible} />
+              <TownHallWind src={animationAssets[0]} paused={animationPaused} />
               <div className={`${styles.citizen} ${styles.services}`}>
-                <Citizen conversation />
+                <Conversation />
               </div>
               <div className={`${styles.citizen} ${styles.plaza}`}>
-                <Citizen conversation />
+                <Conversation />
               </div>
-              <Visitor />
-              <Visitor exiting />
+              <Visitor paused={animationPaused} />
+              <Visitor exiting paused={animationPaused} />
               <Image
                 className={`${styles.plate} ${styles.foreground}`}
                 src={animationAssets[0]}

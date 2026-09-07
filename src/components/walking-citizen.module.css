@@ -1,0 +1,13 @@
+.walkingSprite {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+.walkingSprite svg, .walkingSprite canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

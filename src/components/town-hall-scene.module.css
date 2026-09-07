@@ -35,27 +35,12 @@
   position: absolute;
 }
 
-.sprite {
+.conversation {
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 3;
-  background: url("/images/mairie-marche-alpha.webp") 0 0 / 800% 100% no-repeat;
-  animation: walking-frames 1.12s steps(1, end) infinite;
-}
-
-.conversation {
   aspect-ratio: 4 / 3;
-  background-image: url("/images/mairie-conversation-alpha.webp");
-  background-size: 400% 100%;
+  background: url("/images/mairie-conversation-alpha.webp") 0 0 / 400% 100% no-repeat;
   animation: conversation-frames 3.6s steps(1, end) infinite;
-}
-
-.departureSprite {
-  background-image: url("/images/mairie-sortie-femme.webp");
-}
-
-.departureMan {
-  background-image: url("/images/mairie-sortie-homme.webp");
 }
 
 .services {
@@ -64,7 +49,7 @@
   width: 6.67%;
 }
 
-.services .sprite {
+.services .conversation {
   animation-delay: -1.8s;
 }
 
@@ -81,10 +66,6 @@
   animation-delay: var(--arrival-delay);
   animation-timing-function: linear;
   animation-fill-mode: both;
-}
-
-.walker .sprite {
-  animation-duration: var(--stride-duration);
 }
 
 .walker::before {
@@ -119,15 +100,6 @@
   left: 46.875%;
   top: 51.367188%;
   animation-name: leave-town-hall;
-}
-
-.exitingWalker .sprite {
-  animation-delay: var(--arrival-delay);
-  animation-fill-mode: backwards;
-}
-
-.rightWalker .sprite {
-  animation-delay: -0.56s;
 }
 
 .artwork .foreground {
@@ -173,20 +145,8 @@
 
 :global([data-animation-paused="true"]) .citizen,
 :global([data-animation-paused="true"]) .direction,
-:global([data-animation-paused="true"]) .sprite {
+:global([data-animation-paused="true"]) .conversation {
   animation-play-state: paused;
-}
-
-/* Background positions enumerate whole cells: no interpolation or neighbouring frame bleed. */
-@keyframes walking-frames {
-  0%, 100% { background-position-x: 0%; }
-  12.5% { background-position-x: 14.285714%; }
-  25% { background-position-x: 28.571429%; }
-  37.5% { background-position-x: 42.857143%; }
-  50% { background-position-x: 57.142857%; }
-  62.5% { background-position-x: 71.428571%; }
-  75% { background-position-x: 85.714286%; }
-  87.5% { background-position-x: 100%; }
 }
 
 @keyframes conversation-frames {
