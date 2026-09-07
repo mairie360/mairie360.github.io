@@ -1,0 +1,162 @@
+.scene {
+  position: relative;
+}
+
+.motion {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.artwork {
+  position: absolute;
+  left: 50%;
+  width: 117.1875%;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.artwork .plate {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1.5;
+  object-fit: contain;
+}
+
+.citizen {
+  position: absolute;
+  mix-blend-mode: multiply;
+}
+
+.sprite {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+.sprite .strip {
+  display: block;
+  width: 800%;
+  max-width: none;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: fill;
+  filter: brightness(1.16);
+  animation: frames 1.2s steps(8, end) infinite;
+}
+
+.conversation {
+  aspect-ratio: 4 / 3;
+}
+
+.conversation .strip {
+  width: 400%;
+  animation: frames 3.6s steps(4, end) infinite;
+}
+
+.entrance {
+  left: 43.62%;
+  top: 54.88%;
+  width: 6.67%;
+}
+
+.entrance .strip {
+  animation-delay: -1.8s;
+}
+
+.plaza {
+  left: 26.36%;
+  top: 61.91%;
+  width: 8.33%;
+}
+
+.walker {
+  width: 4.17%;
+  animation: stroll 14.4s linear infinite;
+}
+
+.direction {
+  animation: direction 14.4s step-end infinite;
+}
+
+.rightWalker {
+  left: 59.57%;
+  top: 67.87%;
+}
+
+.centerWalker {
+  left: 37.2%;
+  top: 63.4%;
+  animation-delay: -7.2s;
+}
+
+.centerWalker .direction {
+  animation-delay: -7.2s;
+}
+
+.centerWalker .strip {
+  animation-delay: -0.6s;
+}
+
+.caption {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: white;
+  color: var(--teal);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  background: var(--mint);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+:global([data-animation-paused="true"]) .citizen,
+:global([data-animation-paused="true"]) .direction,
+:global([data-animation-paused="true"]) .strip {
+  animation-play-state: paused;
+}
+
+@keyframes frames {
+  to { transform: translateX(-100%); }
+}
+
+@keyframes stroll {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-90%, -24%); }
+}
+
+@keyframes direction {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(-1); }
+}
+
+@media (max-width: 760px) {
+  .artwork { width: 100%; }
+  .toggle { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion, .toggle { display: none; }
+}

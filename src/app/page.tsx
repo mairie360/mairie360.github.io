@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { Header } from "@/components/header";
 import { Arrow, Brand } from "@/components/icons";
 import { ModulesExplorer } from "@/components/modules-explorer";
 import { RolesExplorer } from "@/components/roles-explorer";
+import { TownHallScene } from "@/components/town-hall-scene";
 
 export default function Home() {
   return (
@@ -43,17 +43,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <figure className="hero-figure">
-            <Image
-              src="/images/mairie-collectif.webp"
-              alt="Une mairie et ses services réunis autour d’une place, illustration architecturale du collectif."
-              width={1536}
-              height={1024}
-              sizes="(max-width: 760px) 100vw, 65vw"
-              priority
-            />
-            <figcaption>Le numérique au service du collectif.</figcaption>
-          </figure>
+          <TownHallScene />
         </section>
         <div className="vision-line container">
           <p>Moins d’outils dispersés. Plus de liens entre vos services.</p>
