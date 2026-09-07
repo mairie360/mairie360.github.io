@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.filters {
+  position: absolute;
+  overflow: hidden;
+}
+
 .motion {
   position: absolute;
   inset: 0;
@@ -26,7 +31,6 @@
 
 .citizen {
   position: absolute;
-  mix-blend-mode: multiply;
 }
 
 .sprite {
@@ -43,8 +47,8 @@
   height: 100%;
   aspect-ratio: auto;
   object-fit: fill;
-  filter: brightness(1.16);
-  animation: frames 1.2s steps(8, end) infinite;
+  filter: var(--sprite-filter);
+  animation: frames 1.12s steps(8, end) infinite;
 }
 
 .conversation {
@@ -56,13 +60,13 @@
   animation: frames 3.6s steps(4, end) infinite;
 }
 
-.entrance {
-  left: 43.62%;
-  top: 54.88%;
+.services {
+  left: 62.25%;
+  top: 63.2%;
   width: 6.67%;
 }
 
-.entrance .strip {
+.services .strip {
   animation-delay: -1.8s;
 }
 
@@ -74,30 +78,52 @@
 
 .walker {
   width: 4.17%;
-  animation: stroll 14.4s linear infinite;
+  transform-origin: 50% 89.5833%;
+  animation-duration: 18.8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-.direction {
-  animation: direction 14.4s step-end infinite;
+.walker::before {
+  content: "";
+  position: absolute;
+  left: 35%;
+  top: 89%;
+  width: 30%;
+  height: 3%;
+  border-radius: 50%;
+  background: rgb(45 38 23 / 20%);
+  filter: blur(0.6px);
 }
 
 .rightWalker {
-  left: 59.57%;
-  top: 67.87%;
+  left: 61.39%;
+  top: 67.97%;
+  animation-name: approach-right;
+  animation-delay: -9.4s;
+}
+
+.rightWalker .direction {
+  transform: scaleX(-1);
 }
 
 .centerWalker {
-  left: 37.2%;
-  top: 63.4%;
-  animation-delay: -7.2s;
+  left: 33.07%;
+  top: 67.09%;
+  animation-name: approach-left;
 }
 
-.centerWalker .direction {
-  animation-delay: -7.2s;
+.rightWalker .strip {
+  animation-delay: -0.56s;
 }
 
-.centerWalker .strip {
-  animation-delay: -0.6s;
+.artwork .foreground {
+  position: absolute;
+  inset: 0;
+}
+
+.foreground {
+  clip-path: polygon(55.5% 65.45%, 57.1% 65.45%, 57.1% 68.65%, 56.6% 68.65%, 56.6% 80.3%, 56.2% 80.3%, 56.2% 68.65%, 55.5% 68.65%);
 }
 
 .caption {
@@ -142,14 +168,32 @@
   to { transform: translateX(-100%); }
 }
 
-@keyframes stroll {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-90%, -24%); }
+@keyframes approach-left {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  5% { transform: translate(18.75%, -10.42%) scale(1); opacity: 1; }
+  20% { transform: translate(75%, -29.17%) scale(0.98); }
+  40% { transform: translate(165.63%, -64.58%) scale(0.95); }
+  58% { transform: translate(250%, -96.88%) scale(0.92); }
+  66% { transform: translate(276.56%, -114.58%) scale(0.90); }
+  72% { transform: translate(292.19%, -128.13%) scale(0.88); }
+  78% { transform: translate(309.38%, -141.67%) scale(0.87); }
+  84% { transform: translate(325%, -157.29%) scale(0.86); opacity: 1; filter: brightness(1); }
+  88% { transform: translate(331.25%, -165.63%) scale(0.83); opacity: 0.6; filter: brightness(0.55); }
+  92%, 100% { transform: translate(331.25%, -175%) scale(0.80); opacity: 0; filter: brightness(0.2); }
 }
 
-@keyframes direction {
-  0% { transform: scaleX(1); }
-  50% { transform: scaleX(-1); }
+@keyframes approach-right {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  5% { transform: translate(-20%, -10.42%) scale(1); opacity: 1; }
+  20% { transform: translate(-95.31%, -45.83%) scale(0.98); }
+  40% { transform: translate(-212.5%, -79.17%) scale(0.95); }
+  58% { transform: translate(-325%, -102.08%) scale(0.92); }
+  66% { transform: translate(-359.38%, -121.88%) scale(0.90); }
+  72% { transform: translate(-357.81%, -140.63%) scale(0.88); }
+  78% { transform: translate(-354.69%, -151.04%) scale(0.87); }
+  84% { transform: translate(-350%, -166.67%) scale(0.86); opacity: 1; filter: brightness(1); }
+  88% { transform: translate(-353.13%, -175%) scale(0.83); opacity: 0.6; filter: brightness(0.55); }
+  92%, 100% { transform: translate(-353.13%, -184.38%) scale(0.80); opacity: 0; filter: brightness(0.2); }
 }
 
 @media (max-width: 760px) {

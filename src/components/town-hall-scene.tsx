@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { type CSSProperties, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import styles from "./town-hall-scene.module.css";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
@@ -44,6 +44,7 @@ function Citizen({ conversation = false }: { conversation?: boolean }) {
 }
 
 export function TownHallScene() {
+  const spriteFilter = useId();
   const reducedMotion = useSyncExternalStore(
     subscribeToMotion,
     getReducedMotion,
@@ -94,11 +95,25 @@ export function TownHallScene() {
       ref={figure}
       className="hero-figure"
       data-animation-paused={paused || !visible}
+      style={{ "--sprite-filter": `url("#${spriteFilter}")` } as CSSProperties}
     >
+      <svg width="0" height="0" className={styles.filters} aria-hidden="true" focusable="false">
+        <defs>
+          <filter id={spriteFilter} colorInterpolationFilters="sRGB">
+            <feColorMatrix
+              type="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -0.333333 -0.333333 -0.333333 0 1"
+            />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="10" intercept="-1" />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
       <div className={styles.scene}>
         <Image
           src="/images/mairie-collectif.webp"
-          alt="Une mairie et ses services autour d’un parvis où des personnes marchent et discutent."
+          alt="Des personnes échangent sur le parvis de la mairie tandis que des visiteurs montent les marches et entrent dans le bâtiment."
           width={1536}
           height={1024}
           sizes="(max-width: 760px) 100vw, 65vw"
@@ -115,7 +130,7 @@ export function TownHallScene() {
                 alt=""
                 loading="eager"
               />
-              <div className={`${styles.citizen} ${styles.entrance}`}>
+              <div className={`${styles.citizen} ${styles.services}`}>
                 <Citizen conversation />
               </div>
               <div className={`${styles.citizen} ${styles.plaza}`}>
@@ -131,6 +146,14 @@ export function TownHallScene() {
                   <Citizen />
                 </div>
               </div>
+              <Image
+                className={`${styles.plate} ${styles.foreground}`}
+                src={animationAssets[0]}
+                width={1536}
+                height={1024}
+                alt=""
+                loading="eager"
+              />
             </div>
           </div>
         )}
