@@ -1,42 +1,108 @@
-export default function Page() {
+import Image from "next/image";
+import { Header } from "@/components/header";
+import { Arrow, Brand } from "@/components/icons";
+import { ModulesExplorer } from "@/components/modules-explorer";
+import { RolesExplorer } from "@/components/roles-explorer";
+
+export default function Home() {
   return (
-    <div className="bg-gray-100 min-h-screen">
-      {/* Hero Section */}
-      <section id="hero" className="bg-blue-600 text-white py-20 text-center mt-16">
-        <h1 className="text-5xl font-bold">Mairie360</h1>
-        <p className="mt-4 text-lg">La solution moderne pour optimiser la productivité des mairies.</p>
-        <button className="mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-200">
-          Demander une démo
-        </button>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-16 px-6 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center">Pourquoi choisir Mairie360 ?</h2>
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-xl font-bold">Gestion documentaire</h3>
-            <p className="mt-2 text-gray-600">Versionnez vos fichiers sans perte d&apos;information.</p>
+    <>
+      <a className="skip-link" href="#contenu">
+        Aller au contenu
+      </a>
+      <Header />
+      <main id="contenu">
+        <section
+          className="hero container"
+          id="solution"
+          aria-labelledby="hero-title"
+        >
+          <div className="hero-copy">
+            <h1 id="hero-title">
+              Votre mairie,
+              <br />
+              plus proche.
+              <br />
+              <span>
+                Vos équipes,
+                <br />
+                mieux connectées.
+              </span>
+            </h1>
+            <p>
+              Projets, calendrier, échanges et formations :
+              <br className="desktop-break" /> un espace commun pour les équipes
+              de votre collectivité.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#modules">
+                Découvrir les modules <Arrow />
+              </a>
+              <a className="text-link" href="#projet">
+                Notre vision <Arrow diagonal />
+              </a>
+            </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-xl font-bold">Collaboration optimisée</h3>
-            <p className="mt-2 text-gray-600">Travaillez ensemble efficacement sans conflits.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-xl font-bold">Sécurité et conformité</h3>
-            <p className="mt-2 text-gray-600">Vos données sont protégées et conformes aux normes.</p>
-          </div>
+          <figure className="hero-figure">
+            <Image
+              src="/images/mairie-collectif.webp"
+              alt="Une mairie et ses services réunis autour d’une place, illustration architecturale du collectif."
+              width={1536}
+              height={1024}
+              sizes="(max-width: 760px) 100vw, 65vw"
+              priority
+            />
+            <figcaption>Le numérique au service du collectif.</figcaption>
+          </figure>
+        </section>
+        <div className="vision-line container">
+          <p>Moins d’outils dispersés. Plus de liens entre vos services.</p>
         </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="bg-gray-200 py-16 text-center">
-        <h2 className="text-3xl font-semibold">Contactez-nous</h2>
-        <p className="mt-4">Découvrez comment Mairie360 peut vous aider.</p>
-        <button className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
-          Nous contacter
-        </button>
-      </section>
-    </div>
+        <ModulesExplorer />
+        <RolesExplorer />
+        <section
+          id="projet"
+          className="project"
+          aria-labelledby="project-title"
+        >
+          <div className="container project-layout">
+            <div>
+              <h2 id="project-title">
+                Pensé pour les collectivités.
+                <br />
+                Construit avec ambition.
+              </h2>
+              <p>
+                Mairie360 est un projet en développement :
+                <br className="desktop-break" /> une plateforme modulaire pour
+                simplifier le travail des équipes municipales.
+              </p>
+            </div>
+            <a
+              className="button button-light"
+              href="https://github.com/mairie360"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Suivre le projet sur GitHub <Arrow diagonal />
+              <span className="sr-only"> (nouvel onglet)</span>
+            </a>
+          </div>
+        </section>
+        <div className="commitments container">
+          <p>
+            Une démarche attentive à l’accessibilité, à la protection des
+            données et à la sobriété numérique.
+          </p>
+        </div>
+      </main>
+      <footer className="footer container">
+        <a href="#solution" aria-label="Mairie360, retour en haut">
+          <Brand compact />
+        </a>
+        <p>Le numérique au service du collectif.</p>
+        <p>© 2026 Mairie360</p>
+      </footer>
+    </>
   );
 }

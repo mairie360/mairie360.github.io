@@ -1,26 +1,45 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 
+const manrope = localFont({
+  src: "./fonts/Manrope.ttf",
+  variable: "--font-manrope",
+  display: "swap",
+  weight: "200 800",
+});
+
 export const metadata: Metadata = {
-  title: "Mairie360",
-  description: "Mairie360 is an all-in-one digital solution designed to simplify and modernize the management of French town halls.",
+  metadataBase: new URL("https://mairie360.github.io"),
+  title: "Mairie360 — Vos équipes, mieux connectées",
+  description:
+    "Projets, calendrier, messagerie et formations : découvrez Mairie360, la plateforme en développement pour les équipes des collectivités.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Mairie360 — Vos équipes, mieux connectées",
+    description: "Un espace commun pour les équipes de votre collectivité.",
+    url: "/",
+    siteName: "Mairie360",
+    locale: "fr_FR",
+    type: "website",
+    images: [
+      {
+        url: "/images/mairie-collectif.webp",
+        width: 1536,
+        height: 1024,
+        alt: "Mairie360, le numérique au service du collectif",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="apple-mobile-web-app-title" content="Mairie360" />
-      </head>
-      <body>
-        <main>{children}</main>
-      </body>
-    </html> 
+    <html lang="fr" className={manrope.variable}>
+      <body>{children}</body>
+    </html>
   );
 }
