@@ -54,6 +54,10 @@
   background-image: url("/images/mairie-sortie-femme.webp");
 }
 
+.departureMan {
+  background-image: url("/images/mairie-sortie-homme.webp");
+}
+
 .services {
   left: 62.25%;
   top: 63.2%;

@@ -11,6 +11,7 @@ const animationAssets = [
   "/images/mairie-marche-alpha.webp",
   "/images/mairie-conversation-alpha.webp",
   "/images/mairie-sortie-femme.webp",
+  "/images/mairie-sortie-homme.webp",
 ];
 
 function subscribeToMotion(callback: () => void) {
@@ -27,10 +28,10 @@ function getServerReducedMotion() {
   return true;
 }
 
-function Citizen({ conversation = false, exiting = false }: { conversation?: boolean; exiting?: boolean }) {
+function Citizen({ conversation = false, exiting = false, male = false }: { conversation?: boolean; exiting?: boolean; male?: boolean }) {
   return (
     <span
-      className={`${styles.sprite} ${conversation ? styles.conversation : exiting ? styles.departureSprite : ""}`}
+      className={`${styles.sprite} ${conversation ? styles.conversation : exiting ? styles.departureSprite : ""} ${exiting && male ? styles.departureMan : ""}`}
     />
   );
 }
@@ -38,6 +39,7 @@ function Citizen({ conversation = false, exiting = false }: { conversation?: boo
 function createJourney(first: boolean, exiting: boolean) {
   return {
     right: !exiting && Math.random() < 0.5,
+    male: exiting && Math.random() < 0.5,
     delay: first ? (exiting ? 3 : 0.5) + Math.random() * 4 : 4 + Math.random() * 9,
     duration: 16 + Math.random() * 6,
     stride: 1.02 + Math.random() * 0.2,
@@ -71,7 +73,7 @@ function Visitor({ exiting = false }: { exiting?: boolean }) {
         setVisit((previous) => previous + 1);
       }}
     >
-      <div className={styles.direction}><Citizen exiting={exiting} /></div>
+      <div className={styles.direction}><Citizen exiting={exiting} male={journey.male} /></div>
     </div>
   );
 }
