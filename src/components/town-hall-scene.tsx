@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { type CSSProperties, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import styles from "./town-hall-scene.module.css";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
 const animationAssets = [
   "/images/mairie-parvis.webp",
-  "/images/mairie-marche.webp",
-  "/images/mairie-conversation.webp",
+  "/images/mairie-marche-alpha.webp",
+  "/images/mairie-conversation-alpha.webp",
 ];
 
 function subscribeToMotion(callback: () => void) {
@@ -30,21 +30,12 @@ function Citizen({ conversation = false }: { conversation?: boolean }) {
     <span
       className={conversation ? `${styles.sprite} ${styles.conversation}` : styles.sprite}
     >
-      <Image
-        className={styles.strip}
-        src={conversation ? animationAssets[2] : animationAssets[1]}
-        width={1024}
-        height={192}
-        alt=""
-        loading="eager"
-        draggable={false}
-      />
+
     </span>
   );
 }
 
 export function TownHallScene() {
-  const spriteFilter = useId();
   const reducedMotion = useSyncExternalStore(
     subscribeToMotion,
     getReducedMotion,
@@ -95,21 +86,7 @@ export function TownHallScene() {
       ref={figure}
       className="hero-figure"
       data-animation-paused={paused || !visible}
-      style={{ "--sprite-filter": `url("#${spriteFilter}")` } as CSSProperties}
     >
-      <svg width="0" height="0" className={styles.filters} aria-hidden="true" focusable="false">
-        <defs>
-          <filter id={spriteFilter} colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              type="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -0.333333 -0.333333 -0.333333 0 1"
-            />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="10" intercept="-1" />
-            </feComponentTransfer>
-          </filter>
-        </defs>
-      </svg>
       <div className={styles.scene}>
         <Image
           src="/images/mairie-collectif.webp"

@@ -2,11 +2,6 @@
   position: relative;
 }
 
-.filters {
-  position: absolute;
-  overflow: hidden;
-}
-
 .motion {
   position: absolute;
   inset: 0;
@@ -35,29 +30,17 @@
 
 .sprite {
   display: block;
-  overflow: hidden;
   width: 100%;
   aspect-ratio: 2 / 3;
-}
-
-.sprite .strip {
-  display: block;
-  width: 800%;
-  max-width: none;
-  height: 100%;
-  aspect-ratio: auto;
-  object-fit: fill;
-  filter: var(--sprite-filter);
-  animation: frames 1.12s steps(8, end) infinite;
+  background: url("/images/mairie-marche-alpha.webp") 0 0 / 800% 100% no-repeat;
+  animation: walking-frames 1.12s steps(1, end) infinite;
 }
 
 .conversation {
   aspect-ratio: 4 / 3;
-}
-
-.conversation .strip {
-  width: 400%;
-  animation: frames 3.6s steps(4, end) infinite;
+  background-image: url("/images/mairie-conversation-alpha.webp");
+  background-size: 400% 100%;
+  animation: conversation-frames 3.6s steps(1, end) infinite;
 }
 
 .services {
@@ -66,7 +49,7 @@
   width: 6.67%;
 }
 
-.services .strip {
+.services .sprite {
   animation-delay: -1.8s;
 }
 
@@ -113,7 +96,7 @@
   animation-name: approach-left;
 }
 
-.rightWalker .strip {
+.rightWalker .sprite {
   animation-delay: -0.56s;
 }
 
@@ -160,12 +143,27 @@
 
 :global([data-animation-paused="true"]) .citizen,
 :global([data-animation-paused="true"]) .direction,
-:global([data-animation-paused="true"]) .strip {
+:global([data-animation-paused="true"]) .sprite {
   animation-play-state: paused;
 }
 
-@keyframes frames {
-  to { transform: translateX(-100%); }
+/* Background positions enumerate whole cells: no interpolation or neighbouring frame bleed. */
+@keyframes walking-frames {
+  0%, 100% { background-position-x: 0%; }
+  12.5% { background-position-x: 14.285714%; }
+  25% { background-position-x: 28.571429%; }
+  37.5% { background-position-x: 42.857143%; }
+  50% { background-position-x: 57.142857%; }
+  62.5% { background-position-x: 71.428571%; }
+  75% { background-position-x: 85.714286%; }
+  87.5% { background-position-x: 100%; }
+}
+
+@keyframes conversation-frames {
+  0%, 100% { background-position-x: 0%; }
+  25% { background-position-x: 33.333333%; }
+  50% { background-position-x: 66.666667%; }
+  75% { background-position-x: 100%; }
 }
 
 @keyframes approach-left {
