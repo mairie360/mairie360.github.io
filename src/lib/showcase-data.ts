@@ -59,3 +59,37 @@ export const modules: {
   },
 ];
 
+export const roles = [
+  {
+    id: "agents",
+    label: "Agents municipaux",
+    title: "Le collectif commence au quotidien.",
+    description:
+      "Retrouvez vos tâches, vos rendez-vous et vos échanges. Un même point d’entrée pour contribuer aux projets de votre mairie.",
+    keywords: ["S’organiser", "Échanger", "Avancer"],
+  },
+  {
+    id: "managers",
+    label: "Chefs de service",
+    title: "Une vision claire pour guider les équipes.",
+    description:
+      "Coordonnez les projets de votre service, répartissez les responsabilités et suivez les priorités. Gardez une vue d’ensemble sur le travail collectif.",
+    keywords: ["Coordonner", "Prioriser", "Accompagner"],
+  },
+  {
+    id: "elected",
+    label: "Élus",
+    title: "Prendre du recul, garder le cap.",
+    description:
+      "Suivez les projets municipaux et les temps forts de la collectivité. Une vue d’ensemble pour éclairer les décisions et accompagner l’action des services.",
+    keywords: ["Consulter", "Décider", "Accompagner"],
+  },
+  {
+    id: "administrators",
+    label: "Administrateurs",
+    title: "Un cadre commun pour chaque équipe.",
+    description:
+      "Gérez les utilisateurs et leurs rôles pour donner à chacun un accès adapté à ses responsabilités dans la collectivité.",
+    keywords: ["Administrer", "Organiser", "Paramétrer"],
+  },
+];
