@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Header } from "@/components/header";
 import { Arrow } from "@/components/icons";
+import { ModulesExplorer } from "@/components/modules-explorer";
 
 export default function Home() {
   return (
@@ -56,6 +57,7 @@ export default function Home() {
         <div className="vision-line container">
           <p>Moins d’outils dispersés. Plus de liens entre vos services.</p>
         </div>
+        <ModulesExplorer />
       </main>
     </>
   );
