@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://mairie360.fr"),
   title: "Mairie360 — Vos équipes, mieux connectées",
   description:
-    "Tableau de bord, projets, calendrier, messagerie et formations : découvrez Mairie360, la plateforme municipale en développement.",
+    "Tableau de bord, projets, calendrier, messagerie, workflows et formations : découvrez Mairie360, la plateforme municipale en développement.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Mairie360 — Vos équipes, mieux connectées",

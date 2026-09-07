@@ -40,7 +40,13 @@ export function Brand({ compact = false }: { compact?: boolean }) {
   );
 }
 
-export type IconName = "dashboard" | "projects" | "calendar" | "messages" | "learning";
+export type IconName =
+  | "dashboard"
+  | "projects"
+  | "calendar"
+  | "messages"
+  | "workflows"
+  | "learning";
 export function ModuleIcon({ name }: { name: IconName }) {
   const paths = {
     dashboard: (
@@ -61,6 +67,14 @@ export function ModuleIcon({ name }: { name: IconName }) {
       </>
     ),
     messages: <path d="m21 3-6 18-4-8-8-4 18-6Zm0 0L11 13" />,
+    workflows: (
+      <>
+        <rect x="8" y="2" width="8" height="6" rx="1.5" />
+        <path d="M12 8v4M5 16v-4h14v4" />
+        <rect x="2" y="16" width="6" height="6" rx="1.5" />
+        <rect x="16" y="16" width="6" height="6" rx="1.5" />
+      </>
+    ),
     learning: (
       <>
         <path d="m2 9 10-5 10 5-10 5-10-5Zm4 2v7c4 3 8 3 12 0v-7m4-2v8" />

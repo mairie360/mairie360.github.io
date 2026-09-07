@@ -320,7 +320,7 @@ h3 {
 }
 .module-tabs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   border-bottom: 1px solid var(--line);
   margin-top: 56px;
 }
@@ -611,6 +611,81 @@ h3 {
   font-size: 13px;
   color: var(--muted);
   padding-top: 6px;
+}
+.workflow-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.workflow-steps li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #dce5e1;
+  border-radius: 8px;
+  position: relative;
+}
+.workflow-steps li + li::before {
+  content: "";
+  position: absolute;
+  left: 35px;
+  top: -15px;
+  height: 14px;
+  width: 2px;
+  background: var(--line);
+}
+.workflow-steps .workflow-current {
+  background: var(--mint);
+  border-color: #abcabe;
+}
+.workflow-step-number {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  background: white;
+}
+.workflow-current .workflow-step-number {
+  color: white;
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.workflow-step-copy h5 {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.workflow-step-copy p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+.workflow-steps li:not(.workflow-current) .preview-status {
+  color: var(--muted);
+  background: #f1f4f3;
+}
+.workflow-documents {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.workflow-documents svg {
+  color: var(--teal);
+  width: 23px;
+  height: 23px;
 }
 .course {
   padding: 22px;
@@ -1237,6 +1312,29 @@ h3 {
   }
   .conversation-note {
     font-size: 11px;
+  }
+  .workflow-steps li {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 8px 12px;
+    padding: 14px;
+  }
+  .workflow-steps li + li::before {
+    left: 28px;
+  }
+  .workflow-step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+  .workflow-step-copy h5 {
+    font-size: 14px;
+  }
+  .workflow-step-copy p {
+    font-size: 11px;
+  }
+  .workflow-steps .preview-status {
+    grid-column: 2;
+    justify-self: start;
   }
   .course {
     padding: 16px;

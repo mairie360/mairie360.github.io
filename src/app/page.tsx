@@ -30,7 +30,7 @@ export default function Home() {
               </span>
             </h1>
             <p>
-              Projets, calendrier, échanges et formations :
+              Du tableau de bord aux workflows :
               <br className="desktop-break" /> un espace commun pour les équipes
               de votre collectivité.
             </p>

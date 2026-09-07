@@ -1,4 +1,4 @@
-import type { IconName } from "./icons";
+import { ModuleIcon, type IconName } from "./icons";
 
 export function ModulePreview({ module }: { module: IconName }) {
   if (module === "dashboard")
@@ -101,6 +101,41 @@ export function ModulePreview({ module }: { module: IconName }) {
           <p className="conversation-note">
             L’information circule. Le projet avance.
           </p>
+        </div>
+      </div>
+    );
+  if (module === "workflows")
+    return (
+      <div className="preview">
+        <div className="preview-heading">
+          <h4>Demande de matériel</h4>
+          <p>Exemple de circuit de validation</p>
+        </div>
+        <ol className="workflow-steps" aria-label="Étapes du circuit illustratif">
+          {[
+            ["Demande déposée", "Agent municipal", "Transmise"],
+            ["Avis du service", "Chef de service", "En cours"],
+            ["Validation finale", "Direction générale", "À venir"],
+          ].map(([title, participant, status], index) => (
+            <li
+              key={title}
+              className={index === 1 ? "workflow-current" : undefined}
+              aria-current={index === 1 ? "step" : undefined}
+            >
+              <span className="workflow-step-number" aria-hidden="true">
+                {index + 1}
+              </span>
+              <div className="workflow-step-copy">
+                <h5>{title}</h5>
+                <p>{participant}</p>
+              </div>
+              <span className="preview-status">{status}</span>
+            </li>
+          ))}
+        </ol>
+        <div className="workflow-documents">
+          <ModuleIcon name="projects" />
+          <p>Documents et échanges d’e-mails liés au dossier</p>
         </div>
       </div>
     );

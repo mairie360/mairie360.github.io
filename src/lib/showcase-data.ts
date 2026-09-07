@@ -57,6 +57,19 @@ export const modules: {
     ],
   },
   {
+    id: "workflows",
+    label: "Workflows",
+    title: "Des étapes claires pour traiter chaque dossier.",
+    description:
+      "Des circuits de traitement pour faire circuler les dossiers entre les services et identifier la prochaine action.",
+    benefits: [
+      "Définir les étapes et les responsables",
+      "Relier les documents et les échanges d’e-mails",
+      "Suivre les validations et l’historique",
+    ],
+    development: true,
+  },
+  {
     id: "learning",
     label: "Formations",
     title: "Apprendre, partager, progresser ensemble.",
