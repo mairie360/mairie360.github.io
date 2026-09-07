@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { type CSSProperties, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import styles from "./town-hall-scene.module.css";
+import { TownHallWind } from "./town-hall-wind";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
 const animationAssets = [
@@ -29,9 +30,7 @@ function Citizen({ conversation = false }: { conversation?: boolean }) {
   return (
     <span
       className={conversation ? `${styles.sprite} ${styles.conversation}` : styles.sprite}
-    >
-
-    </span>
+    />
   );
 }
 
@@ -155,6 +154,7 @@ export function TownHallScene() {
                 alt=""
                 loading="eager"
               />
+              <TownHallWind src={animationAssets[0]} paused={paused || !visible || !tabVisible} />
               <div className={`${styles.citizen} ${styles.services}`}>
                 <Citizen conversation />
               </div>
