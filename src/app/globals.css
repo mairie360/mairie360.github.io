@@ -320,7 +320,7 @@ h3 {
 }
 .module-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   border-bottom: 1px solid var(--line);
   margin-top: 56px;
 }
@@ -330,12 +330,12 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   padding: 23px 12px;
   border: 0;
   border-bottom: 3px solid transparent;
   margin-bottom: -1px;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 550;
   transition:
@@ -421,6 +421,84 @@ h3 {
   color: var(--muted);
   font-size: 15px;
   margin-top: 4px;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.dashboard-widget {
+  padding: 20px;
+  border: 1px solid #dce5e1;
+  border-radius: 8px;
+  min-width: 0;
+}
+.dashboard-widget h5 {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.dashboard-project {
+  grid-column: 1 / -1;
+  background: var(--mint);
+  border-color: var(--mint);
+}
+.dashboard-project-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.dashboard-project-heading > p {
+  font-size: 17px;
+  font-weight: 650;
+}
+.preview-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #e0eee7;
+  color: var(--teal-dark);
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.dashboard-progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  margin-top: 20px;
+}
+.progress-track.dashboard-progress span {
+  width: 60%;
+}
+.dashboard-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 13px 0 0;
+  display: grid;
+  gap: 13px;
+}
+.dashboard-tasks p,
+.dashboard-event-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+.dashboard-tasks span,
+.dashboard-event-place {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.dashboard-date {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 700;
+  margin-block: 15px 10px;
 }
 .kanban {
   display: grid;
@@ -723,6 +801,9 @@ h3 {
   }
 }
 @media (max-width: 1200px) {
+  .module-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .header-inner {
     gap: 32px;
     min-height: 90px;
@@ -1038,10 +1119,11 @@ h3 {
     margin-top: 30px;
   }
   .module-tabs button {
-    font-size: 11px;
+    font-size: 12px;
     flex-direction: column;
-    gap: 10px;
-    padding: 17px 2px;
+    gap: 8px;
+    padding: 14px 6px;
+    min-height: 88px;
   }
   .module-tabs svg {
     width: 25px;
@@ -1091,6 +1173,16 @@ h3 {
   }
   .preview-heading p {
     font-size: 13px;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dashboard-widget {
+    padding: 16px;
+  }
+  .dashboard-project-heading > p {
+    font-size: 15px;
   }
   .kanban {
     grid-template-columns: 1fr;

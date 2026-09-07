@@ -9,6 +9,18 @@ export const modules: {
   development?: boolean;
 }[] = [
   {
+    id: "dashboard",
+    label: "Tableau de bord",
+    title: "Gardez une vue d’ensemble sur votre activité.",
+    description:
+      "Vos projets, vos tâches et vos prochains événements réunis dans une synthèse personnalisée pour organiser votre journée.",
+    benefits: [
+      "Retrouver les projets et les tâches en attente",
+      "Consulter les prochains rendez-vous",
+      "Accéder rapidement aux autres modules",
+    ],
+  },
+  {
     id: "projects",
     label: "Projets",
     title: "Faites avancer les projets de votre commune.",
