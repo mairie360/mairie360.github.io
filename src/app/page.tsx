@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Header } from "@/components/header";
-import { Arrow } from "@/components/icons";
+import { Arrow, Brand } from "@/components/icons";
 import { ModulesExplorer } from "@/components/modules-explorer";
 import { RolesExplorer } from "@/components/roles-explorer";
 
@@ -60,7 +60,49 @@ export default function Home() {
         </div>
         <ModulesExplorer />
         <RolesExplorer />
+        <section
+          id="projet"
+          className="project"
+          aria-labelledby="project-title"
+        >
+          <div className="container project-layout">
+            <div>
+              <h2 id="project-title">
+                Pensé pour les collectivités.
+                <br />
+                Construit avec ambition.
+              </h2>
+              <p>
+                Mairie360 est un projet en développement :
+                <br className="desktop-break" /> une plateforme modulaire pour
+                simplifier le travail des équipes municipales.
+              </p>
+            </div>
+            <a
+              className="button button-light"
+              href="https://github.com/mairie360"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Suivre le projet sur GitHub <Arrow diagonal />
+              <span className="sr-only"> (nouvel onglet)</span>
+            </a>
+          </div>
+        </section>
+        <div className="commitments container">
+          <p>
+            Une démarche attentive à l’accessibilité, à la protection des
+            données et à la sobriété numérique.
+          </p>
+        </div>
       </main>
+      <footer className="footer container">
+        <a href="#solution" aria-label="Mairie360, retour en haut">
+          <Brand compact />
+        </a>
+        <p>Le numérique au service du collectif.</p>
+        <p>© 2026 Mairie360</p>
+      </footer>
     </>
   );
 }
