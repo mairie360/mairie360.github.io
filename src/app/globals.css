@@ -2,6 +2,9 @@
   --white: #ffffff;
   --ink: #102e32;
   --muted: #4e6165;
+  --blue: #0056a6;
+  --blue-dark: #004582;
+  --blue-soft: #eaf2fb;
   --teal: #116e70;
   --teal-dark: #0b5658;
   --mint: #f0f6f3;
@@ -49,7 +52,7 @@ input {
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #0060aa;
+  outline: 3px solid var(--blue);
   outline-offset: 5px;
 }
 button {
@@ -169,7 +172,7 @@ h3 {
   left: 0;
   right: 0;
   height: 1px;
-  background: var(--teal);
+  background: var(--blue);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 180ms;
@@ -198,23 +201,23 @@ h3 {
     color 180ms;
 }
 .button-primary {
-  background: var(--teal);
+  background: var(--blue);
   color: white;
 }
 .button-primary:hover {
-  background: var(--teal-dark);
+  background: var(--blue-dark);
 }
 .button-outline {
-  border-color: var(--teal);
-  color: var(--teal-dark);
+  border-color: var(--blue);
+  color: var(--blue);
   min-height: 52px;
   padding: 12px 24px;
 }
 .button-outline:hover {
-  background: var(--mint);
+  background: var(--blue-soft);
 }
 .text-link {
-  color: var(--teal-dark);
+  color: var(--blue);
   font-size: 17px;
   font-weight: 650;
   display: inline-flex;
@@ -244,6 +247,7 @@ h3 {
   padding-bottom: 44px;
 }
 .hero h1 {
+  color: var(--blue);
   white-space: nowrap;
   font-size: clamp(44px, 4.65vw, 73px);
   font-weight: 650;
@@ -299,7 +303,7 @@ h3 {
   padding-block: 68px 0;
 }
 .section-label {
-  color: var(--teal);
+  color: var(--blue);
   text-transform: uppercase;
   font-size: 15px;
   letter-spacing: 1.5px;
@@ -343,12 +347,12 @@ h3 {
     background 150ms;
 }
 .module-tabs button[aria-selected="true"] {
-  border-bottom-color: var(--teal);
-  color: var(--teal);
+  border-bottom-color: var(--blue);
+  color: var(--blue);
 }
 .module-tabs button:hover {
-  color: var(--teal);
-  background: #e7f0eb;
+  color: var(--blue);
+  background: var(--blue-soft);
 }
 .module-content {
   display: grid;
@@ -495,7 +499,7 @@ h3 {
   margin-top: 3px;
 }
 .dashboard-date {
-  color: var(--teal);
+  color: var(--blue);
   font-size: 12px;
   font-weight: 700;
   margin-block: 15px 10px;
@@ -562,7 +566,7 @@ h3 {
 .event-day {
   font-size: 13px;
   font-weight: 750;
-  color: var(--teal);
+  color: var(--blue);
   width: 44px;
   flex-shrink: 0;
 }
@@ -656,8 +660,8 @@ h3 {
 }
 .workflow-current .workflow-step-number {
   color: white;
-  background: var(--teal);
-  border-color: var(--teal);
+  background: var(--blue);
+  border-color: var(--blue);
 }
 .workflow-step-copy h5 {
   font-size: 15px;
@@ -765,12 +769,12 @@ h3 {
     color 180ms;
 }
 .role-tabs button:hover {
-  background: var(--mint);
+  background: var(--blue-soft);
 }
 .role-tabs button[aria-selected="true"] {
   color: white;
-  background: var(--teal);
-  border-bottom-color: var(--teal);
+  background: var(--blue);
+  border-bottom-color: var(--blue);
 }
 .role-content {
   padding-top: 24px;
