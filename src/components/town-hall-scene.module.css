@@ -51,7 +51,7 @@
 }
 
 .departureSprite {
-  background-image: url("/images/mairie-sortie-alpha.webp");
+  background-image: url("/images/mairie-sortie-femme.webp");
 }
 
 .services {
@@ -115,6 +115,11 @@
   left: 46.875%;
   top: 51.367188%;
   animation-name: leave-town-hall;
+}
+
+.exitingWalker .sprite {
+  animation-delay: var(--arrival-delay);
+  animation-fill-mode: backwards;
 }
 
 .rightWalker .sprite {

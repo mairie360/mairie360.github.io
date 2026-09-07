@@ -10,7 +10,7 @@ const animationAssets = [
   "/images/mairie-parvis.webp",
   "/images/mairie-marche-alpha.webp",
   "/images/mairie-conversation-alpha.webp",
-  "/images/mairie-sortie-alpha.webp",
+  "/images/mairie-sortie-femme.webp",
 ];
 
 function subscribeToMotion(callback: () => void) {
