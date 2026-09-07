@@ -10,8 +10,28 @@ const manrope = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Mairie360",
-  description: "La plateforme des équipes municipales.",
+  metadataBase: new URL("https://mairie360.github.io"),
+  title: "Mairie360 — Vos équipes, mieux connectées",
+  description:
+    "Projets, calendrier, messagerie et formations : découvrez Mairie360, la plateforme en développement pour les équipes des collectivités.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Mairie360 — Vos équipes, mieux connectées",
+    description: "Un espace commun pour les équipes de votre collectivité.",
+    url: "/",
+    siteName: "Mairie360",
+    locale: "fr_FR",
+    type: "website",
+    images: [
+      {
+        url: "/images/mairie-collectif.webp",
+        width: 1536,
+        height: 1024,
+        alt: "Mairie360, le numérique au service du collectif",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
