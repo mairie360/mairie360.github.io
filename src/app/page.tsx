@@ -97,8 +97,12 @@ export default function Home() {
         </div>
       </main>
       <footer className="footer container">
-        <a href="#solution" aria-label="Mairie360, retour en haut">
-          <Brand compact />
+        <a
+          href="#solution"
+          className="brand-link"
+          aria-label="Mairie360, retour en haut"
+        >
+          <Brand />
         </a>
         <p>Le numérique au service du collectif.</p>
         <p>© 2026 Mairie360</p>

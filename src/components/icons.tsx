@@ -22,17 +22,15 @@ export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
-export function Brand({ compact = false }: { compact?: boolean }) {
+export function Brand() {
   return (
-    <span className={`brand${compact ? " brand-compact" : ""}`}>
-      {!compact && (
-        <Image
-          src="/web-app-manifest-192x192.png"
-          width={72}
-          height={72}
-          alt=""
-        />
-      )}
+    <span className="brand">
+      <Image
+        src="/web-app-manifest-192x192.png"
+        width={72}
+        height={72}
+        alt=""
+      />
       <span>
         mairie<span className="brand-number">360</span>
       </span>
