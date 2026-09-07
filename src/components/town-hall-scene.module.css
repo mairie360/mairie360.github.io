@@ -50,6 +50,10 @@
   animation: conversation-frames 3.6s steps(1, end) infinite;
 }
 
+.departureSprite {
+  background-image: url("/images/mairie-sortie-alpha.webp");
+}
+
 .services {
   left: 62.25%;
   top: 63.2%;
@@ -105,6 +109,12 @@
   left: 33.07%;
   top: 67.09%;
   animation-name: approach-left;
+}
+
+.exitingWalker {
+  left: 46.875%;
+  top: 51.367188%;
+  animation-name: leave-town-hall;
 }
 
 .rightWalker .sprite {
@@ -211,6 +221,20 @@
 @keyframes turn-towards-door {
   0% { transform: scaleX(-1); }
   60%, 100% { transform: scaleX(1); }
+}
+
+@keyframes leave-town-hall {
+  0% { transform: translate(0, 0) scale(0.8); opacity: 0; filter: brightness(0.45); }
+  6% { transform: translate(-9.375%, 10.417%) scale(0.83); opacity: 1; filter: brightness(0.7); }
+  14% { transform: translate(-26.563%, 22.917%) scale(0.85); filter: brightness(1); }
+  22% { transform: translate(-46.875%, 37.5%) scale(0.88); }
+  30% { transform: translate(-68.75%, 52.083%) scale(0.9); }
+  38% { transform: translate(-90.625%, 66.667%) scale(0.92); }
+  46% { transform: translate(-110.938%, 80.208%) scale(0.94); }
+  60% { transform: translate(-168.75%, 101.042%) scale(0.97); }
+  74% { transform: translate(-229.688%, 134.375%) scale(1); }
+  88% { transform: translate(-279.688%, 172.917%) scale(1); opacity: 1; }
+  100% { transform: translate(calc(-315.625% + var(--start-x)), 189.583%) scale(1); opacity: 0; }
 }
 
 @media (max-width: 760px) {

@@ -10,6 +10,7 @@ const animationAssets = [
   "/images/mairie-parvis.webp",
   "/images/mairie-marche-alpha.webp",
   "/images/mairie-conversation-alpha.webp",
+  "/images/mairie-sortie-alpha.webp",
 ];
 
 function subscribeToMotion(callback: () => void) {
@@ -26,37 +27,37 @@ function getServerReducedMotion() {
   return true;
 }
 
-function Citizen({ conversation = false }: { conversation?: boolean }) {
+function Citizen({ conversation = false, exiting = false }: { conversation?: boolean; exiting?: boolean }) {
   return (
     <span
-      className={conversation ? `${styles.sprite} ${styles.conversation}` : styles.sprite}
+      className={`${styles.sprite} ${conversation ? styles.conversation : exiting ? styles.departureSprite : ""}`}
     />
   );
 }
 
-function createJourney(first: boolean, right: boolean) {
+function createJourney(first: boolean, right: boolean, exiting: boolean) {
   return {
-    delay: first ? (right ? 6 : 0.5) + Math.random() * 4 : 3 + Math.random() * 12,
+    delay: first ? (exiting ? 3 : right ? 6 : 0.5) + Math.random() * 4 : 3 + Math.random() * 12,
     duration: 16 + Math.random() * 6,
     stride: 1.02 + Math.random() * 0.2,
     start: -18 + Math.random() * 36,
   };
 }
 
-function Visitor({ right = false }: { right?: boolean }) {
+function Visitor({ right = false, exiting = false }: { right?: boolean; exiting?: boolean }) {
   const [journey, setJourney] = useState<ReturnType<typeof createJourney> | null>(null);
   const [visit, setVisit] = useState(0);
 
   useEffect(() => {
-    setJourney(createJourney(true, right));
-  }, [right]);
+    setJourney(createJourney(true, right, exiting));
+  }, [right, exiting]);
 
   if (!journey) return null;
 
   return (
     <div
       key={visit}
-      className={`${styles.citizen} ${styles.walker} ${right ? styles.rightWalker : styles.centerWalker}`}
+      className={`${styles.citizen} ${styles.walker} ${exiting ? styles.exitingWalker : right ? styles.rightWalker : styles.centerWalker}`}
       style={{
         "--arrival-delay": `${journey.delay}s`,
         "--journey-duration": `${journey.duration}s`,
@@ -65,11 +66,11 @@ function Visitor({ right = false }: { right?: boolean }) {
       } as CSSProperties}
       onAnimationEnd={(event) => {
         if (event.target !== event.currentTarget) return;
-        setJourney(createJourney(false, right));
+        setJourney(createJourney(false, right, exiting));
         setVisit((previous) => previous + 1);
       }}
     >
-      <div className={styles.direction}><Citizen /></div>
+      <div className={styles.direction}><Citizen exiting={exiting} /></div>
     </div>
   );
 }
@@ -137,7 +138,7 @@ export function TownHallScene() {
       <div className={styles.scene}>
         <Image
           src="/images/mairie-collectif.webp"
-          alt="Des personnes échangent sur le parvis de la mairie tandis que des visiteurs montent les marches et entrent dans le bâtiment."
+          alt="Des personnes échangent sur le parvis. Des visiteurs entrent dans la mairie tandis qu’une autre personne en sort et descend les marches."
           width={1536}
           height={1024}
           sizes="(max-width: 760px) 100vw, 65vw"
@@ -163,6 +164,7 @@ export function TownHallScene() {
               </div>
               <Visitor />
               <Visitor right />
+              <Visitor exiting />
               <Image
                 className={`${styles.plate} ${styles.foreground}`}
                 src={animationAssets[0]}
