@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { type CSSProperties, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import styles from "./town-hall-scene.module.css";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
@@ -35,6 +35,46 @@ function Citizen({ conversation = false }: { conversation?: boolean }) {
   );
 }
 
+function createJourney(first: boolean, right: boolean) {
+  return {
+    delay: first ? (right ? 6 : 0.5) + Math.random() * 4 : 3 + Math.random() * 12,
+    duration: 16 + Math.random() * 6,
+    stride: 1.02 + Math.random() * 0.2,
+    start: -18 + Math.random() * 36,
+  };
+}
+
+function Visitor({ right = false }: { right?: boolean }) {
+  const [journey, setJourney] = useState<ReturnType<typeof createJourney> | null>(null);
+  const [visit, setVisit] = useState(0);
+
+  useEffect(() => {
+    setJourney(createJourney(true, right));
+  }, [right]);
+
+  if (!journey) return null;
+
+  return (
+    <div
+      key={visit}
+      className={`${styles.citizen} ${styles.walker} ${right ? styles.rightWalker : styles.centerWalker}`}
+      style={{
+        "--arrival-delay": `${journey.delay}s`,
+        "--journey-duration": `${journey.duration}s`,
+        "--stride-duration": `${journey.stride}s`,
+        "--start-x": `${journey.start}%`,
+      } as CSSProperties}
+      onAnimationEnd={(event) => {
+        if (event.target !== event.currentTarget) return;
+        setJourney(createJourney(false, right));
+        setVisit((previous) => previous + 1);
+      }}
+    >
+      <div className={styles.direction}><Citizen /></div>
+    </div>
+  );
+}
+
 export function TownHallScene() {
   const reducedMotion = useSyncExternalStore(
     subscribeToMotion,
@@ -45,6 +85,14 @@ export function TownHallScene() {
   const [ready, setReady] = useState(false);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [tabVisible, setTabVisible] = useState(true);
+
+  useEffect(() => {
+    const updateVisibility = () => setTabVisible(!document.hidden);
+    updateVisibility();
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
 
   useEffect(() => {
     if (reducedMotion || ready) return;
@@ -85,7 +133,7 @@ export function TownHallScene() {
     <figure
       ref={figure}
       className="hero-figure"
-      data-animation-paused={paused || !visible}
+      data-animation-paused={paused || !visible || !tabVisible}
     >
       <div className={styles.scene}>
         <Image
@@ -113,16 +161,8 @@ export function TownHallScene() {
               <div className={`${styles.citizen} ${styles.plaza}`}>
                 <Citizen conversation />
               </div>
-              <div className={`${styles.citizen} ${styles.walker} ${styles.centerWalker}`}>
-                <div className={styles.direction}>
-                  <Citizen />
-                </div>
-              </div>
-              <div className={`${styles.citizen} ${styles.walker} ${styles.rightWalker}`}>
-                <div className={styles.direction}>
-                  <Citizen />
-                </div>
-              </div>
+              <Visitor />
+              <Visitor right />
               <Image
                 className={`${styles.plate} ${styles.foreground}`}
                 src={animationAssets[0]}

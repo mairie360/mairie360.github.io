@@ -62,9 +62,14 @@
 .walker {
   width: 4.17%;
   transform-origin: 50% 89.5833%;
-  animation-duration: 18.8s;
+  animation-duration: var(--journey-duration);
+  animation-delay: var(--arrival-delay);
   animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.walker .sprite {
+  animation-duration: var(--stride-duration);
 }
 
 .walker::before {
@@ -83,7 +88,6 @@
   left: 61.39%;
   top: 67.97%;
   animation-name: approach-right;
-  animation-delay: -9.4s;
 }
 
 .rightWalker .direction {
@@ -167,8 +171,8 @@
 }
 
 @keyframes approach-left {
-  0% { transform: translate(0, 0) scale(1); opacity: 0; }
-  5% { transform: translate(18.75%, -10.42%) scale(1); opacity: 1; }
+  0% { transform: translate(var(--start-x), 0) scale(1); opacity: 0; }
+  5% { transform: translate(calc(18.75% + var(--start-x)), -10.42%) scale(1); opacity: 1; }
   20% { transform: translate(75%, -29.17%) scale(0.98); }
   40% { transform: translate(165.63%, -64.58%) scale(0.95); }
   58% { transform: translate(250%, -96.88%) scale(0.92); }
@@ -181,8 +185,8 @@
 }
 
 @keyframes approach-right {
-  0% { transform: translate(0, 0) scale(1); opacity: 0; }
-  5% { transform: translate(-20%, -10.42%) scale(1); opacity: 1; }
+  0% { transform: translate(var(--start-x), 0) scale(1); opacity: 0; }
+  5% { transform: translate(calc(-20% + var(--start-x)), -10.42%) scale(1); opacity: 1; }
   20% { transform: translate(-95.31%, -45.83%) scale(0.98); }
   40% { transform: translate(-212.5%, -79.17%) scale(0.95); }
   58% { transform: translate(-325%, -102.08%) scale(0.92); }
