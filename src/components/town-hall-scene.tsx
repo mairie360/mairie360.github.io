@@ -35,29 +35,30 @@ function Citizen({ conversation = false, exiting = false }: { conversation?: boo
   );
 }
 
-function createJourney(first: boolean, right: boolean, exiting: boolean) {
+function createJourney(first: boolean, exiting: boolean) {
   return {
-    delay: first ? (exiting ? 3 : right ? 6 : 0.5) + Math.random() * 4 : 3 + Math.random() * 12,
+    right: !exiting && Math.random() < 0.5,
+    delay: first ? (exiting ? 3 : 0.5) + Math.random() * 4 : 4 + Math.random() * 9,
     duration: 16 + Math.random() * 6,
     stride: 1.02 + Math.random() * 0.2,
     start: -18 + Math.random() * 36,
   };
 }
 
-function Visitor({ right = false, exiting = false }: { right?: boolean; exiting?: boolean }) {
+function Visitor({ exiting = false }: { exiting?: boolean }) {
   const [journey, setJourney] = useState<ReturnType<typeof createJourney> | null>(null);
   const [visit, setVisit] = useState(0);
 
   useEffect(() => {
-    setJourney(createJourney(true, right, exiting));
-  }, [right, exiting]);
+    setJourney(createJourney(true, exiting));
+  }, [exiting]);
 
   if (!journey) return null;
 
   return (
     <div
       key={visit}
-      className={`${styles.citizen} ${styles.walker} ${exiting ? styles.exitingWalker : right ? styles.rightWalker : styles.centerWalker}`}
+      className={`${styles.citizen} ${styles.walker} ${exiting ? styles.exitingWalker : journey.right ? styles.rightWalker : styles.centerWalker}`}
       style={{
         "--arrival-delay": `${journey.delay}s`,
         "--journey-duration": `${journey.duration}s`,
@@ -66,7 +67,7 @@ function Visitor({ right = false, exiting = false }: { right?: boolean; exiting?
       } as CSSProperties}
       onAnimationEnd={(event) => {
         if (event.target !== event.currentTarget) return;
-        setJourney(createJourney(false, right, exiting));
+        setJourney(createJourney(false, exiting));
         setVisit((previous) => previous + 1);
       }}
     >
@@ -163,7 +164,6 @@ export function TownHallScene() {
                 <Citizen conversation />
               </div>
               <Visitor />
-              <Visitor right />
               <Visitor exiting />
               <Image
                 className={`${styles.plate} ${styles.foreground}`}
