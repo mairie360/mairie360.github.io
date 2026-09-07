@@ -92,13 +92,13 @@
 }
 
 .rightWalker {
-  left: 61.39%;
-  top: 67.97%;
+  left: 61.588542%;
+  top: 70.214844%;
   animation-name: approach-right;
 }
 
 .rightWalker .direction {
-  transform: scaleX(-1);
+  animation: turn-towards-door var(--journey-duration) steps(1, end) var(--arrival-delay) both;
 }
 
 .centerWalker {
@@ -191,18 +191,26 @@
   92%, 100% { transform: translate(331.25%, -175%) scale(0.80); opacity: 0; filter: brightness(0.2); }
 }
 
+/* Approach on the paving below the planters, then climb through the centre of the steps. */
 @keyframes approach-right {
-  0% { transform: translate(var(--start-x), 0) scale(1); opacity: 0; }
-  5% { transform: translate(calc(-20% + var(--start-x)), -10.42%) scale(1); opacity: 1; }
-  20% { transform: translate(-95.31%, -45.83%) scale(0.98); }
-  40% { transform: translate(-212.5%, -79.17%) scale(0.95); }
-  58% { transform: translate(-325%, -102.08%) scale(0.92); }
-  66% { transform: translate(-359.38%, -121.88%) scale(0.90); }
-  72% { transform: translate(-357.81%, -140.63%) scale(0.88); }
-  78% { transform: translate(-354.69%, -151.04%) scale(0.87); }
-  84% { transform: translate(-350%, -166.67%) scale(0.86); opacity: 1; filter: brightness(1); }
-  88% { transform: translate(-353.13%, -175%) scale(0.83); opacity: 0.6; filter: brightness(0.55); }
-  92%, 100% { transform: translate(-353.13%, -184.38%) scale(0.80); opacity: 0; filter: brightness(0.2); }
+  0% { transform: translate(calc(0.000% + var(--start-x)), 0.000%) scale(1); opacity: 0; }
+  5% { transform: translate(calc(-28.103% + var(--start-x)), -7.286%) scale(1); opacity: 1; }
+  20% { transform: translate(-140.515%, -29.142%) scale(0.99); }
+  36% { transform: translate(-257.611%, -57.244%) scale(0.98); }
+  50% { transform: translate(-374.707%, -90.550%) scale(0.96); }
+  60% { transform: translate(-443.404%, -118.651%) scale(0.93); }
+  66% { transform: translate(-434.036%, -133.222%) scale(0.91); }
+  72% { transform: translate(-412.178%, -147.794%) scale(0.89); }
+  78% { transform: translate(-390.320%, -162.365%) scale(0.88); }
+  84% { transform: translate(-368.462%, -177.977%) scale(0.86); opacity: 1; filter: brightness(1); }
+  88% { transform: translate(-352.849%, -194.629%) scale(0.83); opacity: 0.6; filter: brightness(0.55); }
+  92% { transform: translate(-352.849%, -208.160%) scale(0.8); opacity: 0; filter: brightness(0.2); }
+  100% { transform: translate(-352.849%, -208.160%) scale(0.8); opacity: 0; filter: brightness(0.2); }
+}
+
+@keyframes turn-towards-door {
+  0% { transform: scaleX(-1); }
+  60%, 100% { transform: scaleX(1); }
 }
 
 @media (max-width: 760px) {
