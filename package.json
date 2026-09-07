@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "node -e \"require('node:fs').copyFileSync('CNAME', 'out/CNAME')\"",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit"
   },
