@@ -5,6 +5,7 @@ type SpriteMeshOptions = {
   fragmentSource: string;
   width: number;
   height: number;
+  splitAt?: number;
   configure?: (gl: WebGLRenderingContext, program: WebGLProgram) => void;
 };
 
@@ -33,12 +34,19 @@ export function createSpriteMeshRenderer(canvas: HTMLCanvasElement, image: HTMLI
   gl.useProgram(program);
   const points: number[] = [];
   for (let y = 0; y < height; y += 2) for (let x = 0; x < width; x += 2) {
-    points.push(x,y, x+2,y, x,y+2, x+2,y, x+2,y+2, x,y+2);
+    // Duplicate the seam vertices for each part so one person's pose cannot
+    // stretch triangles attached to their neighbour.
+    const part = options.splitAt !== undefined && x >= options.splitAt ? 1 : 0;
+    points.push(x,y,part, x+2,y,part, x,y+2,part, x+2,y,part, x+2,y+2,part, x,y+2,part);
   }
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(points), gl.STATIC_DRAW);
   const point = gl.getAttribLocation(program, "point");
-  gl.enableVertexAttribArray(point); gl.vertexAttribPointer(point, 2, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(point); gl.vertexAttribPointer(point, 2, gl.FLOAT, false, 12, 0);
+  const part = gl.getAttribLocation(program, "part");
+  if (part >= 0) {
+    gl.enableVertexAttribArray(part); gl.vertexAttribPointer(part, 1, gl.FLOAT, false, 12, 8);
+  }
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -49,7 +57,7 @@ export function createSpriteMeshRenderer(canvas: HTMLCanvasElement, image: HTMLI
   options.configure?.(gl, program);
   gl.enable(gl.BLEND); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
   const phaseLocation = gl.getUniformLocation(program, "phase");
-  const vertexCount = points.length / 2;
+  const vertexCount = points.length / 3;
   return {
     draw: phase => {
       gl.viewport(0, 0, canvas.width, canvas.height);

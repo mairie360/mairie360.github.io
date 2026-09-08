@@ -6,6 +6,7 @@ import type { SpriteMeshRenderer } from "./sprite-mesh-renderer";
 import styles from "./town-hall-scene.module.css";
 
 export const conversationAsset = "/images/mairie-conversation-alpha.webp";
+const conversationDuration = 8;
 
 export function TownHallConversation({ paused, offset, pace }: { paused: boolean; offset: number; pace: number }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -24,7 +25,7 @@ export function TownHallConversation({ paused, offset, pace }: { paused: boolean
       if (!active || !element) return;
       renderer.current = createConversationRenderer(element, image);
       if (renderer.current) {
-        renderer.current.draw(offset / 12 * Math.PI * 2);
+        renderer.current.draw(offset / conversationDuration * Math.PI * 2);
         setReady(true);
       }
     }).catch(() => { /* Keep the original pair visible when rendering is unavailable. */ });
@@ -43,7 +44,7 @@ export function TownHallConversation({ paused, offset, pace }: { paused: boolean
     const tick = (now: number) => {
       if (previous !== undefined) elapsed.current += (now - previous) / 1000;
       previous = now;
-      const phase = ((elapsed.current * pace + offset) % 12) / 12 * Math.PI * 2;
+      const phase = ((elapsed.current * pace + offset) % conversationDuration) / conversationDuration * Math.PI * 2;
       renderer.current?.draw(phase);
       frame = requestAnimationFrame(tick);
     };
