@@ -14,7 +14,7 @@ export const metadata = pageMetadata(
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page">
       <a className="skip-link" href="#contenu">
         Aller au contenu
       </a>
@@ -95,6 +95,9 @@ export default function Home() {
         </div>
       </main>
       <SiteFooter />
-    </>
+      <div className="mobile-cta">
+        <a className="button button-primary" href="#modules">Découvrir les modules <Arrow /></a>
+      </div>
+    </div>
   );
 }
