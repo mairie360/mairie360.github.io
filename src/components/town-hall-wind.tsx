@@ -1,24 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createSpriteMesh } from "./sprite-mesh";
 import styles from "./town-hall-scene.module.css";
-
-const vertexSource = `
-  attribute vec2 position;
-  varying vec2 uv;
-  void main() {
-    uv = vec2((position.x + 1.0) * 0.5, (1.0 - position.y) * 0.5);
-    gl_Position = vec4(position, 0.0, 1.0);
-  }
-`;
 
 // Coordinates refer to the original 1536 × 1024 illustration. Sampling one
 // displaced plate avoids the doubled silhouettes of moving cutouts over trees.
-const fragmentSource = `
+// Compute wind on a fine grid, then interpolate it instead of repeating the
+// trigonometry for every pixel in the canvas.
+const vertexSource = `
   precision highp float;
-  uniform sampler2D illustration;
+  attribute vec2 point;
   uniform float time;
   varying vec2 uv;
+  varying vec2 windUv;
 
   vec2 foliage(vec2 p, vec2 centre, vec2 radius, float root, float phase) {
     float edge = 1.0 - smoothstep(0.78, 1.08, length((p - centre) / radius));
@@ -29,7 +24,14 @@ const fragmentSource = `
   }
 
   void main() {
-    vec2 p = uv * vec2(1536.0, 1024.0);
+    vec2 p = point;
+    uv = point / vec2(1536.0, 1024.0);
+    gl_Position = vec4(uv.x * 2.0 - 1.0, 1.0 - uv.y * 2.0, 0.0, 1.0);
+    if (p.y > 700.0 || p.y < 96.0 || p.x < 180.0 || p.x > 1340.0
+      || (p.x > 596.0 && p.x < 1046.0 && p.y > 224.0 && p.y < 700.0)) {
+      windUv = uv;
+      return;
+    }
     vec2 drift = vec2(0.0);
     // Fade to zero before the rooflines, trunks and masonry.
     float leftRoof = 1.0 - smoothstep(418.0 - (p.x - 440.0) * 0.24, 429.0 - (p.x - 440.0) * 0.24, p.y);
@@ -45,13 +47,33 @@ const fragmentSource = `
     if (p.x > 280.0 && p.x < 596.0 && p.y > 485.0 && p.y < 660.0) drift = vec2(0.0);
     if (p.x > 928.0 && p.x < 1224.0 && p.y > 495.0 && p.y < 710.0) drift = vec2(0.0);
 
-    // The cloth ripples away from its fixed attachment to the mast.
-    float flag = smoothstep(794.0, 800.0, p.x) * (1.0 - smoothstep(855.0, 864.0, p.x));
-    flag *= smoothstep(102.0, 110.0, p.y) * (1.0 - smoothstep(172.0, 183.0, p.y));
-    float freeEdge = clamp((p.x - 793.0) / 60.0, 0.0, 1.0);
-    float ripple = sin(time * 3.7 - (p.x - 793.0) * 0.095);
-    drift += flag * freeEdge * vec2(1.6 * sin(time * 2.5), 6.0 * ripple);
-    gl_FragColor = texture2D(illustration, (p + drift) / vec2(1536.0, 1024.0));
+    windUv = (p + drift) / vec2(1536.0, 1024.0);
+  }
+`;
+
+const fragmentSource = `
+  precision highp float;
+  uniform sampler2D illustration;
+  uniform float time;
+  varying vec2 uv;
+  varying vec2 windUv;
+  void main() {
+    vec2 p = uv * vec2(1536.0, 1024.0);
+    // Only the small flag needs per-pixel ripples; its mast stays fixed.
+    if (p.x > 794.0 && p.x < 864.0 && p.y > 102.0 && p.y < 183.0) {
+      float flag = smoothstep(794.0, 800.0, p.x) * (1.0 - smoothstep(855.0, 864.0, p.x));
+      flag *= smoothstep(102.0, 110.0, p.y) * (1.0 - smoothstep(172.0, 183.0, p.y));
+      float freeEdge = clamp((p.x - 793.0) / 60.0, 0.0, 1.0);
+      float ripple = sin(time * 3.7 - (p.x - 793.0) * 0.095);
+      vec2 drift = flag * freeEdge * vec2(1.6 * sin(time * 2.5), 6.0 * ripple);
+      gl_FragColor = texture2D(illustration, (p + drift) / vec2(1536.0, 1024.0));
+      return;
+    }
+    // Keep the architecture fixed even where a grid cell straddles its outline.
+    bool masonry = (p.x > 596.0 && p.x < 1046.0 && p.y > 224.0 && p.y < 700.0)
+      || (p.x > 280.0 && p.x < 596.0 && p.y > 485.0 && p.y < 660.0)
+      || (p.x > 928.0 && p.x < 1224.0 && p.y > 495.0 && p.y < 710.0);
+    gl_FragColor = texture2D(illustration, masonry ? uv : windUv);
   }
 `;
 
@@ -62,15 +84,17 @@ function createRenderer(canvas: HTMLCanvasElement, image: HTMLImageElement): Ren
   if (!gl) return null;
   const program = gl.createProgram();
   const buffer = gl.createBuffer();
+  const indexBuffer = gl.createBuffer();
   const texture = gl.createTexture();
   const shaders: WebGLShader[] = [];
   const dispose = () => {
     shaders.forEach((shader) => gl.deleteShader(shader));
     gl.deleteTexture(texture);
     gl.deleteBuffer(buffer);
+    gl.deleteBuffer(indexBuffer);
     gl.deleteProgram(program);
   };
-  if (!program || !buffer || !texture) { dispose(); return null; }
+  if (!program || !buffer || !indexBuffer || !texture) { dispose(); return null; }
 
   for (const [type, source] of [[gl.VERTEX_SHADER, vertexSource], [gl.FRAGMENT_SHADER, fragmentSource]] as const) {
     const shader = gl.createShader(type);
@@ -84,11 +108,14 @@ function createRenderer(canvas: HTMLCanvasElement, image: HTMLImageElement): Ren
   gl.linkProgram(program);
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) { dispose(); return null; }
   gl.useProgram(program);
+  const { points, indices } = createSpriteMesh(1536, 1024, undefined, 16);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
-  const position = gl.getAttribLocation(program, "position");
+  gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+  const position = gl.getAttribLocation(program, "point");
   gl.enableVertexAttribArray(position);
-  gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+  gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 12, 0);
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -101,7 +128,7 @@ function createRenderer(canvas: HTMLCanvasElement, image: HTMLImageElement): Ren
     draw: (time) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform1f(timeLocation, time);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
     },
     dispose,
   };

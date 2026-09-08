@@ -6,13 +6,10 @@ import styles from "./town-hall-scene.module.css";
 import { TownHallWind } from "./town-hall-wind";
 import { WalkingCitizen, walkingCharactersAsset } from "./walking-citizen";
 import { TownHallConversation, conversationAsset } from "./town-hall-conversation";
+import { SceneImage, sceneImageSource, sceneImageWidths } from "./scene-image";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
-const animationAssets = [
-  "/images/mairie-parvis.webp",
-  conversationAsset,
-  walkingCharactersAsset,
-];
+const plateAsset = "/images/mairie-parvis.webp";
 
 function subscribeToMotion(callback: () => void) {
   const media = window.matchMedia(motionQuery);
@@ -84,9 +81,10 @@ export function TownHallScene() {
     getServerReducedMotion,
   );
   const figure = useRef<HTMLElement>(null);
-  const [ready, setReady] = useState(false);
+  const [plateSource, setPlateSource] = useState<string | null>(null);
+  const [plateWidth, setPlateWidth] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [tabVisible, setTabVisible] = useState(true);
 
   useEffect(() => {
@@ -97,17 +95,38 @@ export function TownHallScene() {
   }, []);
 
   useEffect(() => {
-    if (reducedMotion || ready) return;
+    const element = figure.current;
+    if (!element) return;
+    const resize = () => {
+      const crop = window.matchMedia("(max-width: 760px)").matches ? 1 : 1.171875;
+      const pixels = element.clientWidth * crop * Math.min(window.devicePixelRatio, 2);
+      setPlateWidth(sceneImageWidths.find(width => width >= pixels) ?? 1536);
+    };
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(element);
+    window.addEventListener("resize", resize);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion || !visible || !plateWidth) return;
+    const source = sceneImageSource(plateAsset, plateWidth);
+    if (source === plateSource) return;
     let active = true;
     Promise.all(
-      animationAssets.map(async (src) => {
+      [source, conversationAsset, walkingCharactersAsset].map(async (src) => {
         const image = new window.Image();
+        image.fetchPriority = "low";
         image.src = src;
         await image.decode();
       }),
     ).then(
       () => {
-        if (active) setReady(true);
+        if (active) setPlateSource(source);
       },
       () => {
         // Keep the original illustration if an animation asset cannot load.
@@ -116,7 +135,7 @@ export function TownHallScene() {
     return () => {
       active = false;
     };
-  }, [reducedMotion, ready]);
+  }, [reducedMotion, visible, plateWidth, plateSource]);
 
   useEffect(() => {
     const element = figure.current;
@@ -129,7 +148,7 @@ export function TownHallScene() {
     return () => observer.disconnect();
   }, []);
 
-  const animated = ready && !reducedMotion;
+  const animated = plateSource !== null && !reducedMotion;
   const animationPaused = paused || !visible || !tabVisible;
 
   return (
@@ -139,26 +158,19 @@ export function TownHallScene() {
       data-animation-paused={animationPaused}
     >
       <div className={styles.scene}>
-        <Image
-          src="/images/mairie-collectif.webp"
-          alt="Des personnes échangent sur le parvis. Des visiteurs entrent dans la mairie tandis qu’une autre personne en sort et descend les marches."
-          width={1536}
-          height={1024}
-          sizes="(max-width: 760px) 100vw, 65vw"
-          priority
-        />
+        <SceneImage />
         {animated && (
           <div className={styles.motion} aria-hidden="true">
             <div className={styles.artwork}>
               <Image
                 className={styles.plate}
-                src={animationAssets[0]}
+                src={plateSource}
                 width={1536}
                 height={1024}
                 alt=""
                 loading="eager"
               />
-              <TownHallWind src={animationAssets[0]} paused={animationPaused} />
+              <TownHallWind src={plateSource} paused={animationPaused} />
               <div className={`${styles.citizen} ${styles.services}`}>
                 <TownHallConversation paused={animationPaused} offset={4.3} pace={0.93} />
               </div>
@@ -169,7 +181,7 @@ export function TownHallScene() {
               <Visitor exiting paused={animationPaused} />
               <Image
                 className={`${styles.plate} ${styles.foreground}`}
-                src={animationAssets[0]}
+                src={plateSource}
                 width={1536}
                 height={1024}
                 alt=""

@@ -1,3 +1,5 @@
+import { createSpriteMesh } from "./sprite-mesh";
+
 export type SpriteMeshRenderer = { draw: (phase: number) => void; dispose: () => void };
 
 type SpriteMeshOptions = {
@@ -13,14 +15,16 @@ export function createSpriteMeshRenderer(canvas: HTMLCanvasElement, image: HTMLI
   const { vertexSource, fragmentSource, width, height } = options;
   const gl = canvas.getContext("webgl", { alpha: true, antialias: true, depth: false });
   if (!gl) return null;
-  const program = gl.createProgram(), buffer = gl.createBuffer(), texture = gl.createTexture();
+  const program = gl.createProgram(), buffer = gl.createBuffer(), indexBuffer = gl.createBuffer(), texture = gl.createTexture();
   const shaders: WebGLShader[] = [];
+  const observer = new ResizeObserver(() => resize());
   const dispose = () => {
+    observer.disconnect();
     shaders.forEach(shader => gl.deleteShader(shader));
-    gl.deleteTexture(texture); gl.deleteBuffer(buffer); gl.deleteProgram(program);
+    gl.deleteTexture(texture); gl.deleteBuffer(buffer); gl.deleteBuffer(indexBuffer); gl.deleteProgram(program);
     gl.getExtension("WEBGL_lose_context")?.loseContext();
   };
-  if (!program || !buffer || !texture) { dispose(); return null; }
+  if (!program || !buffer || !indexBuffer || !texture) { dispose(); return null; }
   for (const [type, source] of [[gl.VERTEX_SHADER, vertexSource], [gl.FRAGMENT_SHADER, fragmentSource]] as const) {
     const shader = gl.createShader(type);
     if (!shader) { dispose(); return null; }
@@ -32,15 +36,12 @@ export function createSpriteMeshRenderer(canvas: HTMLCanvasElement, image: HTMLI
   gl.linkProgram(program);
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) { dispose(); return null; }
   gl.useProgram(program);
-  const points: number[] = [];
-  for (let y = 0; y < height; y += 2) for (let x = 0; x < width; x += 2) {
-    // Duplicate the seam vertices for each part so one person's pose cannot
-    // stretch triangles attached to their neighbour.
-    const part = options.splitAt !== undefined && x >= options.splitAt ? 1 : 0;
-    points.push(x,y,part, x+2,y,part, x,y+2,part, x+2,y,part, x+2,y+2,part, x,y+2,part);
-  }
+  // Share vertices inside each character, keeping separate vertices at the seam.
+  const { points, indices } = createSpriteMesh(width, height, options.splitAt);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(points), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
   const point = gl.getAttribLocation(program, "point");
   gl.enableVertexAttribArray(point); gl.vertexAttribPointer(point, 2, gl.FLOAT, false, 12, 0);
   const part = gl.getAttribLocation(program, "part");
@@ -57,14 +58,22 @@ export function createSpriteMeshRenderer(canvas: HTMLCanvasElement, image: HTMLI
   options.configure?.(gl, program);
   gl.enable(gl.BLEND); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
   const phaseLocation = gl.getUniformLocation(program, "phase");
-  const vertexCount = points.length / 3;
-  return {
-    draw: phase => {
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform1f(phaseLocation, phase);
-      gl.drawArrays(gl.TRIANGLES, 0, vertexCount);
-    },
-    dispose,
+  let currentPhase = 0;
+  const draw = (phase: number) => {
+    currentPhase = phase;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(phaseLocation, phase);
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
   };
+  const resize = () => {
+    const pixels = Math.min(width * 2, Math.max(1, Math.ceil(canvas.clientWidth * Math.min(window.devicePixelRatio, 2))));
+    if (canvas.width === pixels) return;
+    canvas.width = pixels;
+    canvas.height = Math.round(pixels * height / width);
+    draw(currentPhase);
+  };
+  resize();
+  observer.observe(canvas);
+  return { draw, dispose };
 }
