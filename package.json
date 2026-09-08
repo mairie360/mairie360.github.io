@@ -7,6 +7,7 @@
     "build": "next build",
     "postbuild": "node -e \"require('node:fs').copyFileSync('CNAME', 'out/CNAME')\"",
     "lint": "eslint . --max-warnings=0",
+    "test": "node --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

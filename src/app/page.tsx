@@ -4,6 +4,7 @@ import { ModulesExplorer } from "@/components/modules-explorer";
 import { RolesExplorer } from "@/components/roles-explorer";
 import { TownHallScene } from "@/components/town-hall-scene";
 import { SiteFooter } from "@/components/site-footer";
+import { ContactForm } from "@/components/contact-form";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
@@ -46,8 +47,8 @@ export default function Home() {
               <a className="button button-primary" href="#modules">
                 Découvrir les modules <Arrow />
               </a>
-              <a className="text-link" href="#projet">
-                Notre vision <Arrow diagonal />
+              <a className="text-link" href="#contact">
+                Nous contacter <Arrow diagonal />
               </a>
             </div>
           </div>
@@ -87,6 +88,7 @@ export default function Home() {
             </a>
           </div>
         </section>
+        <ContactForm />
         <div className="commitments container">
           <p>
             Une démarche attentive à l’accessibilité, à la protection des

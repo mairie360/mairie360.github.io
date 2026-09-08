@@ -12,6 +12,7 @@ export function SiteFooter() {
       <div className="footer-details">
         <p>Un projet d’école porté par quatre étudiants d’Epitech.</p>
         <nav aria-label="Informations du site">
+          <Link href="/#contact">Nous contacter</Link>
           <a href="mailto:mairie360@gmail.com">mairie360@gmail.com</a>
           <Link href="/confidentialite/">Confidentialité</Link>
           <Link href="/conditions-utilisation/">Conditions d’utilisation</Link>
