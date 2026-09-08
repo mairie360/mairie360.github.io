@@ -1,12 +1,22 @@
-import Image from "next/image";
 import { Header } from "@/components/header";
-import { Arrow, Brand } from "@/components/icons";
+import { Arrow } from "@/components/icons";
 import { ModulesExplorer } from "@/components/modules-explorer";
 import { RolesExplorer } from "@/components/roles-explorer";
+import { TownHallScene } from "@/components/town-hall-scene";
+import { SiteFooter } from "@/components/site-footer";
+import { ContactForm } from "@/components/contact-form";
+import { MobileCta } from "@/components/mobile-cta";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata(
+  "Mairie360 — Vos équipes, mieux connectées",
+  "Tableau de bord, projets, calendrier, messagerie, workflows et formations : découvrez Mairie360, un projet étudiant de plateforme municipale.",
+  "/",
+);
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page">
       <a className="skip-link" href="#contenu">
         Aller au contenu
       </a>
@@ -30,30 +40,20 @@ export default function Home() {
               </span>
             </h1>
             <p>
-              Projets, calendrier, échanges et formations :
+              Du tableau de bord aux workflows :
               <br className="desktop-break" /> un espace commun pour les équipes
               de votre collectivité.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#modules">
+              <a id="hero-modules-cta" className="button button-primary" href="#modules">
                 Découvrir les modules <Arrow />
               </a>
-              <a className="text-link" href="#projet">
-                Notre vision <Arrow diagonal />
+              <a className="text-link" href="#contact">
+                Nous contacter <Arrow diagonal />
               </a>
             </div>
           </div>
-          <figure className="hero-figure">
-            <Image
-              src="/images/mairie-collectif.webp"
-              alt="Une mairie et ses services réunis autour d’une place, illustration architecturale du collectif."
-              width={1536}
-              height={1024}
-              sizes="(max-width: 760px) 100vw, 65vw"
-              priority
-            />
-            <figcaption>Le numérique au service du collectif.</figcaption>
-          </figure>
+          <TownHallScene />
         </section>
         <div className="vision-line container">
           <p>Moins d’outils dispersés. Plus de liens entre vos services.</p>
@@ -73,7 +73,7 @@ export default function Home() {
                 Construit avec ambition.
               </h2>
               <p>
-                Mairie360 est un projet en développement :
+                Mairie360 est un projet d’école porté par quatre étudiants d’Epitech :
                 <br className="desktop-break" /> une plateforme modulaire pour
                 simplifier le travail des équipes municipales.
               </p>
@@ -89,6 +89,7 @@ export default function Home() {
             </a>
           </div>
         </section>
+        <ContactForm />
         <div className="commitments container">
           <p>
             Une démarche attentive à l’accessibilité, à la protection des
@@ -96,13 +97,8 @@ export default function Home() {
           </p>
         </div>
       </main>
-      <footer className="footer container">
-        <a href="#solution" aria-label="Mairie360, retour en haut">
-          <Brand compact />
-        </a>
-        <p>Le numérique au service du collectif.</p>
-        <p>© 2026 Mairie360</p>
-      </footer>
-    </>
+      <SiteFooter />
+      <MobileCta />
+    </div>
   );
 }

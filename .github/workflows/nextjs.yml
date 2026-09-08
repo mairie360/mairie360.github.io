@@ -31,6 +31,8 @@ jobs:
         run: npm audit --audit-level=high
       - name: Lint
         run: npm run lint
+      - name: Test contact delivery
+        run: npm test
       - name: Build static website
         run: npm run build
       - name: Typecheck

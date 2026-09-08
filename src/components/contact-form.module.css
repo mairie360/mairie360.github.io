@@ -1,0 +1,51 @@
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(36px, 7vw, 110px);
+  padding-block: 80px;
+}
+.intro h2 { font-size: clamp(32px, 3.4vw, 48px); }
+.intro > p:not(:first-child) { color: var(--muted); margin-top: 26px; }
+.intro > a { margin-top: 16px; font-size: 16px; }
+.form { min-width: 0; }
+.form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.form > .hint { margin-bottom: 20px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.field label { font-size: 15px; font-weight: 650; }
+.field input, .field textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #9baead;
+  border-radius: 3px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.field textarea { resize: vertical; min-height: 160px; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.field [aria-invalid="true"] { border-color: #a33025; }
+.hint { color: var(--muted); font-size: 12px; }
+.privacy { color: var(--muted); font-size: 13px; margin-bottom: 24px; line-height: 1.7; }
+.privacy a, .submitError a { text-decoration: underline; text-underline-offset: 3px; }
+.privacy a { color: var(--blue); }
+.fieldError { color: #942b22; font-size: 13px; }
+.submitError { color: #7e2820; background: #fff1ed; border-left: 3px solid #a33025; padding: 16px; margin-top: 20px; font-size: 14px; overflow-wrap: anywhere; }
+.honeypot { display: none; }
+.form fieldset:disabled { opacity: 0.7; }
+.form fieldset:disabled button { cursor: wait; }
+.spinner { width: 19px; height: 19px; border: 2px solid #ffffff70; border-top-color: white; border-radius: 50%; animation: spin 800ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 900px) {
+  .contact { grid-template-columns: 1fr; gap: 32px; padding-block: 56px; }
+  .intro { max-width: 640px; }
+}
+@media (max-width: 760px) {
+  .contact { padding-block: 44px; }
+  .row { grid-template-columns: 1fr; gap: 0; }
+  .form button { width: 100%; }
+}

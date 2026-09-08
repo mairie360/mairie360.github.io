@@ -22,17 +22,15 @@ export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
-export function Brand({ compact = false }: { compact?: boolean }) {
+export function Brand() {
   return (
-    <span className={`brand${compact ? " brand-compact" : ""}`}>
-      {!compact && (
-        <Image
-          src="/web-app-manifest-192x192.png"
-          width={72}
-          height={72}
-          alt=""
-        />
-      )}
+    <span className="brand">
+      <Image
+        src="/web-app-manifest-192x192.png"
+        width={72}
+        height={72}
+        alt=""
+      />
       <span>
         mairie<span className="brand-number">360</span>
       </span>
@@ -40,9 +38,23 @@ export function Brand({ compact = false }: { compact?: boolean }) {
   );
 }
 
-export type IconName = "projects" | "calendar" | "messages" | "learning";
+export type IconName =
+  | "dashboard"
+  | "projects"
+  | "calendar"
+  | "messages"
+  | "workflows"
+  | "learning";
 export function ModuleIcon({ name }: { name: IconName }) {
   const paths = {
+    dashboard: (
+      <>
+        <rect x="3" y="3" width="7" height="10" rx="1.5" />
+        <rect x="14" y="3" width="7" height="6" rx="1.5" />
+        <rect x="3" y="17" width="7" height="4" rx="1.5" />
+        <rect x="14" y="13" width="7" height="8" rx="1.5" />
+      </>
+    ),
     projects: (
       <path d="M3 8V6a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8Zm0 2h18" />
     ),
@@ -53,6 +65,14 @@ export function ModuleIcon({ name }: { name: IconName }) {
       </>
     ),
     messages: <path d="m21 3-6 18-4-8-8-4 18-6Zm0 0L11 13" />,
+    workflows: (
+      <>
+        <rect x="8" y="2" width="8" height="6" rx="1.5" />
+        <path d="M12 8v4M5 16v-4h14v4" />
+        <rect x="2" y="16" width="6" height="6" rx="1.5" />
+        <rect x="16" y="16" width="6" height="6" rx="1.5" />
+      </>
+    ),
     learning: (
       <>
         <path d="m2 9 10-5 10 5-10 5-10-5Zm4 2v7c4 3 8 3 12 0v-7m4-2v8" />

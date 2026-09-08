@@ -9,6 +9,18 @@ export const modules: {
   development?: boolean;
 }[] = [
   {
+    id: "dashboard",
+    label: "Tableau de bord",
+    title: "Gardez une vue d’ensemble sur votre activité.",
+    description:
+      "Vos projets, vos tâches et vos prochains événements réunis dans une synthèse personnalisée pour organiser votre journée.",
+    benefits: [
+      "Retrouver les projets et les tâches en attente",
+      "Consulter les prochains rendez-vous",
+      "Accéder rapidement aux autres modules",
+    ],
+  },
+  {
     id: "projects",
     label: "Projets",
     title: "Faites avancer les projets de votre commune.",
@@ -43,6 +55,19 @@ export const modules: {
       "Réunir les équipes dans une conversation",
       "Retrouver l’historique des échanges",
     ],
+  },
+  {
+    id: "workflows",
+    label: "Workflows",
+    title: "Des étapes claires pour traiter chaque dossier.",
+    description:
+      "Des circuits de traitement pour faire circuler les dossiers entre les services et identifier la prochaine action.",
+    benefits: [
+      "Définir les étapes et les responsables",
+      "Relier les documents et les échanges d’e-mails",
+      "Suivre les validations et l’historique",
+    ],
+    development: true,
   },
   {
     id: "learning",

@@ -1,0 +1,211 @@
+.scene {
+  position: relative;
+}
+
+.motion {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.artwork {
+  position: absolute;
+  left: 50%;
+  width: 117.1875%;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.artwork .plate {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1.5;
+  object-fit: contain;
+}
+
+.wind {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.citizen {
+  position: absolute;
+}
+
+.conversation {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: url("/images/mairie-conversation-alpha.webp") 0 0 / 400% 100% no-repeat;
+}
+
+.conversation canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.services {
+  left: 62.25%;
+  top: 63.2%;
+  width: 6.67%;
+}
+
+.plaza {
+  left: 26.36%;
+  top: 61.91%;
+  width: 8.33%;
+}
+
+.walker {
+  width: 4.17%;
+  transform-origin: 50% 89.5833%;
+  animation-duration: var(--journey-duration);
+  animation-delay: var(--arrival-delay);
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+.walker::before {
+  content: "";
+  position: absolute;
+  left: 35%;
+  top: 89%;
+  width: 30%;
+  height: 3%;
+  border-radius: 50%;
+  background: rgb(45 38 23 / 20%);
+  filter: blur(0.6px);
+}
+
+.rightWalker {
+  left: 61.588542%;
+  top: 70.214844%;
+  animation-name: approach-right;
+}
+
+.rightWalker .direction {
+  animation: turn-towards-door var(--journey-duration) steps(1, end) var(--arrival-delay) both;
+}
+
+.centerWalker {
+  left: 33.07%;
+  top: 67.09%;
+  animation-name: approach-left;
+}
+
+.exitingWalker {
+  left: 46.875%;
+  top: 51.367188%;
+  animation-name: leave-town-hall;
+}
+
+.artwork .foreground {
+  position: absolute;
+  inset: 0;
+}
+
+.foreground {
+  clip-path: polygon(55.5% 65.45%, 57.1% 65.45%, 57.1% 68.65%, 56.6% 68.65%, 56.6% 80.3%, 56.2% 80.3%, 56.2% 68.65%, 55.5% 68.65%);
+}
+
+.caption {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: white;
+  color: var(--teal);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  background: var(--mint);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+:global([data-animation-paused="true"]) .citizen,
+:global([data-animation-paused="true"]) .direction {
+  animation-play-state: paused;
+}
+
+@keyframes approach-left {
+  0% { transform: translate(var(--start-x), 0) scale(1); opacity: 0; }
+  5% { transform: translate(calc(18.75% + var(--start-x)), -10.42%) scale(1); opacity: 1; }
+  20% { transform: translate(75%, -29.17%) scale(0.98); }
+  40% { transform: translate(165.63%, -64.58%) scale(0.95); }
+  58% { transform: translate(250%, -96.88%) scale(0.92); }
+  66% { transform: translate(276.56%, -114.58%) scale(0.90); }
+  72% { transform: translate(292.19%, -128.13%) scale(0.88); }
+  78% { transform: translate(309.38%, -141.67%) scale(0.87); }
+  84% { transform: translate(325%, -157.29%) scale(0.86); opacity: 1; filter: brightness(1); }
+  88% { transform: translate(331.25%, -165.63%) scale(0.83); opacity: 0.6; filter: brightness(0.55); }
+  92%, 100% { transform: translate(331.25%, -175%) scale(0.80); opacity: 0; filter: brightness(0.2); }
+}
+
+/* Approach on the paving below the planters, then climb through the centre of the steps. */
+@keyframes approach-right {
+  0% { transform: translate(calc(0.000% + var(--start-x)), 0.000%) scale(1); opacity: 0; }
+  5% { transform: translate(calc(-28.103% + var(--start-x)), -7.286%) scale(1); opacity: 1; }
+  20% { transform: translate(-140.515%, -29.142%) scale(0.99); }
+  36% { transform: translate(-257.611%, -57.244%) scale(0.98); }
+  50% { transform: translate(-374.707%, -90.550%) scale(0.96); }
+  60% { transform: translate(-443.404%, -118.651%) scale(0.93); }
+  66% { transform: translate(-434.036%, -133.222%) scale(0.91); }
+  72% { transform: translate(-412.178%, -147.794%) scale(0.89); }
+  78% { transform: translate(-390.320%, -162.365%) scale(0.88); }
+  84% { transform: translate(-368.462%, -177.977%) scale(0.86); opacity: 1; filter: brightness(1); }
+  88% { transform: translate(-352.849%, -194.629%) scale(0.83); opacity: 0.6; filter: brightness(0.55); }
+  92% { transform: translate(-352.849%, -208.160%) scale(0.8); opacity: 0; filter: brightness(0.2); }
+  100% { transform: translate(-352.849%, -208.160%) scale(0.8); opacity: 0; filter: brightness(0.2); }
+}
+
+@keyframes turn-towards-door {
+  0% { transform: scaleX(-1); }
+  60%, 100% { transform: scaleX(1); }
+}
+
+@keyframes leave-town-hall {
+  0% { transform: translate(0, 0) scale(0.8); opacity: 0; filter: brightness(0.45); }
+  6% { transform: translate(-9.375%, 10.417%) scale(0.83); opacity: 1; filter: brightness(0.7); }
+  14% { transform: translate(-26.563%, 22.917%) scale(0.85); filter: brightness(1); }
+  22% { transform: translate(-46.875%, 37.5%) scale(0.88); }
+  30% { transform: translate(-68.75%, 52.083%) scale(0.9); }
+  38% { transform: translate(-90.625%, 66.667%) scale(0.92); }
+  46% { transform: translate(-110.938%, 80.208%) scale(0.94); }
+  60% { transform: translate(-168.75%, 101.042%) scale(0.97); }
+  74% { transform: translate(-229.688%, 134.375%) scale(1); }
+  88% { transform: translate(-279.688%, 172.917%) scale(1); opacity: 1; }
+  100% { transform: translate(calc(-315.625% + var(--start-x)), 189.583%) scale(1); opacity: 0; }
+}
+
+@media (max-width: 760px) {
+  .artwork { width: 100%; }
+  .toggle { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion, .toggle { display: none; }
+}

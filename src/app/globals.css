@@ -2,6 +2,9 @@
   --white: #ffffff;
   --ink: #102e32;
   --muted: #4e6165;
+  --blue: #0056a6;
+  --blue-dark: #004582;
+  --blue-soft: #eaf2fb;
   --teal: #116e70;
   --teal-dark: #0b5658;
   --mint: #f0f6f3;
@@ -49,7 +52,7 @@ input {
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #0060aa;
+  outline: 3px solid var(--blue);
   outline-offset: 5px;
 }
 button {
@@ -169,7 +172,7 @@ h3 {
   left: 0;
   right: 0;
   height: 1px;
-  background: var(--teal);
+  background: var(--blue);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 180ms;
@@ -198,23 +201,23 @@ h3 {
     color 180ms;
 }
 .button-primary {
-  background: var(--teal);
+  background: var(--blue);
   color: white;
 }
 .button-primary:hover {
-  background: var(--teal-dark);
+  background: var(--blue-dark);
 }
 .button-outline {
-  border-color: var(--teal);
-  color: var(--teal-dark);
+  border-color: var(--blue);
+  color: var(--blue);
   min-height: 52px;
   padding: 12px 24px;
 }
 .button-outline:hover {
-  background: var(--mint);
+  background: var(--blue-soft);
 }
 .text-link {
-  color: var(--teal-dark);
+  color: var(--blue);
   font-size: 17px;
   font-weight: 650;
   display: inline-flex;
@@ -320,7 +323,7 @@ h3 {
 }
 .module-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   border-bottom: 1px solid var(--line);
   margin-top: 56px;
 }
@@ -330,12 +333,12 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   padding: 23px 12px;
   border: 0;
   border-bottom: 3px solid transparent;
   margin-bottom: -1px;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 550;
   transition:
@@ -343,12 +346,12 @@ h3 {
     background 150ms;
 }
 .module-tabs button[aria-selected="true"] {
-  border-bottom-color: var(--teal);
-  color: var(--teal);
+  border-bottom-color: var(--blue);
+  color: var(--blue);
 }
 .module-tabs button:hover {
-  color: var(--teal);
-  background: #e7f0eb;
+  color: var(--blue);
+  background: var(--blue-soft);
 }
 .module-content {
   display: grid;
@@ -422,6 +425,84 @@ h3 {
   font-size: 15px;
   margin-top: 4px;
 }
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.dashboard-widget {
+  padding: 20px;
+  border: 1px solid #dce5e1;
+  border-radius: 8px;
+  min-width: 0;
+}
+.dashboard-widget h5 {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.dashboard-project {
+  grid-column: 1 / -1;
+  background: var(--mint);
+  border-color: var(--mint);
+}
+.dashboard-project-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.dashboard-project-heading > p {
+  font-size: 17px;
+  font-weight: 650;
+}
+.preview-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #e0eee7;
+  color: var(--teal-dark);
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.dashboard-progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  margin-top: 20px;
+}
+.progress-track.dashboard-progress span {
+  width: 60%;
+}
+.dashboard-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 13px 0 0;
+  display: grid;
+  gap: 13px;
+}
+.dashboard-tasks p,
+.dashboard-event-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+.dashboard-tasks span,
+.dashboard-event-place {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.dashboard-date {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  margin-block: 15px 10px;
+}
 .kanban {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -484,7 +565,7 @@ h3 {
 .event-day {
   font-size: 13px;
   font-weight: 750;
-  color: var(--teal);
+  color: var(--blue);
   width: 44px;
   flex-shrink: 0;
 }
@@ -533,6 +614,81 @@ h3 {
   font-size: 13px;
   color: var(--muted);
   padding-top: 6px;
+}
+.workflow-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.workflow-steps li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #dce5e1;
+  border-radius: 8px;
+  position: relative;
+}
+.workflow-steps li + li::before {
+  content: "";
+  position: absolute;
+  left: 35px;
+  top: -15px;
+  height: 14px;
+  width: 2px;
+  background: var(--line);
+}
+.workflow-steps .workflow-current {
+  background: var(--mint);
+  border-color: #abcabe;
+}
+.workflow-step-number {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  background: white;
+}
+.workflow-current .workflow-step-number {
+  color: white;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.workflow-step-copy h5 {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.workflow-step-copy p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+.workflow-steps li:not(.workflow-current) .preview-status {
+  color: var(--muted);
+  background: #f1f4f3;
+}
+.workflow-documents {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.workflow-documents svg {
+  color: var(--teal);
+  width: 23px;
+  height: 23px;
 }
 .course {
   padding: 22px;
@@ -612,12 +768,12 @@ h3 {
     color 180ms;
 }
 .role-tabs button:hover {
-  background: var(--mint);
+  background: var(--blue-soft);
 }
 .role-tabs button[aria-selected="true"] {
   color: white;
-  background: var(--teal);
-  border-bottom-color: var(--teal);
+  background: var(--blue);
+  border-bottom-color: var(--blue);
 }
 .role-content {
   padding-top: 24px;
@@ -689,22 +845,100 @@ h3 {
   color: var(--muted);
 }
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 36px;
   border-top: 1px solid var(--line);
   padding-block: 34px 42px;
   color: var(--muted);
   font-size: 14px;
 }
-.brand-compact {
-  font-size: 31px;
-  font-weight: 650;
+.footer-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
 }
-.brand-compact .brand-number {
-  font-weight: 350;
-  color: var(--teal);
+.footer-details {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 22px;
+  font-size: 12px;
+}
+.footer-details nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.footer-details a {
+  padding-block: 8px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.mobile-cta {
+  display: none;
+}
+.information-page {
+  max-width: 800px;
+  padding-block: 40px 80px;
+}
+.information-page > .text-link {
+  margin-bottom: 40px;
+}
+.information-page h1,
+.not-found h1 {
+  font-size: clamp(34px, 4.4vw, 60px);
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.information-date {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 20px;
+}
+.information-page section {
+  margin-top: 40px;
+}
+.information-page h2 {
+  font-size: clamp(24px, 3vw, 30px);
+  letter-spacing: -0.6px;
+  line-height: 1.35;
+  margin-bottom: 18px;
+}
+.information-page section p {
+  color: var(--muted);
+  margin-top: 14px;
+}
+.information-page section a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.not-found {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  padding-block: 36px;
+}
+.not-found main {
+  flex: 1;
+  align-content: center;
+  max-width: 680px;
+  padding-block: 36px;
+}
+.not-found main > p:not(.section-label) {
+  margin-block: 24px 32px;
+  color: var(--muted);
+}
+.not-found > p {
+  color: var(--muted);
+  font-size: 14px;
 }
 @keyframes enter {
   from {
@@ -723,6 +957,9 @@ h3 {
   }
 }
 @media (max-width: 1200px) {
+  .module-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .header-inner {
     gap: 32px;
     min-height: 90px;
@@ -816,6 +1053,26 @@ h3 {
     margin-right: 20px;
   }
 }
+@media (max-width: 1000px) {
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .hero-actions > a {
+    width: 100%;
+    min-height: 60px;
+    justify-content: center;
+  }
+  .hero-actions > .text-link {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 16px 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    gap: 12px;
+  }
+}
 @media (max-width: 900px) {
   .header-inner {
     gap: 20px;
@@ -831,7 +1088,6 @@ h3 {
     min-height: 600px;
   }
   .hero-actions {
-    gap: 8px 20px;
     margin-top: 26px;
   }
   .hero-copy > p {
@@ -898,6 +1154,7 @@ h3 {
 @media (max-width: 760px) {
   html {
     scroll-padding-top: 20px;
+    scroll-padding-bottom: 100px;
   }
   body {
     font-size: 16px;
@@ -986,7 +1243,12 @@ h3 {
   }
   .hero-actions {
     margin-top: 26px;
-    gap: 12px 25px;
+  }
+  .hero-actions > a {
+    min-height: 54px;
+  }
+  .hero-actions > .text-link {
+    padding: 14px 17px;
   }
   .button {
     min-height: 54px;
@@ -1038,10 +1300,11 @@ h3 {
     margin-top: 30px;
   }
   .module-tabs button {
-    font-size: 11px;
+    font-size: 12px;
     flex-direction: column;
-    gap: 10px;
-    padding: 17px 2px;
+    gap: 8px;
+    padding: 14px 6px;
+    min-height: 88px;
   }
   .module-tabs svg {
     width: 25px;
@@ -1091,6 +1354,16 @@ h3 {
   }
   .preview-heading p {
     font-size: 13px;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dashboard-widget {
+    padding: 16px;
+  }
+  .dashboard-project-heading > p {
+    font-size: 15px;
   }
   .kanban {
     grid-template-columns: 1fr;
@@ -1145,6 +1418,29 @@ h3 {
   }
   .conversation-note {
     font-size: 11px;
+  }
+  .workflow-steps li {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 8px 12px;
+    padding: 14px;
+  }
+  .workflow-steps li + li::before {
+    left: 28px;
+  }
+  .workflow-step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+  .workflow-step-copy h5 {
+    font-size: 14px;
+  }
+  .workflow-step-copy p {
+    font-size: 11px;
+  }
+  .workflow-steps .preview-status {
+    grid-column: 2;
+    justify-self: start;
   }
   .course {
     padding: 16px;
@@ -1214,15 +1510,40 @@ h3 {
     font-size: 12px;
     line-height: 1.8;
   }
-  .footer {
+  .footer-main {
     flex-direction: column;
     align-items: flex-start;
     gap: 17px;
+  }
+  .footer {
     padding-block: 26px;
     font-size: 12px;
   }
-  .brand-compact {
-    font-size: 28px;
+  .footer-details nav {
+    flex-direction: column;
+    gap: 0;
+  }
+  .footer-details a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .home-page {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+  }
+  .mobile-cta {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    z-index: 9;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: var(--white);
+    box-shadow: 0 -4px 18px #102e320a;
+  }
+  .mobile-cta .button {
+    width: 100%;
   }
 }
 @media (max-width: 360px) {
@@ -1234,9 +1555,6 @@ h3 {
   }
   .hero h1 {
     font-size: 34px;
-  }
-  .hero-actions {
-    gap: 7px 18px;
   }
   .role-keywords {
     font-size: 12px;

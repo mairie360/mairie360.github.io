@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Arrow, Brand } from "./icons";
 
 export function Header() {
@@ -16,14 +17,14 @@ export function Header() {
       }}
     >
       <div className="header-inner container">
-        <a
-          href="#solution"
+        <Link
+          href="/#solution"
           className="brand-link"
           aria-label="Mairie360, accueil"
           onClick={() => setOpen(false)}
         >
           <Brand />
-        </a>
+        </Link>
         <button
           id="menu-toggle"
           className="menu-toggle"
@@ -52,22 +53,22 @@ export function Header() {
           className={`navigation${open ? " is-open" : ""}`}
           aria-label="Navigation principale"
         >
-          <a href="#solution" onClick={() => setOpen(false)}>
+          <Link href="/#solution" onClick={() => setOpen(false)}>
             La solution
-          </a>
-          <a href="#modules" onClick={() => setOpen(false)}>
+          </Link>
+          <Link href="/#modules" onClick={() => setOpen(false)}>
             Les modules
-          </a>
-          <a href="#equipes" onClick={() => setOpen(false)}>
+          </Link>
+          <Link href="/#equipes" onClick={() => setOpen(false)}>
             Vos équipes
-          </a>
-          <a
-            href="#projet"
+          </Link>
+          <Link
+            href="/#projet"
             className="button button-outline"
             onClick={() => setOpen(false)}
           >
             Le projet <Arrow diagonal />
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
