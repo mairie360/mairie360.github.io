@@ -5,6 +5,7 @@ import { RolesExplorer } from "@/components/roles-explorer";
 import { TownHallScene } from "@/components/town-hall-scene";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
+import { MobileCta } from "@/components/mobile-cta";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
@@ -44,7 +45,7 @@ export default function Home() {
               de votre collectivité.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#modules">
+              <a id="hero-modules-cta" className="button button-primary" href="#modules">
                 Découvrir les modules <Arrow />
               </a>
               <a className="text-link" href="#contact">
@@ -97,9 +98,7 @@ export default function Home() {
         </div>
       </main>
       <SiteFooter />
-      <div className="mobile-cta">
-        <a className="button button-primary" href="#modules">Découvrir les modules <Arrow /></a>
-      </div>
+      <MobileCta />
     </div>
   );
 }
