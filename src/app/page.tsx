@@ -1,8 +1,16 @@
 import { Header } from "@/components/header";
-import { Arrow, Brand } from "@/components/icons";
+import { Arrow } from "@/components/icons";
 import { ModulesExplorer } from "@/components/modules-explorer";
 import { RolesExplorer } from "@/components/roles-explorer";
 import { TownHallScene } from "@/components/town-hall-scene";
+import { SiteFooter } from "@/components/site-footer";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata(
+  "Mairie360 — Vos équipes, mieux connectées",
+  "Tableau de bord, projets, calendrier, messagerie, workflows et formations : découvrez Mairie360, un projet étudiant de plateforme municipale.",
+  "/",
+);
 
 export default function Home() {
   return (
@@ -63,7 +71,7 @@ export default function Home() {
                 Construit avec ambition.
               </h2>
               <p>
-                Mairie360 est un projet en développement :
+                Mairie360 est un projet d’école porté par quatre étudiants d’Epitech :
                 <br className="desktop-break" /> une plateforme modulaire pour
                 simplifier le travail des équipes municipales.
               </p>
@@ -86,17 +94,7 @@ export default function Home() {
           </p>
         </div>
       </main>
-      <footer className="footer container">
-        <a
-          href="#solution"
-          className="brand-link"
-          aria-label="Mairie360, retour en haut"
-        >
-          <Brand />
-        </a>
-        <p>Le numérique au service du collectif.</p>
-        <p>© 2026 Mairie360</p>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

@@ -11,27 +11,6 @@ const manrope = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mairie360.fr"),
-  title: "Mairie360 — Vos équipes, mieux connectées",
-  description:
-    "Tableau de bord, projets, calendrier, messagerie, workflows et formations : découvrez Mairie360, la plateforme municipale en développement.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Mairie360 — Vos équipes, mieux connectées",
-    description: "Un espace commun pour les équipes de votre collectivité.",
-    url: "/",
-    siteName: "Mairie360",
-    locale: "fr_FR",
-    type: "website",
-    images: [
-      {
-        url: "/images/mairie-collectif.webp",
-        width: 1536,
-        height: 1024,
-        alt: "Mairie360, le numérique au service du collectif",
-      },
-    ],
-  },
-  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

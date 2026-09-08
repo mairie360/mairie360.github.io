@@ -845,12 +845,95 @@ h3 {
   color: var(--muted);
 }
 .footer {
+  border-top: 1px solid var(--line);
+  padding-block: 34px 42px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.footer-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 36px;
+}
+.footer-details {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
   border-top: 1px solid var(--line);
-  padding-block: 34px 42px;
+  margin-top: 28px;
+  padding-top: 22px;
+  font-size: 12px;
+}
+.footer-details nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.footer-details a {
+  padding-block: 8px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.information-page {
+  max-width: 800px;
+  padding-block: 40px 80px;
+}
+.information-page > .text-link {
+  margin-bottom: 40px;
+}
+.information-page h1,
+.not-found h1 {
+  font-size: clamp(34px, 4.4vw, 60px);
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.information-date {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 20px;
+}
+.information-page section {
+  margin-top: 40px;
+}
+.information-page h2 {
+  font-size: clamp(24px, 3vw, 30px);
+  letter-spacing: -0.6px;
+  line-height: 1.35;
+  margin-bottom: 18px;
+}
+.information-page section p {
+  color: var(--muted);
+  margin-top: 14px;
+}
+.information-page section a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.not-found {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  padding-block: 36px;
+}
+.not-found main {
+  flex: 1;
+  align-content: center;
+  max-width: 680px;
+  padding-block: 36px;
+}
+.not-found main > p:not(.section-label) {
+  margin-block: 24px 32px;
+  color: var(--muted);
+}
+.not-found > p {
   color: var(--muted);
   font-size: 14px;
 }
@@ -1399,12 +1482,23 @@ h3 {
     font-size: 12px;
     line-height: 1.8;
   }
-  .footer {
+  .footer-main {
     flex-direction: column;
     align-items: flex-start;
     gap: 17px;
+  }
+  .footer {
     padding-block: 26px;
     font-size: 12px;
+  }
+  .footer-details nav {
+    flex-direction: column;
+    gap: 0;
+  }
+  .footer-details a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 }
 @media (max-width: 360px) {
