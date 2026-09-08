@@ -5,11 +5,12 @@ import { type CSSProperties, useEffect, useRef, useState, useSyncExternalStore }
 import styles from "./town-hall-scene.module.css";
 import { TownHallWind } from "./town-hall-wind";
 import { WalkingCitizen, walkingCharactersAsset } from "./walking-citizen";
+import { TownHallConversation, conversationAsset } from "./town-hall-conversation";
 
 const motionQuery = "(prefers-reduced-motion: reduce)";
 const animationAssets = [
   "/images/mairie-parvis.webp",
-  "/images/mairie-conversation-alpha.webp",
+  conversationAsset,
   walkingCharactersAsset,
 ];
 
@@ -25,10 +26,6 @@ function getReducedMotion() {
 
 function getServerReducedMotion() {
   return true;
-}
-
-function Conversation() {
-  return <span className={styles.conversation} />;
 }
 
 function createJourney(first: boolean, exiting: boolean) {
@@ -163,10 +160,10 @@ export function TownHallScene() {
               />
               <TownHallWind src={animationAssets[0]} paused={animationPaused} />
               <div className={`${styles.citizen} ${styles.services}`}>
-                <Conversation />
+                <TownHallConversation paused={animationPaused} offset={4.3} pace={0.93} />
               </div>
               <div className={`${styles.citizen} ${styles.plaza}`}>
-                <Conversation />
+                <TownHallConversation paused={animationPaused} offset={0} pace={1.07} />
               </div>
               <Visitor paused={animationPaused} />
               <Visitor exiting paused={animationPaused} />
