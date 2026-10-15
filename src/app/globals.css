@@ -10,7 +10,7 @@
   --mint: #f0f6f3;
   --line: #ccd9d7;
   --dark: #173f3b;
-  --gutter: clamp(24px, 5vw, 80px);
+  --gutter: clamp(24px, 3vw, 56px);
 }
 
 * {
@@ -92,7 +92,7 @@ h3 {
 }
 .container {
   width: calc(100% - var(--gutter) * 2);
-  max-width: 1384px;
+  max-width: 1600px;
   margin-inline: auto;
 }
 .sr-only {
@@ -234,7 +234,8 @@ h3 {
 }
 .hero {
   display: grid;
-  grid-template-columns: 44% 56%;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  column-gap: clamp(48px, 5vw, 96px);
   align-items: center;
   min-height: 768px;
   position: relative;
@@ -247,7 +248,7 @@ h3 {
   padding-bottom: 44px;
 }
 .hero h1 {
-  white-space: nowrap;
+  white-space: normal;
   font-size: clamp(44px, 4.65vw, 73px);
   font-weight: 650;
   line-height: 1.15;
@@ -270,8 +271,8 @@ h3 {
   margin-top: 40px;
 }
 .hero-figure {
-  width: 115%;
-  margin-left: -6%;
+  width: 100%;
+  margin-left: 0;
   align-self: center;
 }
 .hero-figure img {
@@ -982,7 +983,7 @@ h3 {
   }
   .hero {
     min-height: 690px;
-    grid-template-columns: 48% 52%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   }
   .hero h1 {
     font-size: 4.75vw;
@@ -998,8 +999,8 @@ h3 {
     font-size: 15px;
   }
   .hero-figure {
-    width: 108%;
-    margin-left: -3%;
+    width: 100%;
+    margin-left: 0;
   }
   .section-intro {
     gap: 40px;
@@ -1262,7 +1263,7 @@ h3 {
   .hero-figure {
     width: calc(100% + 40px);
     margin-left: -20px;
-    margin-top: 30px;
+    margin-top: 44px;
   }
   .hero-figure img {
     aspect-ratio: 1.5;

@@ -7,10 +7,12 @@ import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
 import { MobileCta } from "@/components/mobile-cta";
 import { pageMetadata } from "@/lib/metadata";
+import { Offer } from "@/components/offer";
+import { LandingFunnel } from "@/components/landing-funnel";
 
 export const metadata = pageMetadata(
   "Mairie360 — Vos équipes, mieux connectées",
-  "Tableau de bord, projets, calendrier, messagerie, workflows et formations : découvrez Mairie360, un projet étudiant de plateforme municipale.",
+  "Mairie360, le logiciel en ligne pour les mairies : projets, tâches, calendrier et messagerie. Découvrez la bêta gratuite et demandez une démonstration.",
   "/",
 );
 
@@ -40,16 +42,15 @@ export default function Home() {
               </span>
             </h1>
             <p>
-              Du tableau de bord aux workflows :
-              <br className="desktop-break" /> un espace commun pour les équipes
-              de votre collectivité.
+              Le logiciel en ligne pour les mairies : projets, tâches, calendrier
+              et messagerie dans un espace commun pour vos services.
             </p>
             <div className="hero-actions">
-              <a id="hero-modules-cta" className="button button-primary" href="#modules">
-                Découvrir les modules <Arrow />
+              <a id="hero-primary-cta" className="button button-primary" href="#contact" data-contact-origin="hero" data-contact-intention="beta">
+                Participer à la bêta <Arrow />
               </a>
-              <a className="text-link" href="#contact">
-                Nous contacter <Arrow diagonal />
+              <a className="text-link" href="#offre">
+                Découvrir l’offre <Arrow diagonal />
               </a>
             </div>
           </div>
@@ -58,6 +59,7 @@ export default function Home() {
         <div className="vision-line container">
           <p>Moins d’outils dispersés. Plus de liens entre vos services.</p>
         </div>
+        <Offer />
         <ModulesExplorer />
         <RolesExplorer />
         <section
@@ -99,6 +101,7 @@ export default function Home() {
       </main>
       <SiteFooter />
       <MobileCta />
+      <LandingFunnel />
     </div>
   );
 }

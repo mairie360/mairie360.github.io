@@ -7,7 +7,7 @@ export function MobileCta() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const primaryAction = document.getElementById("hero-modules-cta");
+    const primaryAction = document.getElementById("hero-primary-cta");
     if (!primaryAction || !("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(([entry]) => {
       setVisible(!entry.isIntersecting);
@@ -18,7 +18,7 @@ export function MobileCta() {
 
   return (
     <div className="mobile-cta" hidden={!visible}>
-      <a className="button button-primary" href="#modules">Découvrir les modules <Arrow /></a>
+      <a className="button button-primary" href="#contact" data-contact-origin="mobile" data-contact-intention="beta">Participer à la bêta <Arrow /></a>
     </div>
   );
 }

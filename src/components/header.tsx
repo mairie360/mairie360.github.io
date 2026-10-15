@@ -56,6 +56,9 @@ export function Header() {
           <Link href="/#solution" onClick={() => setOpen(false)}>
             La solution
           </Link>
+          <Link href="/#offre" onClick={() => setOpen(false)}>
+            L’offre
+          </Link>
           <Link href="/#modules" onClick={() => setOpen(false)}>
             Les modules
           </Link>
