@@ -4,7 +4,7 @@ French public website presenting Mairie360, a modular platform in development fo
 
 ## Development
 
-Node.js 22 or later is required.
+Node.js 22.13 or later is required.
 
 ```sh
 npm ci
@@ -56,4 +56,6 @@ Pageviews are automatic. Keep automatic form-submission tracking disabled: an at
 
 The original Mairie360 brand assets are retained. All interface text and controls are rendered in HTML; illustrations contain no functional interface.
 
-`next` remains on the patched 15.5 release line. Its PostCSS dependency is overridden within the compatible 8.x line to include the fixes reported by the dependency audit.
+`next` and `eslint-config-next` use the matching patched 15.5.28 release. The PostCSS override stays within the compatible 8.x line, and the lockfile includes patched transitive dependencies. The complete dependency audit remains enabled in CI.
+
+The Next lint plugin pulls in `braces`, which has an [unpatched recursion vulnerability](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm). Its directory-discovery dependency is therefore redirected to the private adapter in `vendor/eslint-glob`. The adapter exposes only the `globSync` API used by the plugin, backed by `tinyglobby`, with directory expansion disabled and root paths normalized. The plugin version and configured rules are retained. Regression tests cover literal and wildcard roots, App Router dynamic links, and document rules under ESLint 9. Remove this workaround once the upstream glob dependency is fixed.

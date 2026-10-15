@@ -1,0 +1,14 @@
+{
+  "name": "@mairie360/eslint-glob",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Directory discovery adapter for the Next.js ESLint plugin",
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "tinyglobby": "0.2.17"
+  }
+}
