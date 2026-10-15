@@ -37,7 +37,22 @@ GitHub Actions validates `main`, feature branches and pull requests. Only `main`
 - `public/images/mairie-collectif.webp`: original generated town-hall illustration, optimized for the web.
 - `src/app/fonts/`: self-hosted Manrope font and its SIL Open Font License.
 
-The content follows the project's documented scope. Training is marked as in development, and the project section states the platform's development status. The page does not collect personal information, set analytics cookies or submit contact forms. The external project link points to the Mairie360 GitHub organization.
+The content follows the project's documented scope. The offer explains the free invitation-only beta and the future subscription per town hall. The final commercial price is not published until validated. Workflows and training remain development work. The contact form sends a name, email and message through FormSubmit, and confirms success before navigating to the thank-you page. The external project link points to the Mairie360 GitHub organization.
+
+## Audience and contact funnel
+
+Plausible is optional. Without a configured site script, no tracker is loaded and the privacy page says collection is inactive. To activate it, add mairie360.fr to your Plausible account and copy its exact `https://plausible.io/js/pa-….js` script URL into `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL` before building. For GitHub Pages, set the repository variable `MAIRIE360_PLAUSIBLE_SCRIPT_URL`; the build workflow passes it through. Rebuild and deploy after changing it. No API key is needed in the browser.
+
+Create these custom-event goals in Plausible, using the exact names:
+
+- `Offre vue` and `Contact vu`: section visible by at least 25%, once per page mount.
+- `CTA contact`: button origin (`hero`, `offre`, `mobile`) and intention (`beta`, `demo`).
+- `Contact commence`: first actual non-empty input, once per form mount.
+- `Contact tentative`: valid submission to the provider.
+- `Contact erreur`: validation or delivery error category.
+- `Contact envoye`: provider success confirmed before navigation.
+
+Pageviews are automatic. Keep automatic form-submission tracking disabled: an attempt is not a confirmed contact. Opening `/merci/` directly never sends `Contact envoye`. A retry can produce multiple attempts; compare unique conversions or an ordered funnel over the same period and channel filter, rather than raw event totals. Analytics failures never block the contact form. No input contents or arbitrary properties are transmitted by custom events. Do not put personal data in campaign parameters. Check the Plausible installation and goals in the live account before assuming collection is active; local visits are excluded by default.
 
 The original Mairie360 brand assets are retained. All interface text and controls are rendered in HTML; illustrations contain no functional interface.
 

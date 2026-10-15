@@ -35,6 +35,8 @@ jobs:
         run: npm test
       - name: Build static website
         run: npm run build
+        env:
+          NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL: ${{ vars.MAIRIE360_PLAUSIBLE_SCRIPT_URL }}
       - name: Typecheck
         run: npm run typecheck
       - name: Upload Pages artifact

@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import { Arrow } from "./icons";
 import { contactAddress, sendContact, validateContact, type ContactErrors } from "@/lib/contact";
 import styles from "./contact-form.module.css";
+import { trackEvent } from "@/lib/analytics";
 
 export function ContactForm() {
   const router = useRouter();
   const submitting = useRef(false);
+  const started = useRef(false);
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const [errors, setErrors] = useState<ContactErrors>({});
   const [ready, setReady] = useState(false);
@@ -31,6 +33,7 @@ export function ContactForm() {
     setStatus("idle");
     const firstInvalid = Object.keys(nextErrors)[0];
     if (firstInvalid) {
+      trackEvent("Contact erreur", { etape: "validation" });
       (form.elements.namedItem(firstInvalid) as HTMLElement | null)?.focus();
       return;
     }
@@ -40,13 +43,16 @@ export function ContactForm() {
     }
     submitting.current = true;
     setStatus("sending");
+    trackEvent("Contact tentative");
     try {
       await sendContact(fields);
+      trackEvent("Contact envoye");
       router.push("/merci/");
     } catch {
       // Keep the visitor's message available to retry or copy into an email.
       submitting.current = false;
       setStatus("error");
+      trackEvent("Contact erreur", { etape: "envoi" });
     }
   }
 
@@ -54,11 +60,19 @@ export function ContactForm() {
     <section className={`${styles.contact} container`} id="contact" aria-labelledby="contact-title">
       <div className={styles.intro}>
         <p className="section-label">Échangeons</p>
-        <h2 id="contact-title">Une question,<br />une idée à partager ?</h2>
-        <p>Vous souhaitez en savoir plus sur Mairie360 ou nous faire part d’un besoin ? Écrivez à l’équipe du projet.</p>
+        <h2 id="contact-title">Parlons des besoins<br />de votre mairie.</h2>
+        <p>Pour une démonstration ou la bêta gratuite, indiquez dans votre message votre mairie, votre fonction et vos disponibilités. Vous pouvez aussi poser une question à l’équipe.</p>
         <a className="text-link" href={`mailto:${contactAddress}`}>{contactAddress} <Arrow diagonal /></a>
       </div>
-      <form className={styles.form} method="post" onSubmit={submit} noValidate aria-busy={status === "sending"}>
+      <form className={styles.form} method="post" onSubmit={submit} noValidate aria-busy={status === "sending"}
+        onInput={(event) => {
+          const field = event.target;
+          if ((field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) &&
+            ["name", "email", "message"].includes(field.name) && field.value.trim() && !started.current) {
+            started.current = true;
+            trackEvent("Contact commence");
+          }
+        }}>
         <p className={styles.hint}>Tous les champs sont obligatoires.</p>
         <fieldset disabled={!ready || status === "sending"}>
           <legend className="sr-only">Votre message à l’équipe Mairie360</legend>

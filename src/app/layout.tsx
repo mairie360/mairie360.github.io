@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AudienceAnalytics } from "@/components/audience-analytics";
+import { getAnalyticsScriptUrl } from "@/lib/analytics";
 
 const manrope = localFont({
   src: "./fonts/Manrope.woff2",
@@ -18,7 +20,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" className={manrope.variable}>
-      <body>{children}</body>
+      <body>{children}<AudienceAnalytics scriptUrl={getAnalyticsScriptUrl()} /></body>
     </html>
   );
 }

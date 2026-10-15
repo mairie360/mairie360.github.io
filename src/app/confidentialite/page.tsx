@@ -1,5 +1,6 @@
 import { InformationPage } from "@/components/information-page";
 import { pageMetadata } from "@/lib/metadata";
+import { getAnalyticsScriptUrl } from "@/lib/analytics";
 
 export const metadata = pageMetadata(
   "Confidentialité | Mairie360",
@@ -17,7 +18,11 @@ export default function Privacy() {
       </section>
       <section>
         <h2>Cookies et mesure d’audience</h2>
-        <p>Nous n’installons aucun outil de mesure d’audience ni traceur publicitaire sur ce site. Le code du site ne dépose pas de cookie et ne conserve pas vos choix de navigation dans le stockage de votre navigateur.</p>
+        {getAnalyticsScriptUrl() ? <>
+          <p>Nous utilisons Plausible pour mesurer la fréquentation du site, les pages vues et les étapes vers le formulaire de contact : consultation de l’offre, clics, début de saisie, erreurs et envoi confirmé.</p>
+          <p>Les événements de parcours ne transmettent ni votre nom, ni votre adresse e-mail, ni votre message, ni le contenu des champs. Ils comportent uniquement des catégories prédéfinies de boutons ou d’erreurs. Ce suivi ne dépose pas de cookie et ne crée pas de stockage dans votre navigateur.</p>
+          <p>Pour connaître le traitement des données techniques liées aux requêtes, consultez la <a href="https://plausible.io/data-policy">politique de données de Plausible</a>. Une absence entre deux étapes aide à examiner le parcours ; elle ne révèle pas à elle seule la raison du départ d’une personne.</p>
+        </> : <p>Aucun outil de mesure d’audience ni traceur publicitaire n’est activé dans cette version du site. Le code du site ne dépose pas de cookie et ne conserve pas vos choix de navigation dans le stockage de votre navigateur.</p>}
         <p>Les images et la police de caractères sont servies avec le site, sans chargement depuis un service de polices ou de publicité tiers.</p>
       </section>
       <section>
