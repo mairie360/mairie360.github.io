@@ -15,10 +15,17 @@ npm run dev
 
 ```sh
 npm run lint
+npm test             # unit tests of the pure modules in src/lib and src/components
 npm run build
+npm run test:html    # checks the exported HTML in out/ (run after the build)
 npm run typecheck
 npm audit --audit-level=high
 ```
+
+`npm run test:html` parses every exported page with `parse5` and checks what visitors and search
+engines receive before any JavaScript runs: French metadata, canonical URLs, sitemap, a single `h1`
+and no skipped heading level, alt texts, link targets with trailing slashes, ARIA references, the
+contact form fields, the platform tabs and the initial state of the modules board.
 
 The production website is generated in `out/`. To inspect that exact export locally, serve the directory with a static HTTP server, for example:
 
@@ -37,7 +44,7 @@ GitHub Actions validates `main`, feature branches and pull requests. Only `main`
 - `public/images/mairie-collectif.webp`: original generated town-hall illustration, optimized for the web.
 - `src/app/fonts/`: self-hosted Manrope font and its SIL Open Font License.
 
-The content follows the project's documented scope. The offer explains the free invitation-only beta and the future subscription per town hall. The final commercial price is not published until validated. Workflows and training remain development work. The contact form sends a name, email and message through FormSubmit, and confirms success before navigating to the thank-you page. The external project link points to the Mairie360 GitHub organization.
+The landing page follows the Figma mockup [Mairie360 — Site vitrine](https://www.figma.com/design/8IGgmm2Hrs39VMQNWfJHFR) (desktop 1440 and phone 390 pages): hero, a thirty-year timeline of municipal tools, audiences, a without/with Mairie360 module board, the platform tabs, support steps and the demo request form. No commercial price is published. Workflows and training remain development work. The contact form sends a name, town, work email and an optional need through FormSubmit, and confirms success before navigating to the thank-you page. The external project link points to the Mairie360 GitHub organization.
 
 ## Audience and contact funnel
 
@@ -45,8 +52,8 @@ Plausible is optional. Without a configured site script, no tracker is loaded an
 
 Create these custom-event goals in Plausible, using the exact names:
 
-- `Offre vue` and `Contact vu`: section visible by at least 25%, once per page mount.
-- `CTA contact`: button origin (`hero`, `offre`, `mobile`) and intention (`beta`, `demo`).
+- `Contact vu`: contact section visible by at least 25%, once per page mount.
+- `CTA contact`: button origin (`bandeau`, `hero`) and intention (`demo`).
 - `Contact commence`: first actual non-empty input, once per form mount.
 - `Contact tentative`: valid submission to the provider.
 - `Contact erreur`: validation or delivery error category.

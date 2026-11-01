@@ -1,38 +1,23 @@
 "use client";
 
 import { modules } from "@/lib/showcase-data";
-import { Check, ModuleIcon } from "./icons";
 import { ModulePreview } from "./module-preview";
 import { useTabSelection } from "./use-tab-selection";
 
 export function ModulesExplorer() {
   const { selected, setSelected, onKeyDown } = useTabSelection(modules.length);
-  const current = modules[selected];
   return (
-    <section className="modules" id="modules" aria-labelledby="modules-title">
+    <section className="platform" id="plateforme" aria-labelledby="platform-title">
       <div className="container">
-        <div className="section-intro">
-          <div>
-            <p className="section-label">Les modules</p>
-            <h2 id="modules-title">
-              Un espace commun.
-              <br />
-              Des outils qui se parlent.
-            </h2>
-          </div>
-          <p>
-            Retrouvez les outils du quotidien dans une plateforme pensée pour
-            les collectivités.
-          </p>
-        </div>
-        <div
-          className="module-tabs"
-          role="tablist"
-          aria-label="Découvrir les modules"
-        >
+        <p className="eyebrow">La plateforme</p>
+        <h2 id="platform-title">Six modules, un seul espace de travail.</h2>
+        <p className="section-lead platform-lead">Choisissez un module pour voir ce qu’il apporte à vos équipes.</p>
+        {/* The tab and its preview change immediately, without transition (Figma "Animations" › 4). */}
+        <div className="tabs-row" role="tablist" aria-label="Choisir un module">
           {modules.map((module, index) => (
             <button
               key={module.id}
+              type="button"
               role="tab"
               id={`tab-${module.id}`}
               aria-selected={selected === index}
@@ -41,7 +26,6 @@ export function ModulesExplorer() {
               onClick={() => setSelected(index)}
               onKeyDown={(event) => onKeyDown(event, index)}
             >
-              <ModuleIcon name={module.id} />
               {module.label}
             </button>
           ))}
@@ -54,35 +38,25 @@ export function ModulesExplorer() {
             aria-labelledby={`tab-${module.id}`}
             hidden={selected !== index}
             tabIndex={0}
+            className="plat-row"
           >
-            {selected === index && (
-              <div className="module-content">
-                <div className="module-copy">
-                  <h3>{current.title}</h3>
-                  <p>{current.description}</p>
-                  {current.development && (
-                    <p className="development-note">Module en développement</p>
-                  )}
-                  <ul className="benefits">
-                    {current.benefits.map((benefit) => (
-                      <li key={benefit}>
-                        <Check />
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="demo-caption">
-                    Aperçu illustratif — données de démonstration
-                  </p>
-                </div>
-                <ModulePreview module={current.id} />
-              </div>
-            )}
+            <div className="plat-text">
+              <p className="plat-replaces">Remplace : {module.replaces}</p>
+              <h3>{module.title}</h3>
+              <p className="plat-description">{module.description}</p>
+              <ul className="plat-points">
+                {module.benefits.map(benefit => (
+                  <li key={benefit}>
+                    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#70C1B3" strokeWidth="2.4"
+                      strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5 9-10" /></svg>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ModulePreview module={module.id} label={module.label} />
           </div>
         ))}
-        <p className="module-closing">
-          Une plateforme modulaire, qui évolue avec les besoins des équipes.
-        </p>
       </div>
     </section>
   );

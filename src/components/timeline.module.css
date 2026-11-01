@@ -1,0 +1,722 @@
+/* "Trente ans d'outils municipaux" — values from the reference prototype (Claude artifact). */
+.frise {
+  background: white;
+  line-height: normal;
+}
+.eras {
+  display: block;
+}
+.eraBg {
+  position: relative;
+}
+.intro {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 80px 24px 24px;
+}
+.introKicker {
+  margin: 0 0 12px;
+  color: #7cff6b;
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.intro h2 {
+  max-width: 860px;
+  margin: 0 0 16px;
+  color: white;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+.introLead {
+  max-width: 640px;
+  color: #b8c0b8;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.era {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.rail {
+  position: relative;
+  flex: 0 0 300px;
+  padding: 40px 0 40px 24px;
+  border-left: 2px solid rgb(160 166 180 / 60%);
+}
+.stage {
+  display: flex;
+  flex: 1 1 480px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 40px 0 40px 32px;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 10%), transparent 80%);
+}
+.dot {
+  position: absolute;
+  top: 48px;
+  left: -9px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+.card {
+  padding: 18px;
+  border-radius: 12px;
+  background: rgb(10 30 33 / 90%);
+  color: white;
+}
+.year {
+  font-family: var(--font-mono), monospace;
+  font-size: 28px;
+  font-weight: 500;
+}
+.title {
+  margin: 2px 0 14px;
+  font-weight: 700;
+}
+.label {
+  margin-bottom: 8px;
+  color: #f4a79a;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.labelToday {
+  color: var(--teal-ink);
+}
+.limits {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.limits li {
+  display: flex;
+  gap: 8px;
+}
+.limits svg {
+  flex: 0 0 16px;
+  margin-top: 2px;
+}
+
+/* 1993 — Minitel */
+.minitel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  padding: 22px 26px;
+  border: 12px solid #2b2a26;
+  border-radius: 24px;
+  background: black;
+  box-shadow: 0 0 0 2px #45433c, 0 24px 60px rgb(0 0 0 / 60%);
+  color: #7cff6b;
+  font-family: var(--font-vt323), "Courier New", monospace;
+  font-size: 21px;
+  line-height: 1.25;
+}
+.scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgb(0 0 0 / 30%) 0, rgb(0 0 0 / 30%) 1px, transparent 1px, transparent 3px);
+}
+.minitelBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 2px 10px;
+  background: #1a3fbf;
+  color: white;
+}
+.minitelTitle {
+  margin-bottom: 10px;
+  color: #ffff66;
+  font-size: 34px;
+}
+.minitelPrompt {
+  margin-top: 14px;
+}
+.minitelPrompt span {
+  padding: 0 8px;
+  background: #7cff6b;
+  color: black;
+}
+
+/* 1999 — first website */
+.netscape {
+  width: 100%;
+  max-width: 640px;
+  border: 2px solid;
+  border-color: white #404040 #404040 white;
+  background: #c0c0c0;
+  box-shadow: 4px 4px 0 rgb(0 0 0 / 35%);
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+}
+.netscapeBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: #000080;
+  color: white;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+}
+.netscapeButtons {
+  display: flex;
+  gap: 3px;
+}
+.netscapeButtons span {
+  display: inline-block;
+  width: 14px;
+  height: 12px;
+  border: 1px solid white;
+  background: #c0c0c0;
+}
+.netscapePage {
+  margin: 6px;
+  padding: 18px;
+  border: 2px inset #808080;
+  background: #fffff0;
+}
+.netscapeDate {
+  color: #800000;
+  font-size: 14px;
+  text-align: center;
+}
+.netscapeTitle {
+  margin: 8px 0 12px;
+  color: #000080;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+}
+.netscape table {
+  width: 100%;
+  border: 1px solid #808080;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.netscape th,
+.netscape td {
+  padding: 6px;
+  border: 1px solid #808080;
+  text-align: left;
+}
+.netscape tr:first-child {
+  background: #e0e0e0;
+}
+.netscapeCounter {
+  margin-top: 12px;
+  font-size: 13px;
+  text-align: center;
+}
+.netscapeCounter span {
+  padding: 1px 4px;
+  background: black;
+  color: #00ff00;
+  font-family: "Courier New", monospace;
+}
+
+/* 2008 — intranet */
+.intranet {
+  overflow: hidden;
+  width: 100%;
+  max-width: 660px;
+  border: 1px solid #7a96c2;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 10px 30px rgb(30 60 110 / 25%);
+  color: #222;
+  font-family: Verdana, Tahoma, sans-serif;
+}
+.intranetBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 18px;
+  border-bottom: 3px solid #f29a1f;
+  background: #3a6bb5;
+  color: white;
+}
+.intranetBar strong {
+  font-size: 18px;
+}
+.intranetBar span {
+  font-size: 12px;
+}
+.intranetBody {
+  padding: 20px;
+}
+.intranetWarning {
+  margin-bottom: 14px;
+  padding: 8px 12px;
+  border: 1px solid #e8c860;
+  background: #fff6d6;
+  font-size: 13px;
+}
+.intranetHeading {
+  margin-bottom: 8px;
+  color: #3a6bb5;
+  font-size: 13px;
+  font-weight: bold;
+}
+.intranetFiles {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.intranetError {
+  margin-top: 12px;
+  color: #b00020;
+  font-size: 12px;
+}
+
+/* 2016 — one tool per job */
+.portal {
+  overflow: hidden;
+  width: 100%;
+  max-width: 680px;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
+  color: #333;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.portalBar {
+  padding: 12px 20px;
+  background: #337ab7;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+.portalBody {
+  padding: 22px;
+}
+.portalApps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.portalApps > div {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+.portalApps > div > div {
+  margin-top: 4px;
+  color: #777;
+  font-size: 11px;
+}
+.portalSession {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 4px;
+  background: #b8741a;
+  color: white;
+  font-size: 13px;
+}
+
+/* 2026 — Mairie360 */
+.band2026 {
+  position: relative;
+  padding: 40px 0 96px;
+  background:
+    radial-gradient(ellipse 38% 46% at 70% 40%, rgb(60 79 118 / 16%), transparent 70%),
+    radial-gradient(ellipse 30% 40% at 88% 70%, rgb(200 191 199 / 13%), transparent 70%),
+    radial-gradient(ellipse 30% 36% at 52% 78%, rgb(208 138 76 / 12%), transparent 70%),
+    radial-gradient(ellipse 34% 40% at 20% 30%, rgb(112 193 179 / 12%), transparent 70%),
+    linear-gradient(to bottom, #f6f7f9, white 40%);
+}
+.era2026 .rail {
+  border-left: 3px solid #3c4f76;
+  border-image: linear-gradient(to bottom, rgb(160 166 180 / 60%), #3f9c8c 30%, #3c4f76) 1;
+}
+.era2026 .stage {
+  background: none;
+}
+.dot2026 {
+  position: absolute;
+  top: 44px;
+  left: -11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3c4f76;
+  box-shadow: 0 0 0 4px white, 0 0 0 8px rgb(60 79 118 / 25%);
+}
+.card2026 {
+  padding: 20px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #70c1b3, #c8bfc7) border-box;
+  box-shadow: 0 20px 44px rgb(60 79 118 / 14%);
+  color: var(--text-primary);
+}
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.cardHead img {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: 32px;
+}
+.cardHead span {
+  color: #3c4f76;
+  font-family: var(--font-mono), monospace;
+  font-size: 28px;
+  font-weight: 500;
+}
+.cardName {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.cta {
+  display: flex;
+  justify-content: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+}
+.cta a {
+  min-height: 44px;
+  padding: 14px 24px;
+}
+
+/* The app window of 2026 */
+.appStage {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  padding: 34px 0 40px;
+}
+.appWindow {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border: 1px solid #3a4256;
+  border-radius: 16px;
+  background: #2a3040;
+  box-shadow: 0 40px 90px rgb(60 79 118 / 28%), 0 0 0 6px rgb(255 255 255 / 50%);
+}
+.appBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #3a4256;
+  background: #222836;
+}
+.appLights {
+  display: flex;
+  gap: 6px;
+}
+.appLights span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4a5470;
+}
+.appUrl {
+  flex: 1;
+  color: #a9b0c0;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  text-align: center;
+}
+.appBody {
+  display: flex;
+}
+.appMenu {
+  display: flex;
+  /* 170 px including padding, as in the Figma mockup (the prototype adds the padding on top). */
+  flex: 0 0 170px;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 10px;
+}
+.appMenu > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #d8dce2;
+  font-size: 14px;
+}
+.appMenu > div > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+}
+.appMenu > .appMenuCurrent {
+  background: rgb(255 255 255 / 10%);
+  color: white;
+  font-weight: 700;
+}
+.appContent {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  background: var(--surface-page);
+  color: var(--text-primary);
+}
+.appGreeting {
+  display: flex;
+  grid-column: span 2;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.appGreeting span:first-child {
+  font-size: 20px;
+  font-weight: 800;
+}
+.appGreeting span:last-child {
+  color: var(--text-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+}
+.appCard {
+  padding: 12px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  background: white;
+}
+.appWide {
+  grid-column: span 2;
+  padding: 14px;
+}
+.appProject {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.appProject span:last-child {
+  color: #3c4f76;
+}
+.appGauge {
+  height: 8px;
+  border-radius: 4px;
+  background: #e6ebec;
+}
+.appGauge div {
+  width: 60%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #70c1b3, #3c4f76);
+}
+.appLabel {
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.appBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 56px;
+}
+.appBars div {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+}
+.appToday {
+  font-size: 13px;
+}
+.appToday > div:nth-child(2) {
+  margin-bottom: 6px;
+}
+.appToday span {
+  font-family: var(--font-mono), monospace;
+}
+.notification {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 10px;
+  border: 1px solid rgb(204 217 215 / 90%);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 18px 40px rgb(56 63 81 / 16%);
+  color: var(--text-primary);
+}
+.notificationBadge {
+  display: flex;
+  flex: 0 0 34px;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+.notificationLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.notificationText {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.notificationCalendar {
+  top: 2px;
+  left: -28px;
+}
+.notificationMessages {
+  top: 120px;
+  right: -30px;
+}
+.notificationWorkflows {
+  bottom: 0;
+  left: 40px;
+}
+
+@media (max-width: 1120px) {
+  .notificationMessages {
+    right: -6px;
+  }
+}
+
+/* Phone: a single continuous timeline, the screens zoomed out. */
+@media (max-width: 820px) {
+  .intro {
+    padding: 56px 16px 16px;
+  }
+  .introLead,
+  .label,
+  .limits {
+    display: none;
+  }
+  .eraBg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 27px;
+    width: 2px;
+    background: rgb(160 166 180 / 60%);
+  }
+  .frise > .eraBg::before,
+  .eras > .eraBg:first-child::before {
+    top: auto;
+    height: 40px;
+  }
+  .band2026 {
+    padding: 12px 0 48px;
+  }
+  .band2026::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 27px;
+    width: 3px;
+    height: 64px;
+    background: linear-gradient(to bottom, rgb(160 166 180 / 60%), #3c4f76);
+  }
+  .era {
+    display: block;
+    max-width: none;
+    padding: 22px 16px 22px 52px;
+  }
+  .band2026 .era {
+    padding: 28px 16px 22px 52px;
+  }
+  .rail,
+  .era2026 .rail {
+    position: relative;
+    width: auto;
+    padding: 0;
+    border: 0;
+    border-image: none;
+  }
+  .dot {
+    top: 12px;
+    left: -32px;
+  }
+  .dot2026 {
+    top: 16px;
+    left: -34px;
+  }
+  .card {
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+  .year {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 20px;
+  }
+  .title {
+    display: inline-block;
+    margin: 0;
+    font-size: 15px;
+  }
+  .card2026 {
+    padding: 10px 14px;
+  }
+  .cardHead {
+    display: inline-flex;
+    margin: 0 8px 0 0;
+  }
+  .cardHead span {
+    font-size: 22px;
+  }
+  .cardName {
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+  .stage {
+    display: block;
+    padding: 12px 0 0;
+    background: none;
+    zoom: 0.5;
+  }
+  .stage > div {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  .frise {
+    overflow: hidden;
+  }
+}

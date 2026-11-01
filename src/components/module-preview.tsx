@@ -1,199 +1,117 @@
-import { ModuleIcon, type IconName } from "./icons";
+import type { ModuleName } from "./icons";
 
-export function ModulePreview({ module }: { module: IconName }) {
-  if (module === "dashboard")
-    return (
-      <div className="preview">
-        <div className="preview-heading">
-          <h4>Votre activité du jour</h4>
-          <p>Une vue d’ensemble pour votre équipe</p>
-        </div>
-        <div className="dashboard-grid">
-          <div className="dashboard-widget dashboard-project">
-            <h5>Projet à suivre</h5>
-            <div className="dashboard-project-heading">
-              <p>Réaménagement de la place</p>
-              <span className="preview-status">En cours</span>
-            </div>
-            <div className="dashboard-progress-label">
-              <span>Avancement du projet</span>
-              <strong>60 %</strong>
-            </div>
-            <div
-              className="progress-track dashboard-progress"
-              role="progressbar"
-              aria-label="Avancement illustratif du projet"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={60}
-            >
-              <span />
-            </div>
-          </div>
-          <div className="dashboard-widget">
-            <h5>Tâches en attente</h5>
-            <ul className="dashboard-tasks">
-              <li>
-                <p>Partager le compte rendu</p>
-                <span>Priorité haute</span>
-              </li>
-              <li>
-                <p>Préparer la concertation</p>
-                <span>Priorité moyenne</span>
-              </li>
-            </ul>
-          </div>
-          <div className="dashboard-widget">
-            <h5>Prochain rendez-vous</h5>
-            <p className="dashboard-date">Jeudi · 09:00</p>
-            <p className="dashboard-event-title">Point d’équipe</p>
-            <p className="dashboard-event-place">Salle du conseil</p>
-          </div>
-        </div>
-      </div>
-    );
-  if (module === "calendar")
-    return (
-      <div className="preview">
-        <div className="preview-heading">
-          <h4>Le calendrier de l’équipe</h4>
-          <p>Une semaine dans votre collectivité</p>
-        </div>
-        <div className="calendar-preview">
-          {[
-            ["LUN.", "Point d’équipe", "09:00 · Direction générale"],
-            ["MAR.", "Visite du chantier", "10:30 · Services techniques"],
-            ["JEU.", "Réunion de concertation", "17:00 · Vie locale"],
-          ].map(([day, title, detail]) => (
-            <div className="calendar-event" key={day}>
-              <span className="event-day">{day}</span>
-              <div>
-                <h5>{title}</h5>
-                <p>{detail}</p>
-              </div>
-              <span className="event-line" />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  if (module === "messages")
-    return (
-      <div className="preview">
-        <div className="preview-heading">
-          <h4>Une équipe, une conversation</h4>
-          <p>Projet · Réaménagement de la place</p>
-        </div>
-        <div className="conversation">
-          <div className="message">
-            <span>Services techniques</span>
-            <p>
-              Le planning des interventions est prêt pour notre point d’équipe.
-            </p>
-          </div>
-          <div className="message message-reply">
-            <span>Direction générale</span>
-            <p>
-              Merci ! Nous pourrons le partager lors de la réunion de
-              concertation.
-            </p>
-          </div>
-          <p className="conversation-note">
-            L’information circule. Le projet avance.
-          </p>
-        </div>
-      </div>
-    );
-  if (module === "workflows")
-    return (
-      <div className="preview">
-        <div className="preview-heading">
-          <h4>Demande de matériel</h4>
-          <p>Exemple de circuit de validation</p>
-        </div>
-        <ol className="workflow-steps" aria-label="Étapes du circuit illustratif">
-          {[
-            ["Demande déposée", "Agent municipal", "Transmise"],
-            ["Avis du service", "Chef de service", "En cours"],
-            ["Validation finale", "Direction générale", "À venir"],
-          ].map(([title, participant, status], index) => (
-            <li
-              key={title}
-              className={index === 1 ? "workflow-current" : undefined}
-              aria-current={index === 1 ? "step" : undefined}
-            >
-              <span className="workflow-step-number" aria-hidden="true">
-                {index + 1}
-              </span>
-              <div className="workflow-step-copy">
-                <h5>{title}</h5>
-                <p>{participant}</p>
-              </div>
-              <span className="preview-status">{status}</span>
-            </li>
-          ))}
-        </ol>
-        <div className="workflow-documents">
-          <ModuleIcon name="projects" />
-          <p>Documents et échanges d’e-mails liés au dossier</p>
-        </div>
-      </div>
-    );
-  if (module === "learning")
-    return (
-      <div className="preview">
-        <div className="preview-heading">
-          <h4>Votre espace de formation</h4>
-          <p>Exemple de parcours</p>
-        </div>
-        <div className="course">
-          <span className="course-category">Collaboration</span>
-          <h5>Prendre en main les outils de votre collectivité</h5>
-          <div className="course-progress">
-            <span>Progression du parcours</span>
-            <strong>1 chapitre sur 3</strong>
-          </div>
-          <div
-            className="progress-track"
-            role="progressbar"
-            aria-label="Progression illustrative du parcours"
-            aria-valuemin={0}
-            aria-valuemax={3}
-            aria-valuenow={1}
-          >
-            <span />
-          </div>
-          <ol>
-            <li className="chapter-complete">
-              Découvrir son espace <span>Terminé</span>
-            </li>
-            <li>Organiser son quotidien</li>
-            <li>Collaborer avec son équipe</li>
-          </ol>
-        </div>
-      </div>
-    );
+/* Illustrative previews with demo data, as in the reference prototype (Claude artifact). */
+
+function Bar({ value, color, height = 8 }: { value: number; color: string; height?: number }) {
   return (
-    <div className="preview">
-      <div className="preview-heading">
-        <h4>Réaménagement de la place</h4>
-        <p>Projet municipal</p>
-      </div>
-      <div className="kanban">
-        {[
-          ["À faire", "Préparer la concertation", "Vie locale"],
-          ["En cours", "Planifier les interventions", "Services techniques"],
-          ["Terminé", "Partager le compte rendu", "Direction générale"],
-        ].map(([status, title, service], index) => (
-          <div className={`kanban-column column-${index}`} key={status}>
-            <h5>{status}</h5>
-            <div className="task">
-              <p>{title}</p>
-              <span>{service}</span>
-            </div>
+    <div className="pv-track" style={{ height }}>
+      {value > 0 && <div style={{ width: `${value}%`, height, background: color }} />}
+    </div>
+  );
+}
+
+function Body({ module }: { module: ModuleName }) {
+  switch (module) {
+    case "dashboard":
+      return (
+        <div className="pv-grid-2">
+          <div className="pv-card pv-wide">
+            <div className="pv-label">Projet à suivre</div>
+            <div className="pv-strong">Réaménagement de la place</div>
+            <Bar value={60} color="#3C4F76" />
+            <div className="pv-note">60 % · en cours</div>
           </div>
-        ))}
+          <div className="pv-card">
+            <div className="pv-label">Tâches en attente</div>
+            <div className="pv-line">Partager le compte rendu</div>
+            <div className="pv-text">Préparer la concertation</div>
+          </div>
+          <div className="pv-card">
+            <div className="pv-label">Prochain rendez-vous</div>
+            <div className="pv-text"><strong>Jeudi · 09:00</strong></div>
+            <div className="pv-text">Point d’équipe</div>
+          </div>
+        </div>
+      );
+    case "projects":
+      return (
+        <div className="pv-kanban">
+          {[["À faire", [["Devis éclairage", ""], ["Affichage public", ""]]],
+            ["En cours", [["Plan de la place", "#3C4F76"], ["Concertation", "#3C4F76"]]],
+            ["Terminé", [["Étude de faisabilité", "#2F7D71"]]]].map(([column, cards]) => (
+            <div key={column as string} className="pv-column">
+              <div className="pv-column-title">{column as string}</div>
+              {(cards as string[][]).map(([card, color]) => (
+                <div key={card} className="pv-ticket" style={color ? { borderLeft: `3px solid ${color}` } : undefined}>{card}</div>
+              ))}
+            </div>
+          ))}
+        </div>
+      );
+    case "calendar":
+      return (
+        <div className="pv-week">
+          {["Lun", "Mar", "Mer", "Jeu", "Ven"].map(day => <div key={day} className="pv-day">{day}</div>)}
+          {[["10:00 Accueil nouveaux agents", "#E7EAF1", "#3C4F76"], null, ["14:30 Commission travaux", "#E3F2EF", "#2F7D71"],
+            ["09:00 Point d’équipe", "#E7EAF1", "#3C4F76"], ["18:00 Conseil municipal", "#ECECEC", "#383F51"]].map((event, index) => (
+            <div key={index} className="pv-slot">
+              {event && <div style={{ background: event[1], borderLeft: `3px solid ${event[2]}` }}>{event[0]}</div>}
+            </div>
+          ))}
+        </div>
+      );
+    case "messages":
+      return (
+        <div className="pv-chat">
+          <div className="pv-channels">
+            <div className="is-current"># services-techniques</div>
+            <div># accueil</div>
+            <div># élus</div>
+          </div>
+          <div className="pv-thread">
+            <div className="pv-card pv-message"><div className="pv-author">Nadia · services techniques</div><div>Les barrières pour la fête sont réservées pour samedi.</div></div>
+            <div className="pv-card pv-message"><div className="pv-author">Thomas · accueil</div><div>Parfait, je préviens les associations.</div></div>
+          </div>
+        </div>
+      );
+    case "workflows":
+      return (
+        <div className="pv-flow">
+          <div className="pv-flow-title">Demande de réservation de salle</div>
+          {[["Demande reçue à l’accueil", "Fait", "done"], ["Validation du chef de service", "En cours", "current"],
+            ["Confirmation envoyée au demandeur", "À venir", "next"]].map(([step, status, state], index) => (
+            <div key={step} className={`pv-step is-${state}`}>
+              <span className="pv-step-number">{index + 1}</span>
+              <span className="pv-step-name">{step}</span>
+              <span className="pv-step-status">{status}</span>
+            </div>
+          ))}
+        </div>
+      );
+    case "learning":
+      return (
+        <div className="pv-courses">
+          {[["Prendre en main Mairie360", "4 vidéos · 20 min", 100, "#2F7D71"], ["Créer un circuit de validation", "Guide + quiz", 40, "#3C4F76"],
+            ["Protéger les données des habitants", "3 modules", 0, ""]].map(([title, detail, value, color]) => (
+            <div key={title as string} className="pv-card pv-course">
+              <div className="pv-course-title">{title}</div>
+              <div className="pv-course-detail">{detail}</div>
+              <Bar value={value as number} color={color as string} height={6} />
+            </div>
+          ))}
+        </div>
+      );
+  }
+}
+
+export function ModulePreview({ module, label }: { module: ModuleName; label: string }) {
+  return (
+    <div className="plat-preview">
+      <div className="plat-preview-head">
+        <span>{label}</span>
+        <span>données de démonstration</span>
       </div>
+      <Body module={module} />
     </div>
   );
 }

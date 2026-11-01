@@ -1,77 +1,59 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Arrow, Brand } from "./icons";
+import { Logo } from "./icons";
+import { headerVisibility } from "@/lib/header-visibility";
 
-export function Header() {
-  const [open, setOpen] = useState(false);
+/**
+ * Band fixed at the top that hides while scrolling down and comes back when scrolling up
+ * (Figma "Animations — à implémenter" › 3). At the top of the page it is always visible on
+ * desktop and hidden on the home page on phones (≤ 820 px), where it only appears when scrolling back up.
+ */
+export function Header({ home = false }: { home?: boolean }) {
+  // Unknown until the first scroll check, so the server snapshot relies on the CSS defaults.
+  const [visible, setVisible] = useState<boolean | undefined>(undefined);
+  const last = useRef(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const update = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = Math.max(window.scrollY, 0);
+        const lastY = last.current;
+        const phone = home && window.innerWidth <= 820;
+        last.current = y;
+        setVisible(current => headerVisibility({ y, lastY, phone, current: current ?? !phone }));
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [home]);
+
+  const anchor = (id: string) => (home ? `#${id}` : `/#${id}`);
+
   return (
-    <header
-      className="header"
-      onKeyDown={(event) => {
-        if (event.key === "Escape") {
-          setOpen(false);
-          document.getElementById("menu-toggle")?.focus();
-        }
-      }}
-    >
+    <header className="header" data-visible={visible}>
       <div className="header-inner container">
-        <Link
-          href="/#solution"
-          className="brand-link"
-          aria-label="Mairie360, accueil"
-          onClick={() => setOpen(false)}
-        >
-          <Brand />
+        <Link href="/" className="brand-link" aria-label="Mairie360, accueil">
+          <Logo />
         </Link>
-        <button
-          id="menu-toggle"
-          className="menu-toggle"
-          aria-expanded={open}
-          aria-controls="navigation"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "Fermer" : "Menu"}
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            aria-hidden="true"
-          >
-            {open ? (
-              <path d="m5 5 14 14M5 19 19 5" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            )}
-          </svg>
-        </button>
-        <nav
-          id="navigation"
-          className={`navigation${open ? " is-open" : ""}`}
-          aria-label="Navigation principale"
-        >
-          <Link href="/#solution" onClick={() => setOpen(false)}>
-            La solution
-          </Link>
-          <Link href="/#offre" onClick={() => setOpen(false)}>
-            L’offre
-          </Link>
-          <Link href="/#modules" onClick={() => setOpen(false)}>
-            Les modules
-          </Link>
-          <Link href="/#equipes" onClick={() => setOpen(false)}>
-            Vos équipes
-          </Link>
-          <Link
-            href="/#projet"
-            className="button button-outline"
-            onClick={() => setOpen(false)}
-          >
-            Le projet <Arrow diagonal />
-          </Link>
+        <nav className="navigation" aria-label="Navigation principale">
+          <a href={anchor("mairies")}>Pour les mairies</a>
+          <a href={anchor("plateforme")}>La plateforme</a>
+          <a href={anchor("accompagnement")}>Accompagnement</a>
+          <a className="button button-primary header-cta" href={anchor("contact")}
+            data-contact-origin="bandeau" data-contact-intention="demo">
+            Demander une démo
+          </a>
         </nav>
       </div>
     </header>

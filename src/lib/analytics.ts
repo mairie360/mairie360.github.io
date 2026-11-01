@@ -5,8 +5,7 @@ declare global {
 }
 
 const eventProperties: Record<string, Record<string, readonly string[]>> = {
-  "Offre vue": {},
-  "CTA contact": { origine: ["hero", "offre", "mobile"], intention: ["beta", "demo"] },
+  "CTA contact": { origine: ["bandeau", "hero"], intention: ["demo"] },
   "Contact vu": {},
   "Contact commence": {},
   "Contact tentative": {},
