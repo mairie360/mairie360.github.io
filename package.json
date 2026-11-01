@@ -8,6 +8,7 @@
     "postbuild": "node -e \"require('node:fs').copyFileSync('CNAME', 'out/CNAME')\"",
     "lint": "eslint . --max-warnings=0",
     "test": "node --test tests/*.test.mjs",
+    "test:html": "node --test tests/html/*.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -22,8 +23,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.28",
-    "typescript": "^5",
-    "fast-glob": "file:vendor/eslint-glob"
+    "fast-glob": "file:vendor/eslint-glob",
+    "parse5": "8.0.1",
+    "typescript": "^5"
   },
   "engines": {
     "node": "^22.23.4 || ^24.22.1 || ^26.12.1"

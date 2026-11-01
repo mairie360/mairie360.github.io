@@ -83,7 +83,6 @@ export function TownHallScene() {
   const figure = useRef<HTMLElement>(null);
   const [plateSource, setPlateSource] = useState<string | null>(null);
   const [plateWidth, setPlateWidth] = useState<number | null>(null);
-  const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [tabVisible, setTabVisible] = useState(true);
 
@@ -149,7 +148,7 @@ export function TownHallScene() {
   }, []);
 
   const animated = plateSource !== null && !reducedMotion;
-  const animationPaused = paused || !visible || !tabVisible;
+  const animationPaused = !visible || !tabVisible;
 
   return (
     <figure
@@ -193,23 +192,6 @@ export function TownHallScene() {
       </div>
       <figcaption className={styles.caption}>
         <span>Le numérique au service du collectif.</span>
-        {animated && (
-          <button
-            className={styles.toggle}
-            type="button"
-            onClick={() => setPaused(!paused)}
-            aria-label={paused ? "Reprendre l’animation" : "Mettre l’animation en pause"}
-            title={paused ? "Reprendre l’animation" : "Mettre l’animation en pause"}
-          >
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-              {paused ? (
-                <path d="M4 2.5v11L13 8Z" />
-              ) : (
-                <path d="M4 3h3v10H4Zm5 0h3v10H9Z" />
-              )}
-            </svg>
-          </button>
-        )}
       </figcaption>
     </figure>
   );

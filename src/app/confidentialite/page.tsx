@@ -19,8 +19,8 @@ export default function Privacy() {
       <section>
         <h2>Cookies et mesure d’audience</h2>
         {getAnalyticsScriptUrl() ? <>
-          <p>Nous utilisons Plausible pour mesurer la fréquentation du site, les pages vues et les étapes vers le formulaire de contact : consultation de l’offre, clics, début de saisie, erreurs et envoi confirmé.</p>
-          <p>Les événements de parcours ne transmettent ni votre nom, ni votre adresse e-mail, ni votre message, ni le contenu des champs. Ils comportent uniquement des catégories prédéfinies de boutons ou d’erreurs. Ce suivi ne dépose pas de cookie et ne crée pas de stockage dans votre navigateur.</p>
+          <p>Nous utilisons Plausible pour mesurer la fréquentation du site, les pages vues et les étapes vers le formulaire de contact : affichage du formulaire, clics sur les boutons de prise de rendez-vous, début de saisie, erreurs et envoi confirmé.</p>
+          <p>Les événements de parcours ne transmettent ni votre nom, ni votre commune, ni votre adresse e-mail, ni votre besoin, ni le contenu des champs. Ils comportent uniquement des catégories prédéfinies de boutons ou d’erreurs. Ce suivi ne dépose pas de cookie et ne crée pas de stockage dans votre navigateur.</p>
           <p>Pour connaître le traitement des données techniques liées aux requêtes, consultez la <a href="https://plausible.io/data-policy">politique de données de Plausible</a>. Une absence entre deux étapes aide à examiner le parcours ; elle ne révèle pas à elle seule la raison du départ d’une personne.</p>
         </> : <p>Aucun outil de mesure d’audience ni traceur publicitaire n’est activé dans cette version du site. Le code du site ne dépose pas de cookie et ne conserve pas vos choix de navigation dans le stockage de votre navigateur.</p>}
         <p>Les images et la police de caractères sont servies avec le site, sans chargement depuis un service de polices ou de publicité tiers.</p>
@@ -32,8 +32,8 @@ export default function Privacy() {
       </section>
       <section>
         <h2>Le formulaire de contact</h2>
-        <p>Le formulaire demande votre nom, votre adresse e-mail et votre message. Ces informations sont utilisées pour traiter votre demande et vous répondre.</p>
-        <p>Lorsque vous choisissez « Envoyer le message », ces informations sont transmises à FormSubmit, le service qui les achemine vers notre boîte mairie360@gmail.com. Aucun envoi au service n’a lieu pendant la saisie.</p>
+        <p>Le formulaire demande votre nom et prénom, votre commune, votre adresse e-mail professionnelle et, si vous le souhaitez, votre besoin. Ces informations sont utilisées pour organiser une démonstration et vous répondre.</p>
+        <p>Lorsque vous choisissez « Prendre rendez-vous », ces informations sont transmises à FormSubmit, le service qui les achemine vers notre boîte mairie360@gmail.com. Aucun envoi au service n’a lieu pendant la saisie.</p>
         <p>FormSubmit indique conserver les messages dans ses archives pendant 30 jours. Consultez sa <a href="https://formsubmit.co/privacy.pdf">politique de confidentialité</a> et sa <a href="https://formsubmit.co/documentation">documentation</a> pour les conditions de ce traitement.</p>
         <p>Le contenu du formulaire reste dans la page pendant la saisie et en cas d’erreur d’envoi. Il n’est pas enregistré dans le stockage local de votre navigateur ; quitter ou recharger la page peut l’effacer.</p>
       </section>

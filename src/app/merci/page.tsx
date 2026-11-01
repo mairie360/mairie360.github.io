@@ -16,7 +16,7 @@ export default function ThankYou() {
         <h2>Votre message a été pris en charge.</h2>
         <p>Votre message est en route vers l’équipe Mairie360. Nous vous répondrons à l’adresse e-mail indiquée dans le formulaire.</p>
         <p>Vous pouvez aussi nous joindre à <a href={`mailto:${contactAddress}`}>{contactAddress}</a>.</p>
-        <Link className="text-link" href="/#modules">Continuer à découvrir les modules <Arrow /></Link>
+        <Link className="text-link" href="/#plateforme">Continuer à découvrir la plateforme <Arrow /></Link>
       </section>
     </InformationPage>
   );

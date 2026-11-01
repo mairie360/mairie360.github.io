@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Arrow, Brand } from "@/components/icons";
+import { Arrow, Logo } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Page introuvable | Mairie360",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div className="not-found container">
-      <Link className="brand-link" href="/" aria-label="Mairie360, accueil"><Brand /></Link>
+      <Link className="brand-link" href="/" aria-label="Mairie360, accueil"><Logo /></Link>
       <main>
         <p className="section-label">Erreur 404</p>
         <h1>Cette page a pris<br />un autre chemin.</h1>

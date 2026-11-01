@@ -24,13 +24,16 @@ test("audience events cannot transmit arbitrary properties or field contents", (
   const received = [];
   context.after(() => { delete globalThis.window; });
   globalThis.window = { plausible: (...args) => received.push(args) };
-  trackEvent("CTA contact", { origine: "offre", intention: "beta", email: "private@example.com", message: "Private content" });
+  trackEvent("CTA contact", { origine: "bandeau", intention: "demo", email: "private@example.com", message: "Private content" });
+  trackEvent("CTA contact", { origine: "offre", intention: "beta" });
+  trackEvent("Offre vue");
   trackEvent("Contact erreur", { etape: "validation", message: "Private content" });
   trackEvent("Contact envoye", { email: "private@example.com" });
   trackEvent("Contact commence", { origine: "private@example.com" });
   trackEvent("Private event name", { email: "private@example.com" });
   assert.deepEqual(received, [
-    ["CTA contact", { props: { origine: "offre", intention: "beta" } }],
+    ["CTA contact", { props: { origine: "bandeau", intention: "demo" } }],
+    ["CTA contact"],
     ["Contact erreur", { props: { etape: "validation" } }],
     ["Contact envoye"],
     ["Contact commence"],

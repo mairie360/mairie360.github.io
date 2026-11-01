@@ -1,51 +1,341 @@
+/* Contact — values from the reference prototype (Claude artifact). */
 .contact {
+  padding: 112px 24px;
+  border-top: 1px solid var(--border-default);
+  background: var(--surface-card);
+  line-height: normal;
+}
+.grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(36px, 7vw, 110px);
-  padding-block: 80px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "head form" "ctas submit" "note note2";
+  column-gap: 64px;
+  row-gap: 24px;
+  align-items: start;
+  max-width: 1080px;
+  margin: 0 auto;
 }
-.intro h2 { font-size: clamp(32px, 3.4vw, 48px); }
-.intro > p:not(:first-child) { color: var(--muted); margin-top: 26px; }
-.intro > a { margin-top: 16px; font-size: 16px; }
-.form { min-width: 0; }
-.form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
-.form > .hint { margin-bottom: 20px; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-.field label { font-size: 15px; font-weight: 650; }
-.field input, .field textarea {
-  width: 100%;
+.head {
+  grid-area: head;
+}
+.head :global(.eyebrow) {
+  margin: 0 0 12px;
+}
+.head h2 {
+  margin: 0 0 20px;
+  font-size: clamp(34px, 4.2vw, 48px);
+  line-height: 1.06;
+}
+.lead {
+  max-width: 460px;
+  margin: 0 0 32px;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.form {
+  grid-area: form;
+  margin-top: 34px;
+}
+.form fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
   min-width: 0;
-  min-height: 48px;
-  padding: 12px 14px;
-  border: 1px solid #9baead;
-  border-radius: 3px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/* Fields: hover #E9EFEF; focus white + 2 px #3C4F76 ring + soft shadow, 200 ms (Figma "Animations" › 4). */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: var(--surface-page);
+  cursor: text;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.field:hover {
+  background: #e9efef;
+}
+.field:focus-within {
   background: white;
-  color: var(--ink);
+  box-shadow: 0 0 0 2px #3c4f76, 0 8px 20px rgb(60 79 118 / 12%);
+}
+.full {
+  grid-column: 1 / -1;
+}
+.area {
+  align-items: flex-start;
+  padding-top: 12px;
+}
+.icon {
+  display: flex;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  color: var(--teal-ink);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.field:focus-within .icon {
+  background: #e7eaf1;
+  color: #3c4f76;
+}
+.body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+.body label {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: text;
+}
+.optional {
+  color: #9aa1ae;
+  font-weight: 500;
+}
+.body input,
+.body textarea {
+  width: 100%;
+  padding: 3px 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font: 600 16px var(--font-manrope), sans-serif;
+  resize: vertical;
+}
+.body input::placeholder,
+.body textarea::placeholder {
+  color: #a5abb8;
+  font-weight: 500;
+}
+.field:has([aria-invalid="true"]) {
+  box-shadow: 0 0 0 2px #a33025;
+}
+.fieldError {
+  margin-top: 4px;
+  color: #942b22;
+  font-size: 13px;
+  font-weight: 600;
+}
+.honeypot {
+  display: none;
+}
+.form fieldset:disabled {
+  opacity: 0.7;
+}
+
+/* "Nous écrire" (copies the address) and "Le projet": #E6EBEC and −2 px on hover, 200 ms. */
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: ctas;
+  align-self: center;
+  gap: 12px;
+}
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding: 12px 20px 12px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-page);
+  color: var(--text-primary);
   font: inherit;
-  font-size: 16px;
-  line-height: 1.6;
+  text-align: left;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
-.field textarea { resize: vertical; min-height: 160px; }
-.field input:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-.field [aria-invalid="true"] { border-color: #a33025; }
-.hint { color: var(--muted); font-size: 12px; }
-.privacy { color: var(--muted); font-size: 13px; margin-bottom: 24px; line-height: 1.7; }
-.privacy a, .submitError a { text-decoration: underline; text-underline-offset: 3px; }
-.privacy a { color: var(--blue); }
-.fieldError { color: #942b22; font-size: 13px; }
-.submitError { color: #7e2820; background: #fff1ed; border-left: 3px solid #a33025; padding: 16px; margin-top: 20px; font-size: 14px; overflow-wrap: anywhere; }
-.honeypot { display: none; }
-.form fieldset:disabled { opacity: 0.7; }
-.form fieldset:disabled button { cursor: wait; }
-.spinner { width: 19px; height: 19px; border: 2px solid #ffffff70; border-top-color: white; border-radius: 50%; animation: spin 800ms linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 900px) {
-  .contact { grid-template-columns: 1fr; gap: 32px; padding-block: 56px; }
-  .intro { max-width: 640px; }
+.card:hover {
+  background: #e6ebec;
+  transform: translateY(-2px);
 }
-@media (max-width: 760px) {
-  .contact { padding-block: 44px; }
-  .row { grid-template-columns: 1fr; gap: 0; }
-  .form button { width: 100%; }
+.cardIcon {
+  display: flex;
+  flex: 0 0 44px;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.cardText {
+  min-width: 0;
+}
+.cardTitle {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+}
+.cardSub {
+  display: block;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.submit {
+  display: flex;
+  grid-area: submit;
+  align-self: center;
+  align-items: center;
+}
+/* Green button: brightness 94 % and 2 px to the right on hover, 200 ms. */
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 0 30px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--brand-vert-eau);
+  color: var(--text-primary);
+  font: 700 16px var(--font-manrope), sans-serif;
+  transition: background 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+}
+.submitButton:hover:not(:disabled) {
+  filter: brightness(0.94);
+  transform: translateX(2px);
+}
+.submitButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgb(56 63 81 / 30%);
+  border-top-color: var(--text-primary);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.note {
+  grid-area: note;
+  margin-top: -8px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.note2 {
+  display: flex;
+  flex-direction: column;
+  grid-area: note2;
+  gap: 6px;
+  margin-top: -8px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.privacy {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.privacy a,
+.submitError a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.submitError {
+  margin-top: 8px;
+  padding: 12px 16px;
+  border-left: 3px solid #a33025;
+  background: #fff1ed;
+  color: #7e2820;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* "Adresse copiée" toast: bottom centre, opacity and 16 px rise in 250 ms, hidden after 2.5 s. */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: var(--text-primary);
+  box-shadow: 0 14px 34px rgb(56 63 81 / 30%);
+  color: white;
+  font: 600 15px var(--font-manrope), sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 16px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.toastShown {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 820px) {
+  .contact {
+    padding-block: 64px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "head" "form" "submit" "note2" "ctas" "note";
+    row-gap: 18px;
+  }
+  .head :global(.eyebrow),
+  .lead,
+  .demo,
+  .note {
+    display: none;
+  }
+  .form {
+    margin-top: 0;
+  }
+  .submitButton {
+    justify-content: center;
+    width: 100%;
+    min-height: 56px;
+  }
+  .submit {
+    display: block;
+  }
+  .ctas {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .card {
+    flex: 1 1 0;
+    gap: 8px;
+    min-width: 0;
+    padding: 8px 10px 8px 8px;
+  }
+  .cardIcon {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+  }
+  .cardTitle {
+    font-size: 14px;
+  }
+  .cardSub {
+    overflow: hidden;
+    font-size: 11.5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

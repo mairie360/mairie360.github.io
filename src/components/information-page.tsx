@@ -12,7 +12,7 @@ export function InformationPage({ title, children, showUpdated = true }: { title
         <Link className="text-link" href="/">Retour à l’accueil</Link>
         <p className="section-label">Mairie360 · Le projet étudiant</p>
         <h1>{title}</h1>
-        {showUpdated && <p className="information-date">Mis à jour le 8 septembre 2026</p>}
+        {showUpdated && <p className="information-date">Mis à jour le 1er novembre 2026</p>}
         {children}
       </main>
       <SiteFooter />

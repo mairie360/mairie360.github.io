@@ -12,15 +12,24 @@ loaded._compile(ts.transpileModule(fs.readFileSync(filename, "utf8"), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText, filename);
 const { sendContact, validateContact, contactEndpoint } = loaded.exports;
-const fields = { name: "  Léa Martin  ", email: "  lea@example.com  ", message: "  Bonjour, je souhaite découvrir le projet.  " };
+const fields = { name: "  Léa Martin  ", town: "  Saint-Herblain  ", email: "  lea@example.com  ", need: "  Préparer les conseils municipaux.  " };
 
 test("invalid or whitespace-only fields cannot trigger a request", async () => {
-  const invalid = { name: "  ", email: "lea\r\n@example.com", message: "   " };
-  assert.deepEqual(Object.keys(validateContact(invalid)), ["name", "email", "message"]);
+  const invalid = { name: "  ", town: " ", email: "lea\r\n@example.com", need: "x".repeat(5001) };
+  assert.deepEqual(Object.keys(validateContact(invalid)), ["name", "town", "email", "need"]);
   let called = false;
   await assert.rejects(sendContact(invalid, async () => { called = true; }));
   assert.equal(called, false);
-  assert.ok(validateContact({ ...fields, message: "x".repeat(5001) }).message);
+});
+
+test("MAIR-742: the need is optional but the town hall is required", async () => {
+  assert.deepEqual(validateContact({ ...fields, need: "   " }), {});
+  assert.ok(validateContact({ ...fields, town: "" }).town);
+  await sendContact({ ...fields, need: "" }, async (_url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.besoin, "Non précisé");
+    return Response.json({ success: true });
+  });
 });
 
 test("a confirmed request uses the project destination and preserves the reply address", async () => {
@@ -33,7 +42,9 @@ test("a confirmed request uses the project destination and preserves the reply a
       const body = JSON.parse(options.body);
       assert.equal(body.email, "lea@example.com");
       assert.equal(body.name, "Léa Martin");
-      assert.equal(body.message, fields.message.trim());
+      assert.equal(body.commune, "Saint-Herblain");
+      assert.equal(body.besoin, fields.need.trim());
+      assert.equal(body.message, undefined);
       assert.equal(body._cc, undefined);
       return Response.json({ success });
     });
