@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { IBM_Plex_Mono, VT323 } from "next/font/google";
 import "./globals.css";
 import { AudienceAnalytics } from "@/components/audience-analytics";
-import { getAnalyticsScriptUrl } from "@/lib/analytics";
+import { getAnalyticsMeasurementId } from "@/lib/analytics";
 
 const manrope = localFont({
   src: "./fonts/Manrope.woff2",
@@ -37,7 +37,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" className={`${manrope.variable} ${plexMono.variable} ${vt323.variable}`}>
-      <body>{children}<AudienceAnalytics scriptUrl={getAnalyticsScriptUrl()} /></body>
+      <body>{children}<AudienceAnalytics measurementId={getAnalyticsMeasurementId()} /></body>
     </html>
   );
 }

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { socialLinks } from "@/lib/showcase-data";
 import { InstagramIcon, LinkedInIcon, Logo } from "./icons";
+import { AnalyticsPreferences } from "./audience-analytics";
+import { getAnalyticsMeasurementId } from "@/lib/analytics";
 
 export function SiteFooter() {
   return (
@@ -14,6 +16,7 @@ export function SiteFooter() {
           <Link href="/#contact">Contact</Link>
           <Link href="/confidentialite/">Confidentialité</Link>
           <Link href="/conditions-utilisation/">Conditions d’utilisation</Link>
+          {getAnalyticsMeasurementId() && <AnalyticsPreferences />}
           <span className="footer-socials">
             <a className="footer-social" href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
               aria-label="Mairie360 sur LinkedIn (nouvel onglet)"><LinkedInIcon /></a>

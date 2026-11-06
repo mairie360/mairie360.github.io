@@ -1,6 +1,6 @@
 import { InformationPage } from "@/components/information-page";
 import { pageMetadata } from "@/lib/metadata";
-import { getAnalyticsScriptUrl } from "@/lib/analytics";
+import { getAnalyticsMeasurementId } from "@/lib/analytics";
 
 export const metadata = pageMetadata(
   "Confidentialité | Mairie360",
@@ -10,7 +10,7 @@ export const metadata = pageMetadata(
 
 export default function Privacy() {
   return (
-    <InformationPage title="Confidentialité">
+    <InformationPage title="Confidentialité" updated="7 novembre 2026">
       <section>
         <h2>Le site de présentation</h2>
         <p>Mairie360 est un projet d’école porté par quatre étudiants d’Epitech. Cette page décrit le fonctionnement du site vitrine mairie360.fr dans sa version actuelle.</p>
@@ -18,11 +18,13 @@ export default function Privacy() {
       </section>
       <section>
         <h2>Cookies et mesure d’audience</h2>
-        {getAnalyticsScriptUrl() ? <>
-          <p>Nous utilisons Plausible pour mesurer la fréquentation du site, les pages vues et les étapes vers le formulaire de contact : affichage de l’offre et du formulaire, clics sur les boutons de prise de rendez-vous, début de saisie, erreurs et envoi confirmé.</p>
-          <p>Les événements de parcours ne transmettent ni votre nom, ni votre commune, ni votre adresse e-mail, ni votre besoin, ni le contenu des champs. Ils comportent uniquement des catégories prédéfinies de boutons ou d’erreurs. Ce suivi ne dépose pas de cookie et ne crée pas de stockage dans votre navigateur.</p>
-          <p>Pour connaître le traitement des données techniques liées aux requêtes, consultez la <a href="https://plausible.io/data-policy">politique de données de Plausible</a>. Une absence entre deux étapes aide à examiner le parcours ; elle ne révèle pas à elle seule la raison du départ d’une personne.</p>
-        </> : <p>Aucun outil de mesure d’audience ni traceur publicitaire n’est activé dans cette version du site. Le code du site ne dépose pas de cookie et ne conserve pas vos choix de navigation dans le stockage de votre navigateur.</p>}
+        {getAnalyticsMeasurementId() ? <>
+          <p>Avec votre accord, nous utilisons Google Analytics 4 pour mesurer les visites, les pages vues et le parcours vers une demande de contact : consultation de l’offre et du formulaire, clic sur un bouton de rendez-vous, début de saisie, erreur et envoi confirmé.</p>
+          <p>Aucun script Google Analytics n’est chargé avant votre acceptation. Vous pouvez refuser et continuer à utiliser le site et le formulaire. Vous pouvez modifier ou retirer votre accord à tout moment avec « Gérer les cookies » dans le pied de page.</p>
+          <p>Votre choix est conservé pendant 180 jours dans le stockage local de ce navigateur. Si ce stockage est bloqué, le choix vaut seulement pour la page en cours. Après acceptation, Google Analytics peut déposer des cookies de mesure d’audience, configurés pour une durée maximale de 180 jours sans renouvellement automatique à chaque visite. Le retrait bloque la collecte et supprime les cookies Analytics accessibles à ce site dans ce navigateur.</p>
+          <p>Les événements que nous ajoutons ne transmettent ni votre nom, ni votre commune, ni votre e-mail, ni le contenu des champs du formulaire. Les URL transmises excluent les paramètres libres et les fragments ; seuls des libellés de campagne autorisés peuvent être conservés. Nous désactivons les signaux Google et la personnalisation publicitaire dans cette intégration.</p>
+          <p>Google reçoit également les informations techniques nécessaires aux requêtes et à la mesure. Les traitements, la conservation et les droits associés sont décrits dans la <a href="https://policies.google.com/privacy?hl=fr">politique de confidentialité de Google</a>. Les chiffres concernent les visites mesurées après acceptation ; ils ne recensent pas tous les visiteurs qui refusent le suivi.</p>
+        </> : <p>Aucune mesure d’audience n’est activée dans cette version. Le suivi Google Analytics et les choix de cookies seront proposés uniquement après son activation. Aucun script Analytics n’est chargé et aucun cookie Analytics n’est déposé par le site.</p>}
         <p>Les images et la police de caractères sont servies avec le site, sans chargement depuis un service de polices ou de publicité tiers.</p>
       </section>
       <section>

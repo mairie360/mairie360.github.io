@@ -110,8 +110,7 @@ export function ContactForm() {
             const field = event.target;
             if ((field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) &&
               fields.some(item => item.name === field.name) && field.value.trim() && !started.current) {
-              started.current = true;
-              trackEvent("Contact commence");
+              started.current = trackEvent("Contact commence");
             }
           }}>
           <fieldset disabled={disabled}>
