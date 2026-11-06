@@ -15,9 +15,9 @@ const inside = (root, predicate) => home.all(element => predicate(element) && an
 test("MAIR-742: sections follow the mockup order and are each named by their heading", () => {
   const sections = home.tags("section");
   const ids = sections.map(element => attr(element, "id")).filter(Boolean);
-  assert.deepEqual(ids, ["mairies", "modules", "plateforme", "accompagnement", "contact"]);
+  assert.deepEqual(ids, ["mairies", "modules", "plateforme", "accompagnement", "offre", "contact"]);
   const labelled = sections.map(element => attr(element, "aria-labelledby"));
-  assert.deepEqual(labelled, ["hero-title", "timeline-title", "audiences-title", "board-title", "platform-title", "support-title", "contact-title"]);
+  assert.deepEqual(labelled, ["hero-title", "timeline-title", "audiences-title", "board-title", "platform-title", "support-title", "offer-title", "contact-title"]);
   for (const id of labelled) assert.match(home.byId(id).tagName, /^h[12]$/);
   assert.equal(home.byId("hero-title").tagName, "h1");
 });
@@ -169,4 +169,19 @@ test("footer links to the legal pages and the social accounts", () => {
 
 test("visible home text stays in French (no leftover English placeholders)", () => {
   assert.doesNotMatch(body, /\b(Lorem|ipsum|TODO|Learn more|Click here|Submit|Loading)\b/);
+});
+
+
+test("offer explains beta eligibility, browser access and future pricing without a firm price", () => {
+  const offer = section("offre");
+  const content = visibleText(offer);
+  assert.match(content, /gratuitement et sur invitation/);
+  assert.match(content, /Après la démonstration.*préparons vos comptes.*navigateur/);
+  assert.match(content, /abonnement payant par mairie/);
+  assert.match(content, /tarif reste à confirmer/);
+  assert.doesNotMatch(body, /149\s*€/);
+  const cta = inside(offer, element => element.tagName === "a")[0];
+  assert.equal(attr(cta, "href"), "#contact");
+  assert.equal(attr(cta, "data-contact-origin"), "offre");
+  assert.equal(attr(cta, "data-contact-intention"), "beta");
 });

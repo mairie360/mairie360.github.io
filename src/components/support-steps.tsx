@@ -7,8 +7,8 @@ export function SupportSteps() {
         <p className="eyebrow">Accompagnement</p>
         <h2 id="support-title">On avance à votre rythme, avec vos équipes.</h2>
         <p className="section-lead support-lead">
-          Changer d’outil, c’est d’abord une affaire de personnes. Nous restons à vos côtés de l’installation à la prise
-          en main.
+          Changer d’outil, c’est d’abord une affaire de personnes. Nous restons à vos côtés de la préparation de vos accès à la prise
+          en main, dans votre navigateur.
         </p>
         <ol className="steps-grid">
           {supportSteps.map((step, index) => (

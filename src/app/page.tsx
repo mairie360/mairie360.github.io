@@ -1,3 +1,4 @@
+import { Offer } from "@/components/offer";
 import { Header } from "@/components/header";
 import { TownHallScene } from "@/components/town-hall-scene";
 import { Timeline } from "@/components/timeline";
@@ -12,7 +13,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "Mairie360 — Le logiciel en ligne pour les mairies",
-  "Mairie360, le logiciel en ligne pour les mairies : projets, tâches, calendrier et messagerie dans un espace commun. Demandez une démonstration de 30 minutes.",
+  "Mairie360, le logiciel en ligne pour les mairies : projets, tâches, calendrier et messagerie dans un espace commun. Découvrez la bêta gratuite sur invitation et demandez une démonstration de 30 minutes.",
   "/",
 );
 
@@ -49,6 +50,7 @@ export default function Home() {
         <ModulesBoard />
         <ModulesExplorer />
         <SupportSteps />
+        <Offer />
         <ContactForm />
       </main>
       <SiteFooter />
