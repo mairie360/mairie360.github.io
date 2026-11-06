@@ -98,6 +98,29 @@ test("only known funnel events and allowed categories reach the GA4 boundary", c
   assert.doesNotMatch(JSON.stringify(window.dataLayer), /private@|Private content|email=/);
 });
 
+test("optimized destination initialization cannot add an automatic page view", context => {
+  const { api } = browser(context);
+  const automaticViews = [];
+  let defaults;
+  document.head.appendChild = () => {
+    // Optimized Google containers initialize before applying per-stream config.
+    defaults = Object.assign({}, ...window.dataLayer
+      .filter(entry => entry[0] === "set").map(entry => entry[1]));
+    if (defaults.send_page_view !== false) automaticViews.push("page_view");
+  };
+  api.setAnalyticsConsent("accepted");
+  api.startAnalytics(id);
+  api.trackPageView("/");
+  const explicitViews = window.dataLayer.filter(entry => entry[0] === "event" && entry[1] === "page_view");
+  assert.equal(automaticViews.length + explicitViews.length, 1);
+  assert.equal(defaults.cookie_expires, 180 * 86400);
+  assert.equal(defaults.allow_google_signals, false);
+  assert.equal(defaults.allow_ad_personalization_signals, false);
+  assert.equal(defaults.page_location, "https://mairie360.fr/");
+  assert.equal(defaults.page_referrer, "https://example.org");
+  assert.doesNotMatch(JSON.stringify(defaults), /private@|email=/);
+});
+
 test("a page is counted once per route and direct thank-you visits never generate leads", context => {
   const { api } = browser(context);
   assert.equal(typeof api.trackPageView, "function");

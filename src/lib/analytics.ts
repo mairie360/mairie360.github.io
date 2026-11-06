@@ -102,13 +102,16 @@ export function startAnalytics(measurementId: string | null): boolean {
     };
     window.gtag("consent", "default", denied);
     window.gtag("consent", "update", { ...denied, analytics_storage: "granted" });
-    window.gtag("js", new Date());
-    window.gtag("config", id, {
+    const settings = {
       ...pageContext(), send_page_view: false,
       allow_google_signals: false, allow_ad_personalization_signals: false,
       cookie_expires: consentLifetime / 1000, cookie_update: false,
       cookie_flags: "SameSite=Lax;Secure",
-    });
+    };
+    // Optimized containers can initialize destinations before per-stream config.
+    window.gtag("set", settings);
+    window.gtag("js", new Date());
+    window.gtag("config", id, settings);
     if (!document.getElementById("mairie-ga4")) {
       const script = document.createElement("script");
       script.id = "mairie-ga4"; script.async = true;
