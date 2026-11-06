@@ -44,7 +44,7 @@ GitHub Actions validates `main`, feature branches and pull requests. Only `main`
 - `public/images/mairie-collectif.webp`: original generated town-hall illustration, optimized for the web.
 - `src/app/fonts/`: self-hosted Manrope font and its SIL Open Font License.
 
-The landing page follows the Figma mockup [Mairie360 — Site vitrine](https://www.figma.com/design/8IGgmm2Hrs39VMQNWfJHFR) (desktop 1440 and phone 390 pages): hero, a thirty-year timeline of municipal tools, audiences, a without/with Mairie360 module board, the platform tabs, support steps and the demo request form. No commercial price is published. Workflows and training remain development work. The contact form sends a name, town, work email and an optional need through FormSubmit, and confirms success before navigating to the thank-you page. The external project link points to the Mairie360 GitHub organization.
+The landing page follows the Figma mockup [Mairie360 — Site vitrine](https://www.figma.com/design/8IGgmm2Hrs39VMQNWfJHFR) (desktop 1440 and phone 390 pages): hero, a thirty-year timeline of municipal tools, audiences, a without/with Mairie360 module board, the platform tabs, support steps, the free invitation-only beta offer and the demo request form. After the demonstration, accounts are prepared for browser access. A future paid subscription per town hall is planned, with pricing still to be confirmed. No commercial price is published. Workflows and training remain development work. The contact form sends a name, town, work email and an optional need through FormSubmit, and confirms success before navigating to the thank-you page. The external project link points to the Mairie360 GitHub organization.
 
 ## Audience and contact funnel
 
@@ -52,8 +52,9 @@ Plausible is optional. Without a configured site script, no tracker is loaded an
 
 Create these custom-event goals in Plausible, using the exact names:
 
+- `Offre vue`: offer section visible by at least 25%, once per page mount.
 - `Contact vu`: contact section visible by at least 25%, once per page mount.
-- `CTA contact`: button origin (`bandeau`, `hero`) and intention (`demo`).
+- `CTA contact`: button origin (`bandeau`, `hero`, `offre`) and intention (`demo`, `beta`).
 - `Contact commence`: first actual non-empty input, once per form mount.
 - `Contact tentative`: valid submission to the provider.
 - `Contact erreur`: validation or delivery error category.

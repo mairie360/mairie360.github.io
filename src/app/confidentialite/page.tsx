@@ -19,7 +19,7 @@ export default function Privacy() {
       <section>
         <h2>Cookies et mesure d’audience</h2>
         {getAnalyticsScriptUrl() ? <>
-          <p>Nous utilisons Plausible pour mesurer la fréquentation du site, les pages vues et les étapes vers le formulaire de contact : affichage du formulaire, clics sur les boutons de prise de rendez-vous, début de saisie, erreurs et envoi confirmé.</p>
+          <p>Nous utilisons Plausible pour mesurer la fréquentation du site, les pages vues et les étapes vers le formulaire de contact : affichage de l’offre et du formulaire, clics sur les boutons de prise de rendez-vous, début de saisie, erreurs et envoi confirmé.</p>
           <p>Les événements de parcours ne transmettent ni votre nom, ni votre commune, ni votre adresse e-mail, ni votre besoin, ni le contenu des champs. Ils comportent uniquement des catégories prédéfinies de boutons ou d’erreurs. Ce suivi ne dépose pas de cookie et ne crée pas de stockage dans votre navigateur.</p>
           <p>Pour connaître le traitement des données techniques liées aux requêtes, consultez la <a href="https://plausible.io/data-policy">politique de données de Plausible</a>. Une absence entre deux étapes aide à examiner le parcours ; elle ne révèle pas à elle seule la raison du départ d’une personne.</p>
         </> : <p>Aucun outil de mesure d’audience ni traceur publicitaire n’est activé dans cette version du site. Le code du site ne dépose pas de cookie et ne conserve pas vos choix de navigation dans le stockage de votre navigateur.</p>}

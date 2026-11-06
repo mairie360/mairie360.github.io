@@ -33,7 +33,8 @@ test("audience events cannot transmit arbitrary properties or field contents", (
   trackEvent("Private event name", { email: "private@example.com" });
   assert.deepEqual(received, [
     ["CTA contact", { props: { origine: "bandeau", intention: "demo" } }],
-    ["CTA contact"],
+    ["CTA contact", { props: { origine: "offre", intention: "beta" } }],
+    ["Offre vue"],
     ["Contact erreur", { props: { etape: "validation" } }],
     ["Contact envoye"],
     ["Contact commence"],
