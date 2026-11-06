@@ -1,15 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { useEffect, useSyncExternalStore } from "react";
+import { getAnalyticsConsent, subscribeAnalyticsConsent, trackEvent } from "@/lib/analytics";
+
+const serverConsent = () => null;
 
 export function LandingFunnel() {
+  const consent = useSyncExternalStore(subscribeAnalyticsConsent, getAnalyticsConsent, serverConsent);
   useEffect(() => {
+    if (consent !== "accepted") return;
     const observer = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
-          trackEvent(entry.target.id === "offre" ? "Offre vue" : "Contact vu");
-          observer?.unobserve(entry.target);
+          if (trackEvent(entry.target.id === "offre" ? "Offre vue" : "Contact vu")) observer?.unobserve(entry.target);
         }
       }
     }, { threshold: 0.25 }) : null;
@@ -25,6 +28,6 @@ export function LandingFunnel() {
     };
     document.addEventListener("click", clicked);
     return () => { observer?.disconnect(); document.removeEventListener("click", clicked); };
-  }, []);
+  }, [consent]);
   return null;
 }

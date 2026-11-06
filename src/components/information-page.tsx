@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Header } from "./header";
 import { SiteFooter } from "./site-footer";
 
-export function InformationPage({ title, children, showUpdated = true }: { title: string; children: ReactNode; showUpdated?: boolean }) {
+export function InformationPage({ title, children, showUpdated = true, updated = "1er novembre 2026" }: { title: string; children: ReactNode; showUpdated?: boolean; updated?: string }) {
   return (
     <>
       <a className="skip-link" href="#contenu">Aller au contenu</a>
@@ -12,7 +12,7 @@ export function InformationPage({ title, children, showUpdated = true }: { title
         <Link className="text-link" href="/">Retour à l’accueil</Link>
         <p className="section-label">Mairie360 · Le projet étudiant</p>
         <h1>{title}</h1>
-        {showUpdated && <p className="information-date">Mis à jour le 1er novembre 2026</p>}
+        {showUpdated && <p className="information-date">Mis à jour le {updated}</p>}
         {children}
       </main>
       <SiteFooter />

@@ -48,19 +48,37 @@ The landing page follows the Figma mockup [Mairie360 — Site vitrine](https://w
 
 ## Audience and contact funnel
 
-Plausible is optional. Without a configured site script, no tracker is loaded and the privacy page says collection is inactive. To activate it, add mairie360.fr to your Plausible account and copy its exact `https://plausible.io/js/pa-….js` script URL into `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL` before building. For GitHub Pages, set the repository variable `MAIRIE360_PLAUSIBLE_SCRIPT_URL`; the build workflow passes it through. Rebuild and deploy after changing it. No API key is needed in the browser.
+The standard Google Analytics 4 service replaces Plausible. Without a valid Web stream measurement ID, no Google tag or consent banner is loaded. A Tag Manager container (`GTM-…`) is not a GA4 measurement ID and is rejected. No analytics subscription or additional hosting is required for this integration.
 
-Create these custom-event goals in Plausible, using the exact names:
+### Activation
 
-- `Offre vue`: offer section visible by at least 25%, once per page mount.
-- `Contact vu`: contact section visible by at least 25%, once per page mount.
-- `CTA contact`: button origin (`bandeau`, `hero`, `offre`) and intention (`demo`, `beta`).
-- `Contact commence`: first actual non-empty input, once per form mount.
-- `Contact tentative`: valid submission to the provider.
-- `Contact erreur`: validation or delivery error category.
-- `Contact envoye`: provider success confirmed before navigation.
+1. In Google Analytics, create a property and Web data stream for `https://mairie360.fr`. Select the reporting timezone deliberately and retain it for the before/after comparison.
+2. Copy its **Measurement ID** (`G-…`) into `NEXT_PUBLIC_GA_MEASUREMENT_ID` for local builds, or the GitHub repository variable `MAIRIE360_GA_MEASUREMENT_ID` for Pages. This public ID is not a password. Rebuild and deploy after changing it; do not add a second Google tag or the supplied GTM container.
+3. **Disable enhanced measurement on this Web stream before activation.** Page views, section views and forms are measured explicitly here. Automatic history/form/outbound/search tracking can duplicate events, include URL data or count a submit attempt as a lead. Do not connect Google Ads, enable Google Signals or enable automatic user-provided data collection for this purpose. Review the property's retention and data-sharing settings.
+4. In Analytics, mark **`generate_lead`** as a key event. The site sends it only after FormSubmit confirms success, never on a button click or a direct `/merci/` visit. Configure custom dimensions `origine`, `intention` and `etape` only if needed for the reports.
+5. On the deployed site, accept analytics and verify the Web stream ID, page views and funnel events in Realtime. Confirm that refusal keeps the tag absent, contact still works and withdrawal stops collection. Exclude identifiable internal QA activity from reporting.
 
-Pageviews are automatic. Keep automatic form-submission tracking disabled: an attempt is not a confirmed contact. Opening `/merci/` directly never sends `Contact envoye`. A retry can produce multiple attempts; compare unique conversions or an ordered funnel over the same period and channel filter, rather than raw event totals. Analytics failures never block the contact form. No input contents or arbitrary properties are transmitted by custom events. Do not put personal data in campaign parameters. Check the Plausible installation and goals in the live account before assuming collection is active; local visits are excluded by default.
+### Consent and payload
+
+Basic consent blocks loading `gtag.js` and drops all events before acceptance, rather than queueing actions for later replay. The equal Accept/Refuse controls leave the contact form available. The choice lasts 180 days, applies across the site and can be changed through **Gérer les cookies** in the footer. Withdrawal sets Google's measurement-disable flag, updates consent to denied, drops pending commands and expires the site's accessible `_ga` cookies. Advertising storage, user data and personalization remain denied. A browser with blocked local storage keeps the choice only for the current document.
+
+The page URL sent to Analytics omits query strings/fragments. Referrers retain only their origin. Only restricted campaign labels from `utm_source`, `utm_medium` and `utm_campaign` are preserved; use static publication codes such as `beta_2026`, never personal data. Form contents, free-text error messages and unknown event properties are not sent. Enhanced measurement must remain disabled so the property does not add a second automatic collection path.
+
+### Events and reporting
+
+| Site action | GA4 event | Optional categories |
+| --- | --- | --- |
+| Offer section visible at least 25% | `offer_view` | — |
+| Contact section visible at least 25% | `contact_view` | — |
+| Contact CTA click | `contact_cta` | `origine`: bandeau/hero/offre; `intention`: demo/beta |
+| First non-empty form input after consent | `contact_start` | — |
+| Valid submission attempt | `contact_attempt` | — |
+| Validation or delivery failure | `contact_error` | `etape`: validation/envoi |
+| Confirmed provider success | `generate_lead` | — |
+
+Page views are sent explicitly once per route transition. Section views are limited to once per section and consent period. Analytics failures never block the contact form. A retry can create multiple attempts: compare unique users who converted with measured visitors over the **same period**, rather than dividing raw event counts. Name the dates and the modification, and use comparable acquisition channels for before/after periods. These reports cover consenting measurable traffic, not every site visitor. This integration alone cannot prove that a change caused an improvement.
+
+Official references: [basic consent](https://developers.google.com/tag-platform/security/guides/consent?consentmode=basic), [configuration](https://developers.google.com/analytics/devguides/collection/ga4/reference/config), [key events](https://support.google.com/analytics/answer/12946393).
 
 The original Mairie360 brand assets are retained. All interface text and controls are rendered in HTML; illustrations contain no functional interface.
 

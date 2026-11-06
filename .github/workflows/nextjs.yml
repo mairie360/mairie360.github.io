@@ -36,7 +36,7 @@ jobs:
       - name: Build static website
         run: npm run build
         env:
-          NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL: ${{ vars.MAIRIE360_PLAUSIBLE_SCRIPT_URL }}
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.MAIRIE360_GA_MEASUREMENT_ID }}
       - name: Test exported HTML
         run: npm run test:html
       - name: Typecheck
